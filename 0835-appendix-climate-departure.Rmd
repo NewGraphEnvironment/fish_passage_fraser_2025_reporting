@@ -47,10 +47,9 @@ inventory: culverts, bridges, weirs, fords. The streams they cross
 sit inside a climate that is changing — warmer air, shifting
 snowpack, longer shoulder seasons — and those climate changes set
 the hydrologic and thermal context the structures pass fish
-*through*. A culvert that worked when it was installed in 1985 is
-now passing a different hydrograph: earlier freshet, lower
-late-summer flows, warmer water. The barrier inventory does not see
-that on its own.
+*through*. A culvert installed in the 1980s is now passing a
+different hydrograph: earlier freshet, lower late-summer flows,
+warmer water. The barrier inventory does not see that on its own.
 
 Warmer air drives warmer streams. For the cold-water salmonids the
 study area supports — bull trout, chinook, mountain whitefish,
@@ -266,8 +265,10 @@ cumulative). The overnight side warmed about
 `r sprintf("%.1f", cmp$difference[cmp$variable == "tmin" & cmp$period == "annual"] - cmp$difference[cmp$variable == "tmax" & cmp$period == "annual"])` °C
 more than the daytime side over the recent decade, narrowing the
 diurnal temperature range by the same amount
-(Figure \@ref(fig:cd-plot-dtr)). The signal is real but modest —
-about one-third the magnitude that Karl et al. reported globally.
+(Figure \@ref(fig:cd-plot-dtr)). The asymmetry is present but
+weaker than the canonical signal — the local tmin/tmax warming
+ratio is about 1.2:1 versus the ~3:1 ratio Karl et al. reported
+at the global scale between 1951 and 1990.
 
 ```{r cd-plot-tmax, fig.cap = "Annual daytime maximum temperature (tmax) anomaly relative to the 1951-1980 baseline."}
 trn_tmax <- cd::cd_trend(
@@ -403,7 +404,7 @@ cd::cd_plot_timeseries(ano, variable = "snowmelt_rate_peak", period = "annual",
                        title = "Peak weekly melt rate — Anomaly")
 ```
 
-```{r cd-snow-fraction, fig.cap = "Annual snowfall fraction: the percent of annual precipitation that fell as snow. Anomaly is in percentage points relative to the 1951-1980 baseline. The downward trend is borderline significant (Mann-Kendall p ≈ 0.05) — a modest shift toward rain-dominant precipitation."}
+```{r cd-snow-fraction, fig.cap = "Annual snowfall fraction: the percent of annual precipitation that fell as snow. Anomaly is in percentage points relative to the 1951-1980 baseline. The downward trend sits just above statistical significance (Mann-Kendall p ≈ 0.05) — directionally a shift toward rain-dominant precipitation, but not formally significant on either the trend or the recent-vs-baseline window test."}
 trn_frac <- cd::cd_trend(
   ano[ano$variable == "snowfall_fraction" & ano$period == "annual", ],
   trend_start = c(1951, 1981)
@@ -418,28 +419,39 @@ cd::cd_plot_timeseries(ano, variable = "snowfall_fraction", period = "annual",
 Three findings carry the snowpack story.
 
 **Snow is leaving the region earlier each year, not falling
-less.** Annual snowfall and annual SWE both dropped modestly (-5 %
-and -10 % respectively) but neither change clears statistical
-significance against year-to-year variability. The clear signals
-are in *timing*: the snowmelt midpoint shifted nearly two weeks
-earlier (p < 0.001 regionally and in every ecoregion), snow cover
-declined 3.8 percentage points (p = 0.002), and snowfall fraction
-edged down 3.7 pp (p ≈ 0.05) — a modest shift toward rain-dominant
-precipitation. This matches the broader Pacific-Northwest signal
+less.** Annual snowfall fell about
+`r sprintf("%.0f", -cmp_pct$difference[cmp_pct$variable == "snowfall" & cmp_pct$period == "annual"])` %
+and annual SWE about
+`r sprintf("%.0f", -cmp_pct$difference[cmp_pct$variable == "swe" & cmp_pct$period == "annual"])` %,
+but neither change clears statistical significance against
+year-to-year variability. The clear signals are in *timing*: the
+snowmelt midpoint shifted nearly two weeks earlier (p < 0.001
+regionally and in every ecoregion), snow cover declined 3.8
+percentage points (p = 0.002), and snowfall fraction edged down
+3.7 pp (Welch and Mann-Kendall p both just above 0.05 —
+directionally consistent with a shift toward rain-dominant
+precipitation, but just shy of statistical significance). This
+matches in direction the broader Pacific-Northwest signal
 documented since @mote_etal2005DECLININGMOUNTAIN.
 
-**Melt is shifting earlier on both ends.** Spring snowmelt rose
-`r sprintf("%+.0f", cmp_pct$difference[cmp_pct$variable == "snowmelt" & cmp_pct$period == "spring"])` %
-and winter snowmelt rose
-`r sprintf("%+.0f", cmp_pct$difference[cmp_pct$variable == "snowmelt" & cmp_pct$period == "winter"])` %
-— both moving the centre of mass of annual melt earlier in the
-calendar. Summer snowmelt fell
+**Melt is shifting earlier.** The unambiguous signals are on the
+summer side and at the midpoint: summer snowmelt fell
 `r sprintf("%.0f", -cmp_pct$difference[cmp_pct$variable == "snowmelt" & cmp_pct$period == "summer"])` %
-to compensate. The total annual melt has not changed; its timing
-has. This is consistent in direction with the 1–4 week earlier
-streamflow timing across western North America documented by
-@stewart_etal2005ChangesEarlier and with the ~10-day earlier
-Fraser freshet at Hope @kang_etal2016ImpactsRapidly.
+(p ≈ 0.02), summer SWE collapsed
+`r sprintf("%.0f", -cmp_pct$difference[cmp_pct$variable == "swe" & cmp_pct$period == "summer"])` %
+(p ≈ 0.01), and the annual snowmelt midpoint moved ~12 days
+earlier (p < 0.001). Apparent rises in spring snowmelt
+(+`r sprintf("%.0f", cmp_pct$difference[cmp_pct$variable == "snowmelt" & cmp_pct$period == "spring"])` %,
+Welch p ≈ 0.06) and winter snowmelt
+(+`r sprintf("%.0f", cmp_pct$difference[cmp_pct$variable == "snowmelt" & cmp_pct$period == "winter"])` %,
+Welch p ≈ 0.28) mirror this redistribution but are noisier season-
+by-season — winter and spring have smaller absolute snowmelt
+volumes, so the same shifts produce larger relative-change
+variance. The total annual melt has not changed; its centre of
+mass has moved earlier. This is consistent in direction with the
+1–4 week earlier streamflow timing across western North America
+documented by @stewart_etal2005ChangesEarlier and with the ~10-day
+earlier Fraser freshet at Hope @kang_etal2016ImpactsRapidly.
 
 **Summer SWE has dropped sharply.** Summer SWE fell
 `r sprintf("%.0f", -cmp_pct$difference[cmp_pct$variable == "swe" & cmp_pct$period == "summer"])` %.
@@ -454,23 +466,24 @@ highest.
 The regional zonal mean reduces an AOI this size to a single
 number; the spatial pattern carries the rest of the story.
 
-Warming is not spatially uniform. Total departures range from about
-+1.1 °C in the south-east to over +2.0 °C in the north-west
-(Figure \@ref(fig:cd-map-tmean)). The dominant gradient runs
-**north-west-warm to south-east-cool** — the lower-elevation
-interior plateau (Fraser Basin, Fraser Plateau) warmed roughly
-0.5 °C more than the high-elevation eastern Rockies. Two
-mechanisms stack: high-latitude amplification adds to the warming
-in the northern part of the AOI, and the eastern Rocky Mountain
-ecoregions show a thermal-buffer effect — likely a combination of
-slower-warming at elevation and the snow-albedo feedback being
-weaker where snow persists longer. The implication for fish
-passage is geographic: barrier reaches in the interior-plateau
-WSGs (LCHL, NECR, TABR, FRAN) sit in the warmer side of the
-gradient; reaches in the eastern WSGs (UFRA, MORK) sit in the
-cooler side.
+Warming is not spatially uniform. Individual grid cells range from
+about +1.1 to +2.0 °C across the AOI, and ecoregion means span
++1.4 to +2.0 °C (Figure \@ref(fig:cd-map-tmean)). The dominant
+axis runs **west-warm to east-cool** — the lower-elevation
+interior plateau ecoregions (Fraser Basin, Fraser Plateau) warmed
+roughly 0.5 °C more than the high-elevation Western Continental
+Ranges and adjacent eastern Rocky Mountain ecoregions. A secondary
+south-to-north component adds about 0.4 °C of additional warming
+in the northern part of the AOI, consistent with high-latitude
+amplification. The eastern Rocky Mountain ecoregions show a
+thermal-buffer effect — likely a combination of slower warming at
+elevation and a weaker snow-albedo feedback where snow persists
+longer. The implication for fish passage is geographic: barrier
+reaches in the interior-plateau WSGs (LCHL, NECR, TABR, FRAN) sit
+on the warmer side of the gradient; reaches in the eastern WSGs
+(UFRA, MORK) sit on the cooler side.
 
-```{r cd-map-tmean, fig.cap = "Spatial pattern of annual mean temperature departure across the AOI (2015-2025 mean minus 1951-1980 mean, degrees C). The dominant gradient runs north-west-warm (interior plateau) to south-east-cool (Rocky Mountain ranges).", fig.height = 6.5}
+```{r cd-map-tmean, fig.cap = "Spatial pattern of annual mean temperature departure across the AOI (2015-2025 mean minus 1951-1980 mean, degrees C). The dominant axis runs west-warm (interior plateau) to east-cool (Rocky Mountain ranges), with a secondary south-to-north amplification.", fig.height = 6.5}
 ggplot() +
   geom_spatraster(data = departure) +
   geom_sf(data = ecoregions, fill = NA, color = "grey25",
@@ -771,18 +784,23 @@ AOI for barrier prioritisation to lean on.
 
 **Snow is leaving the AOI earlier, not falling less.** The
 snowmelt midpoint shifted nearly two weeks earlier (p < 0.001
-regionally and in every ecoregion), winter and spring snowmelt
-both rose by 18–45 %, and summer SWE collapsed by 52 %. The total
-annual melt has not changed; its timing has. The freshet — the
+regionally and in every ecoregion), summer SWE collapsed by 52 %
+(p ≈ 0.01) and summer snowmelt fell 37 % (p ≈ 0.02); the
+counterbalancing winter (+45 %) and spring (+18 %) snowmelt rises
+follow in direction but do not individually clear statistical
+significance season-by-season. The total annual melt has not
+changed; its centre of mass has moved earlier. The freshet — the
 dominant high-flow event that mobilises spawning gravels, refills
 off-channel rearing habitat, and that crossing structures are
 sized against — is arriving weeks earlier across all seven
-watershed groups, regardless of which ecoregion they sit in. The
-late-summer cold-water input that high-elevation snowpack
-historically provided during the warmest, most thermally
+watershed groups, regardless of which ecoregion they sit in.
+Crossing-structure design assumptions and peak-flow-timing
+baselines baked into the assessment scoring need to track this
+shift. The late-summer cold-water input that high-elevation
+snowpack historically provided during the warmest, most thermally
 stressful weeks of summer is dropping in parallel.
 
-**The geographic gradient runs north-west-warm to south-east-cool,
+**The geographic gradient runs west-warm to east-cool,
 following the elevation profile.** Warming has been roughly 0.5 °C
 greater in the lower-elevation interior plateau ecoregions
 (Fraser Basin, Fraser Plateau) and the Eastern Hazelton Mountains
