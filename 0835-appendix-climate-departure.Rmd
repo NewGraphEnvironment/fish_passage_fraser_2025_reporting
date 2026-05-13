@@ -306,7 +306,7 @@ ggplot(dtr, aes(x = year, y = dtr)) +
 
 ## Snowpack {-}
 
-Snowpack is the hinge of British Columbia hydrology: winter
+Snowpack drives the seasonal water supply across British Columbia: winter
 precipitation falls as snow, accumulates on the ground, and
 releases as meltwater across spring and summer. That seasonal
 storage is the difference between a late-summer creek that still
@@ -333,9 +333,13 @@ Aggregated to the four standard meteorological seasons — winter
 fall (September–November) — the table below compares the recent
 decade (2015–2025) directly against the pre-warming reference
 (1951–1980) for each of the four monthly-native snow variables.
-The seasonal redistribution is the headline: summer SWE has
-collapsed, winter and spring snowmelt are both up sharply, and
-summer snowmelt has fallen by a comparable amount.
+The seasonal redistribution is the headline. Statistically the
+load-bearing signals are on the summer side — summer SWE has
+collapsed (p ≈ 0.01) and summer snowmelt has fallen by a
+comparable amount (p ≈ 0.02). The counterbalancing winter and
+spring snowmelt rises are directionally consistent but noisier
+season-by-season (Welch p ≈ 0.28 and 0.06 respectively) — see
+the *What this means* paragraph below for the full reading.
 
 ```{r cd-snow-seasonal-table}
 snow_monthly <- c("swe", "snowfall", "snowmelt", "snow_cover")
@@ -359,7 +363,7 @@ names(snow_seasonal) <- c("Variable", "Season",
 
 kableExtra::kable_styling(
   knitr::kable(snow_seasonal, label = NA, row.names = FALSE,
-    caption = "Seasonal snowpack: recent decade versus pre-warming reference. Summer SWE collapse (-52 %), winter snowmelt rise (+45 %), and spring snowmelt rise (+18 %) are the headline redistribution signals; summer snowmelt fell by -37 %."),
+    caption = "Seasonal snowpack: recent decade versus pre-warming reference. Summer SWE collapse (-52 %, p ≈ 0.01) and summer snowmelt fall (-37 %, p ≈ 0.02) are the statistically significant signals. Winter (+45 %) and spring (+18 %) snowmelt rises are directionally consistent with the redistribution but do not individually clear statistical significance (Welch p ≈ 0.28 and 0.06)."),
   bootstrap_options = c("striped", "hover", "condensed")
 )
 ```

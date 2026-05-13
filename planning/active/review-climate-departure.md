@@ -132,6 +132,24 @@ Date: 2026-05-13
 - **F12 (package-tutorial register):** Deferred. The two-p-values explainer and the trend-windows two-start-years explainer are useful to ops readers seeing this analysis for the first time; tightening is a judgement call and the reviewer marked it not load-bearing. Worth a polish pass at edit time, not blocking the PR.
 - **F13 (DOY-50 → crossing structures):** Resolved. Added an explicit sentence in the Interpretation snowpack bullet: "Crossing-structure design assumptions and peak-flow-timing baselines baked into the assessment scoring need to track this shift." Closes the loop the framing opens. (0835:797)
 
+## Reviewer re-check (2026-05-13)
+
+Verified each resolution against the diff in commit ff3853b and against the data in `data/gis/climate_departure.rds` + `data/gis/climate_departure_tmean.tif`.
+
+- **F1** verified — both snowfall and SWE annual lines in the "What this means" paragraph now use inline `cmp_pct` expressions. Rendered values: snowfall -6 %, SWE -10 %. Matches the earlier intro paragraph's inline (line 318–319 also renders 6 %). Internal consistency restored.
+- **F2** verified — Karl framing reworded to an explicit 1.2:1 vs ~3:1 ratio comparison. Local tmin/tmax slope ratio recomputed from data: 0.0298/0.0245 = 1.22, rounds to 1.2:1. ✓
+- **F3** verified in the two load-bearing places (the "What this means" paragraph and the Interpretation snowpack bullet). Significant signals (summer SWE p≈0.01, summer snowmelt p≈0.02, DOY-50 p<0.001) now lead; winter (+45 %, p≈0.28) and spring (+18 %, p≈0.06) rises are explicitly caveated as noisier and not individually significant. Body Results bullet (0400:357) carries the same caveat ("noisier season-by-season"). Minor residual: the snow-seasonal-table caption (0835:362) and intro paragraph (0835:336–338) still phrase winter/spring rises as "headline redistribution signals" / "up sharply" without inline caveats. Not a blocker — the substantive interpretation paragraphs immediately below the table now do the right thing.
+- **F4** verified — figcap (line 407) and "What this means" (lines 430–433) both softened to "just shy of statistical significance" / "p just above 0.05". ✓
+- **F5** verified — body bullet (0400:353) now reads "broad and significant" + explicit "The rate has been steady rather than accelerating — the 1981–present slope is shallower than the 1951–present slope". Matches appendix's non-acceleration finding. ✓
+- **F6** verified — appendix prose (469–484), figcap (486), and Interpretation gradient bullet (803) all restated as "west-warm to east-cool". Data correlations confirm: dep vs X (west-warm) = -0.87; dep vs Y (north-warm) = +0.84. Both signals are real. The added "secondary south-to-north component adds about 0.4 °C" is supported by the data (top-3 north vs bottom-3 south = 0.35 °C; "about 0.4" is fair). Body Results (0400:353) updated to "west-to-east gradient". ✓
+- **F7** verified — appendix now reads "Individual grid cells range from about +1.1 to +2.0 °C across the AOI, and ecoregion means span +1.4 to +2.0 °C". Matches raster cell min/max (1.10 / 2.02) and ecoregion-mean range (1.35 / 1.96 rounded to "+1.4 to +2.0"). ✓
+- **F10** deferred — acceptable. Body Results section + per-ecoregion rollup carries VPD adequately for a first pass; dedicated subsection is real scope (narrative + plot) and was originally flagged non-blocking.
+- **F11** verified — "A culvert installed in the 1980s" replaces "in 1985" at line 50. ✓
+- **F12** deferred — acceptable. Trend-windows and two-p-values explainers are genuinely useful to first-time readers; tightening is a judgement call best handled at edit time.
+- **F13** verified — Interpretation snowpack bullet (797–799) now reads "Crossing-structure design assumptions and peak-flow-timing baselines baked into the assessment scoring need to track this shift". Loop closed.
+
+Cross-references and structure: re-verified that body links to `#app-climate-departure`, anchor and figure refs are intact, chunk labels unchanged. Render output (`docs/app-climate-departure.html`) and figure PNGs are present from the rebuild. No new tone or pattern-accuracy issues introduced by the changes.
+
 ## Sign-off
 
-Pending reviewer re-check.
+Sign-off: all findings resolved or appropriately deferred. — independent reviewer, 2026-05-13.

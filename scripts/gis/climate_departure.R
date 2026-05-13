@@ -143,8 +143,9 @@ town_list_sql <- paste0("'", gsub("'", "''", town_names), "'",
 towns <- fresh::frs_db_query(conn, sprintf("
   SELECT geographical_name AS name, feature_type, geom
   FROM whse_basemapping.gns_geographical_names_sp
-  WHERE feature_type IN ('City', 'Town', 'Village', 'Locality',
-                         'Community', 'Unincorporated Community',
+  WHERE feature_type IN ('City', 'Town', 'Village', 'Village (1)',
+                         'Locality', 'Community',
+                         'Unincorporated Community',
                          'District Municipality (1)')
     AND geographical_name IN (%s)", town_list_sql))
 towns <- towns[!duplicated(towns$name), ]
