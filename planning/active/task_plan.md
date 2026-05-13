@@ -21,13 +21,13 @@ The issue was drafted before plan-mode exploration. Four filename/path values ad
 
 ## Phase 1 — Snapshot script: AOI, context, ecoregions
 
-- [ ] Verify `cd` >= 0.3.0 installed (`packageVersion("cd")`)
-- [ ] Scaffold `scripts/gis/climate_departure.R` header with WSG codes, db connection helper (mirroring `scripts/gis/floodplain.R` lines 1–47)
-- [ ] Build AOI = dissolved union of the 7 WSG polygons via `fresh::frs_db_conn()` + `whse_basemapping.fwa_watershed_groups_poly` query
-- [ ] Source ecoregions intersecting the AOI bbox (PostgreSQL `whse_terrestrial_ecology.erc_ecoregions_sp` or via `bcdata` — pick whichever returns a clean polygon layer; document choice in script header)
-- [ ] Source context layers (towns, lakes, rivers, streams, highways) cropped to AOI bbox via the same db connection
-- [ ] Write all to `data/gis/climate_departure.gpkg` (multi-layer)
-- [ ] Atomic commit: "Snapshot script — AOI + context + ecoregions for climate departure (#6)"
+- [x] Verify `cd` >= 0.3.0 installed (`packageVersion("cd")`)
+- [x] Scaffold `scripts/gis/climate_departure.R` header with WSG codes, db connection helper (mirroring `scripts/gis/floodplain.R` lines 1–47)
+- [x] Build AOI = dissolved union of the 7 WSG polygons via `fresh::frs_db_conn()` + `whse_basemapping.fwa_watershed_groups_poly` query — 34,019 km² total
+- [x] Source ecoregions intersecting the AOI bbox via `bcdata::bcdc_query_geodata("d00389e0-66da-4895-bd56-39a0dd64aa78")` (ecoregions are NOT in fwapg; same pattern Peace uses). 8 ecoregions returned: FAB, FAP, WRA, NCM, SRT, COH, CRM, EHM
+- [x] Source context layers (towns, lakes, rivers, streams, highways) cropped to AOI bbox via fwapg. 5 of 8 town candidates found; 56 lakes >1000 ha; 339 named river polygons; 2,098 stream segments (order ≥ 7); 2,390 highway segments
+- [x] Write all to `data/gis/climate_departure.gpkg` (multi-layer, 1.4 MB)
+- [x] Atomic commit: "Snapshot script — AOI + context + ecoregions for climate departure (#6)"
 
 ## Phase 2 — Snapshot script: cd pipeline run
 
