@@ -4,10 +4,15 @@
 
 Apply the climate-departure template to the FWCP Fraser AOI. Three pieces — Methods paragraph in `0300-methods.Rmd`, Results paragraph (with hidden inline-R rollup chunk) in `0400-results.Rmd`, deep appendix `0835-appendix-climate-departure.Rmd`. The Peace work is the structure template; the Fraser interpretation is written fresh.
 
-Source drafts in the `cd` repo:
-- `cd/hold/main-body-climate-departure.Rmd` — Peace body paragraphs (structure to mirror)
-- `cd/hold/9999-appendix-climate-departure.Rmd` — Peace appendix (structure to mirror, content fresh)
-- `cd/hold/render_preview.Rmd` — preview pattern
+**Primary tone reference — the Peace REPORT (PR #17 merged 2026-05-12), not the `cd/hold/` drafts:**
+- `fish_passage_peace_2025_reporting/0820-appendix-climate-departure.Rmd` (742 lines) — the landed appendix; mirror section structure, chunk-label convention (`cd-*`), prose tone, plot recipes
+- `fish_passage_peace_2025_reporting/0300-methods.Rmd` lines 16–22 — Methods uses a **two-paragraph** structure: first paragraph is a plain-language audience-translation intro ("Climate departure measures how far recent climate has shifted from a historical baseline…"), second paragraph is the technical pipeline summary
+- `fish_passage_peace_2025_reporting/0400-results.Rmd` lines 121–153 — hidden `cd-rollup-body` chunk + 4-finding Results paragraph with bolded leads + closing both-ways fish-passage framing
+
+Secondary reference (structural draft, lower-priority tone source — written for `cd` package learners, not the FWCP audience):
+- `cd/hold/main-body-climate-departure.Rmd`
+- `cd/hold/9999-appendix-climate-departure.Rmd`
+- `cd/hold/render_preview.Rmd`
 
 ## Conventions discovered (Fraser repo)
 
@@ -21,33 +26,63 @@ Source drafts in the `cd` repo:
 
 ### Body Methods placement
 
-`0300-methods.Rmd` lines 66–75 has a `### Floodplain Delineation` subsection under `## Planning — Habitat, Connectivity and Floodplain Modelling`. The climate-departure Methods subsection (`### Climate Departure`) lands as a sibling under the same `## Planning…` heading.
+Mirror the **Peace report's** two-paragraph Methods pattern at `fish_passage_peace_2025_reporting/0300-methods.Rmd` lines 16–22:
+
+1. **First paragraph** — audience-translation intro. Plain language; no `cd` package name, no `ERA5-Land`, no Mann-Kendall. Explain *what* climate departure is (how far recent climate has shifted from baseline) and *why it matters for fish passage* (warming water, snowpack timing, atmospheric drying changing the context that crossings sit inside). One paragraph.
+2. **Second paragraph** — technical pipeline summary. `cd` package, ERA5-Land hourly reanalysis, 1951–1980 reference, Mann-Kendall + Theil-Sen + Welch t. End with the cross-reference link `[Appendix - Climate Departure](#app-climate-departure)`.
+
+In the Fraser repo, place this as a `## Climate Departure` section at the top level (peer to other Methods sections like `## Fish Passage Assessments`), **not nested** under `## Planning — Habitat, Connectivity and Floodplain Modelling`. The Peace report put it at `##` level (line 16); follow that placement.
 
 ### Body Results placement
 
-`0400-results.Rmd` lines 410–435 has a hidden inline-R rollup chunk (loads gpkg layers, computes headline metrics into variables: `aoi_area_km2`, `fp_area_ha`, `fp_pct_aoi`, etc.) followed by a single paragraph of prose with inline R expressions referencing those variables, closed by the cross-reference link `[Appendix - Floodplain Delineation](#app-floodplain)`. Mirror for climate departure: the chunk loads `data/gis/climate_departure.rds`, computes tmean / vpd / snowpack signal headline numbers, the paragraph quotes them inline and points at `#app-climate-departure`.
+Mirror **Peace's** Results pattern at `fish_passage_peace_2025_reporting/0400-results.Rmd` lines 121–153:
+
+- Hidden chunk `cd-rollup-body` (`include = FALSE`) loads `data/gis/climate_departure.rds`, extracts `cmp`, `cmp_pct`, `trn` from `regional`, defines a small `pick()` helper, and computes headline scalars: `tmean_d`, `tmax_d`, `tmin_d`, `vpd_d`, `prcp_p`, `swe_p`, `snowfall_p`, `summer_swe_p`, `spring_melt_p`, `doy50_d`
+- `## Climate Departure` section heading
+- One-line intro: "Four findings from the regional climate-departure analysis carry to fish-passage prioritisation."
+- Four bolded-lead findings: `**Warming is broad...** … **The atmosphere is drying...** … **The snowpack signal is about timing...** … **Day-night asymmetry is present.** …` — each finding 1 lead sentence + 1–2 substantiation sentences, all headline numbers via inline R from the scalars above
+- Closing paragraph: the both-ways fish-passage framing (cold-limited reaches gain growing-degree-days vs near-upper-thermal reaches lose habitat), with `[Appendix - Climate Departure](#app-climate-departure)` cross-reference
+
+The wording of each finding gets rewritten from the actual Fraser numbers — Peace's findings (1.8 °C warming, north-only precip increase, summer SWE collapse, day-night asymmetry) are not the Fraser findings. See Fresh-interpretation discipline below.
 
 ### Snapshot script pattern
 
 `scripts/gis/floodplain.R` is the precedent. Same location for climate departure: `scripts/gis/climate_departure.R`. WSG polygons sourced via `fresh::frs_db_conn()` + `whse_basemapping.fwa_watershed_groups_poly` query. Multi-layer geopackage output to `data/gis/`. Manifest entry written to (TBD — confirm during Phase 1 — likely `data/cd_inputs_snapshot_manifest.txt` or equivalent; mirror what floodplain did).
 
-### gitbook-vs-PDF table wrapping
+### Table wrapping
 
-`fpr::fpr_kable(scroll = gitbook_on)` — the `gitbook_on` flag is defined in `index.Rmd` line 74. No bespoke helper needed; every table in the appendix wraps via `fpr::fpr_kable()` with `scroll = gitbook_on` so PDF rendering falls back to no-scroll automatically.
+The earlier plan-mode Explore note about `fpr::fpr_kable(scroll = gitbook_on)` being the appendix convention was wrong — that pattern appears in body files (`0200-background.Rmd`, `0300-methods.Rmd`) but **not** in appendices. The Peace appendix `0820-appendix-climate-departure.Rmd` uses direct `kableExtra::kable_styling() |> kableExtra::scroll_box()` with no conditional, and the Fraser floodplain appendix `0830-appendix-floodplain.Rmd` uses plain `knitr::kable()` (its tables are short).
+
+Decision: mirror **Peace's** pattern in the climate-departure appendix —
+
+```r
+kableExtra::kable_styling(
+  knitr::kable(df, label = NA, row.names = FALSE,
+    caption = "..."),
+  bootstrap_options = c("striped", "hover", "condensed")
+) |>
+  kableExtra::scroll_box(height = "420px")
+```
+
+Both Fraser and Peace ship `bookdown::pdf_book` in `_output.yml`; Peace's PDF build clearly survived this raw pattern (PR #17 merged). If PDF rendering surfaces an issue in Phase 5, fall back to conditional wrapping then — don't pre-engineer for it.
 
 ### Bibliography
 
 rbbt-driven via `params$update_bib` in `index.Rmd` line 64. When the parameter is TRUE the build regenerates `references.bib` from `rbbt::bbt_write_bib()`. No manual bib management in this PR — cite keys land in the prose, rbbt does the rest as long as Zotero is running with Better BibTeX enabled.
 
-### Filename abstraction
+### Filename abstraction — deliberate divergence from Peace
 
-Repo path identifies the AOI (`fish_passage_fraser_2025_reporting`). Filenames should be AOI-neutral so the same template applies in every regional report:
+Peace report shipped with `cd_peace_*` prefixed data filenames (`data/gis/cd_peace.gpkg`, `cd_peace.rds`, `cd_peace_departure_tmean.tif`). The user asked for abstract names after Peace landed, on the principle that the repo path already identifies the AOI and AOI-neutral filenames make the script + appendix portable across regional reports.
+
+Fraser is the first report using the abstract convention:
 
 - `scripts/gis/climate_departure.R`
 - `data/gis/climate_departure.gpkg` (multi-layer: aoi, wsgs, ecoregions, towns, lakes, rivers, streams, highways)
 - `data/gis/climate_departure.rds` (named list: `regional` + `ecoregion` keyed list)
 - `data/gis/climate_departure_tmean.tif`
 - `data/gis/climate_departure_wsg_ecoregion.csv`
+
+Peace can be retrofitted to match later if desired; that's out of scope for this PR.
 
 ## Fresh-interpretation discipline
 
