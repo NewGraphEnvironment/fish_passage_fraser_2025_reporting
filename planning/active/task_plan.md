@@ -44,19 +44,19 @@ The issue was drafted before plan-mode exploration. Four filename/path values ad
 
 Mirror the Peace appendix structure (`cd/hold/9999-appendix-climate-departure.Rmd`) section-by-section but with all interpretation written fresh from Fraser numbers. **Look at the data before writing each narrative paragraph** — see Fresh-interpretation section in findings.md.
 
-- [ ] YAML header + setup + `cd-load` chunk reading `data/gis/climate_departure.{gpkg,rds,tif,csv}` (all paths under `data/gis/`, no `system.file()`)
-- [ ] `# Appendix - Climate Departure {-#app-climate-departure}`
-- [ ] "Climate departure and fish passage" — framing paragraph (cold-water salmonid habitat both ways: cold-limited reaches gain growing-degree-days vs near-upper-thermal reaches lose habitat; freshet timing changes design assumptions and migration windows)
-- [ ] AOI section + AOI map (`fig:cd-map-aoi`) with ecoregion fill + 7 WSGs outlined + context layers
-- [ ] Recent decade vs pre-warming table (15 variables, Δ p windows + Trend p) — wrapped via `fpr::fpr_kable(scroll = gitbook_on)`
-- [ ] Trends section: `cd_summary` table + tmean annual anomaly plot + prcp annual anomaly plot
-- [ ] Day-night asymmetry: tmax + tmin + DTR plots; narrative reflects what Fraser tmax–tmin slopes actually show
-- [ ] Snowpack section: seasonal table + 4 derived snow plots; 3-paragraph "what this means" written from the Fraser numbers
-- [ ] Spatial pattern map (`fig:cd-map-tmean`) + gradient narrative (look at the raster — where is warming largest? smallest? what's the dominant gradient direction?)
-- [ ] Per-ecoregion variation: tmean / prcp / swe_max / doy_50 facets (one panel per ecoregion in the AOI) + per-ecoregion rollup table
-- [ ] WSG × ecoregion rollup: map of the 7 WSGs on ecoregion fill + percentage crosswalk table
-- [ ] Interpretation for fish passage: 4 findings written from the Fraser numbers, with the both-ways framing on cold-limited vs near-upper-thermal reaches mapped onto the 7 WSGs via the ecoregion crosswalk
-- [ ] Atomic commit: "Climate departure appendix — Fraser (#6)"
+- [x] YAML header + setup + `cd-load` chunk reading `data/gis/climate_departure.{gpkg,rds,tif,csv}` (all paths under `data/gis/`, no `system.file()`)
+- [x] `# Appendix - Climate Departure {-#app-climate-departure}`
+- [x] "Climate departure and fish passage" — framing paragraph (cold-water salmonid habitat both ways)
+- [x] AOI section + AOI map (`fig:cd-map-aoi`) with ecoregion fill + 7 WSGs outlined + context layers
+- [x] Recent decade vs pre-warming table (15 variables, Δ p windows + Trend p) — direct `kableExtra::kable_styling() |> kableExtra::scroll_box()` (Peace pattern, no gitbook_on conditional)
+- [x] Trends section: `cd_summary` table + tmean annual anomaly plot + prcp annual anomaly plot. **Added note: 45-yr trend slopes are SHALLOWER than 75-yr (Fraser warming has not accelerated since 1981) — fresh finding from the data, not in Peace's narrative**
+- [x] Day-night asymmetry: tmax + tmin + DTR plots; narrative reflects Fraser tmax (+1.46) vs tmin (+1.78) — asymmetry present, modest (~one-third Karl-et-al global scale)
+- [x] Snowpack section: seasonal table + 4 derived snow plots; 3 paragraphs from Fraser numbers — "snow leaving earlier not falling less", "melt shifting earlier on both ends" (highlights winter snowmelt +45 % alongside spring +18 % — a Fraser-specific signal Peace didn't carry), "summer SWE collapse −52 %"
+- [x] Spatial pattern map + gradient narrative: NW-warm to SE-cool (r = −0.90 longitude, +0.75 latitude) — interior plateau warmed ~0.5 °C MORE than eastern Rockies; the mountains acted as a thermal buffer
+- [x] Per-ecoregion variation: tmean / prcp / swe_max / doy_50 facets (8 panels each, ncol = 3) + per-ecoregion rollup table. Narrative: ALL 8 ecoregions show tmean p < 0.001; **ZERO show significant prcp trend** (different from Peace where 2/5 did); VPD significant in every ecoregion; DOY-50 significant in every ecoregion
+- [x] WSG × ecoregion rollup: 7-WSG map + percentage crosswalk table. MORK noted as spanning 6 ecoregions
+- [x] Interpretation for fish passage: 4 findings synthesized from Fraser numbers, with both-ways framing on cold-limited vs near-upper-thermal reaches mapped onto the 7 WSGs via the ecoregion crosswalk (interior-plateau WSGs warmest + likely closer to upper thermal niche; mountain WSGs cooler + likely cold-limited)
+- [x] Atomic commit: "Climate departure appendix — Fraser (#6)"
 
 ## Phase 4 — Body wiring
 

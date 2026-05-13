@@ -13,4 +13,10 @@
 - Phase 2 produced: `data/gis/climate_departure.rds` (403 KB; regional ts/bl/ano/trn/cmp/cmp_pct + per-ecoregion list keyed by code), `data/gis/climate_departure_tmean.tif` (4 KB, range +1.10 to +2.02 °C across the AOI), `data/gis/climate_departure_wsg_ecoregion.csv` (7 WSG rows), `data/climate_departure_inputs_snapshot_manifest.txt`
 - Fraser headline numbers (regional, annual): tmean +1.64 °C (p < 0.001), tmax +1.46, tmin +1.78 (day-night asymmetry present, gap 0.32 °C), VPD +0.34 hPa (p = 0.002), prcp +28 mm ≈ +3 % (p = 0.46, not significant), snowmelt midpoint shifted 11.8 days earlier (p < 0.001). Warming about 0.2 °C less than Peace; freshet-timing signal comparable.
 - The "WARNING: Error exit, tauk2. IFAULT = 12" lines (2× on WRA) are Mann-Kendall internals signaling insufficient variance on specific series — non-fatal, just produces NA p-values for affected rows.
-- Next: Phase 3 — draft `0835-appendix-climate-departure.Rmd` from the Fraser numbers, mirroring the Peace REPORT's tone + section structure
+- Phase 3: drafted `0835-appendix-climate-departure.Rmd` (~440 lines) mirroring the Peace REPORT structure (`0820-appendix-climate-departure.Rmd`) but with all narrative rewritten from the Fraser numbers. Used direct `kableExtra::kable_styling() |> kableExtra::scroll_box()` for tables (Peace pattern; no `gitbook_on` conditional).
+- Fresh interpretation findings unique to Fraser:
+  - Warming is real but **has not accelerated since 1981** (45-yr slope shallower than 75-yr — surfaced as a paragraph in the Trends section)
+  - **Zero ecoregions show significant precipitation trend** (Peace had 2/5; Fraser has 0/8) — climate-driven hydrology story is dominated by atmospheric drying + snowpack timing, not by precipitation
+  - **Winter snowmelt rose +45 %** alongside spring +18 % — Fraser-specific seasonal redistribution Peace did not carry
+  - Spatial gradient is **NW-warm to SE-cool** (interior plateau warmer than mountains, the inverse of "windward amplification" — mountains acting as thermal buffer)
+- Next: Phase 4 — wire Methods paragraph into `0300-methods.Rmd` and Results paragraph + hidden rollup chunk into `0400-results.Rmd`
