@@ -432,7 +432,7 @@ wetlands_n  <- sum(wb_in_fp$waterbody_type == "W", na.rm = TRUE)
 
 ### Floodplain Delineation
 
-Modelled functional floodplain in the Nechako River Watershed Group covers `r format(round(fp_area_ha), big.mark = ",")` ha — `r sprintf("%.1f", fp_pct_aoi)` % of the `r format(round(aoi_area_km2), big.mark = ",")` km² watershed group — attached to `r format(round(streams_km_in_fp), big.mark = ",")` km of chinook accessible order-3+ streams. The footprint contains `r lakes_n` lakes and `r format(wetlands_n, big.mark = ",")` mapped wetland polygons, the off-channel habitat units that lateral floodplain connectivity supports. The full metric table, watershed-scale map, and Murray Creek confluence detail map are in [Appendix - Floodplain Delineation](#app-floodplain).
+Modelled functional floodplain in the Nechako River Watershed Group covers `r format(round(fp_area_ha), big.mark = ",")` ha — `r sprintf("%.1f", fp_pct_aoi)` % of the `r format(round(aoi_area_km2), big.mark = ",")` km² watershed group — attached to `r format(round(streams_km_in_fp), big.mark = ",")` km of chinook accessible order-3+ streams. Within that footprint sit `r lakes_n` lakes and `r format(wetlands_n, big.mark = ",")` mapped wetland polygons — the off-channel inventory that crossing remediations in these reaches stand to reconnect or leave severed, depending on whether design accounts for the floodplain context around the structure. The full metric table, watershed-scale map, and Murray Creek confluence detail map are in [Appendix - Floodplain Delineation](#app-floodplain).
 
 
 ## Fish Passage Assessemnts
@@ -456,7 +456,6 @@ A summary of crossings assessed, a rough cost estimate for remediation, and a pr
 
 <br>
 
-The "Barrier" and "Potential Barrier" rankings used in this project followed @moe2011Fieldassessment and represent an assessment of passability for juvenile salmon or small resident rainbow trout under any flow conditions that may occur throughout the year [@clarkinNationalInventoryAssessment2005; @bellFisheriesHandbookEngineering1991; @thompsonAssessingFishPassage2013]. As noted in @bourne_etal2011Barriersfish, with a detailed review of different criteria in @kemp_ohanley2010Proceduresevaluating, passability of barriers can be quantified in many different ways. Fish physiology (i.e. species, length, swim speeds) can make defining passability complex but with important implications for evaluating connectivity and prioritizing remediation candidates [@bourne_etal2011Barriersfish; @shaw_etal2016Importancepartial; @mahlum_etal2014EvaluatingBarrier; @kemp_ohanley2010Proceduresevaluating].  @washingtondepartmentoffishwildlife2009FishPassage present criteria for assigning passability scores to culverts that have already been assessed as barriers in coarser level assessments. These passability scores provide additional information to feed into decision making processes related to the prioritization of remediation site candidates and have potential for application in British Columbia.  
 
 
 `r if(gitbook_on){knitr::asis_output("")} else knitr::asis_output("<br><br><br><br>")`

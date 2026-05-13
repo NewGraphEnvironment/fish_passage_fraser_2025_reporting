@@ -220,6 +220,12 @@ fetch_layer(
            WHERE watershed_group_code = '%s'", wsg),
   "named_streams", "named streams")
 
+fetch_layer(
+  sprintf("SELECT admin_area_name, geom
+           FROM whse_legal_admin_boundaries.abms_municipalities_sp
+           WHERE %s", intersect_clause()),
+  "municipalities", "municipalities")
+
 # Cache the bcfishpass model version + date so the vignette can stamp
 # data provenance without needing a DB connection at render time.
 message("Caching bcfishpass version stamp ...")
