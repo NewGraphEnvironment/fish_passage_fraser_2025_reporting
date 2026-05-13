@@ -19,4 +19,5 @@
   - **Zero ecoregions show significant precipitation trend** (Peace had 2/5; Fraser has 0/8) — climate-driven hydrology story is dominated by atmospheric drying + snowpack timing, not by precipitation
   - **Winter snowmelt rose +45 %** alongside spring +18 % — Fraser-specific seasonal redistribution Peace did not carry
   - Spatial gradient is **NW-warm to SE-cool** (interior plateau warmer than mountains, the inverse of "windward amplification" — mountains acting as thermal buffer)
-- Next: Phase 4 — wire Methods paragraph into `0300-methods.Rmd` and Results paragraph + hidden rollup chunk into `0400-results.Rmd`
+- Phase 4: wired body files. `0300-methods.Rmd` got a new top-level `## Climate Departure` section (3 paragraphs: audience intro + scope + technical pipeline). `0400-results.Rmd` got a hidden `cd-rollup-body` chunk that loads the rds and computes 11 headline scalars, followed by a `## Climate Departure` section with 4 bolded-lead findings + closing both-ways framing. All inline-R values verified to resolve cleanly against the rds.
+- Next: Phase 5 — render verification (gitbook + PDF). Confirm cross-references resolve, chunk labels unique, tables render in both formats.

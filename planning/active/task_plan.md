@@ -60,10 +60,10 @@ Mirror the Peace appendix structure (`cd/hold/9999-appendix-climate-departure.Rm
 
 ## Phase 4 — Body wiring
 
-- [ ] Add `### Climate Departure` subsection under `## Planning — Habitat, Connectivity and Floodplain Modelling` in `0300-methods.Rmd` — one paragraph naming `cd`, ERA5-Land, 1951–1980 reference, Mann-Kendall + Theil-Sen, Welch t, with `[Appendix - Climate Departure](#app-climate-departure)` pointer
-- [ ] Add hidden inline-R rollup chunk + prose paragraph for climate departure in `0400-results.Rmd` (alongside the floodplain results paragraph at line 410+) — chunk loads `data/gis/climate_departure.rds`, computes headline numbers for inline-R injection in the prose paragraph
-- [ ] Verify cross-reference link from body paragraphs to `#app-climate-departure` resolves in render
-- [ ] Atomic commit: "Wire climate departure Methods + Results into body (#6)"
+- [x] Add `## Climate Departure` section to `0300-methods.Rmd` at top level (peer to `## Collaborative GIS Environment` etc., mirroring Peace's placement at line 16). Three-paragraph structure: audience intro + 15-variable scope + technical pipeline. Closes with `[Appendix - Climate Departure](#app-climate-departure)` pointer.
+- [x] Add hidden `cd-rollup-body` chunk + `## Climate Departure` section to `0400-results.Rmd` between `## Site Assessment Data` and `## Collaborative GIS Environment` (mirrors Peace's placement). Chunk loads `data/gis/climate_departure.rds` and computes 11 headline scalars; the prose has 4 bolded-lead findings + closing both-ways framing.
+- [x] Verified inline-R values resolve cleanly: 1.6 / 1.5 / 1.8 °C; VPD +0.34 hPa; prcp +3 %, SWE -10 %, snowfall -6 %; summer SWE -52 %, winter snowmelt +45 %, spring snowmelt +18 %; midpoint 12 days earlier; DTR -0.3 °C
+- [x] Atomic commit: "Wire climate departure Methods + Results into body (#6)"
 
 ## Phase 5 — Render verification
 
