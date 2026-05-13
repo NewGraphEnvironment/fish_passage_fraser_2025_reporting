@@ -31,14 +31,14 @@ The issue was drafted before plan-mode exploration. Four filename/path values ad
 
 ## Phase 2 — Snapshot script: cd pipeline run
 
-- [ ] Run `cd::cd_catalog()` + `cd::cd_extract()` on AOI to produce regional ts
-- [ ] Run `cd::cd_baseline()` + `cd::cd_anomaly()` + `cd::cd_trend()` + `cd::cd_compare()` on AOI → regional outputs
-- [ ] Loop per ecoregion (intersect each ecoregion polygon with AOI, then run the full pipeline) — produces a named list keyed by ecoregion code
-- [ ] Build spatial tmean departure raster: `cd::cd_crop()` the tmean annual COG to AOI, mean of 2015–2025 layers minus mean of 1951–1980 layers, `terra::mask()` to AOI
-- [ ] Compute WSG × ecoregion percentage table (for each of the 7 WSGs, percent area in each ecoregion)
-- [ ] Save: `data/gis/climate_departure.rds`, `data/gis/climate_departure_tmean.tif`, `data/gis/climate_departure_wsg_ecoregion.csv`
-- [ ] Write snapshot manifest entry (file sha + cd version + run date)
-- [ ] Atomic commit: "Snapshot script — cd pipeline outputs for Fraser climate departure (#6)"
+- [x] Run `cd::cd_catalog()` + `cd::cd_extract()` on AOI to produce regional ts (4,484 rows across 15 variables × periods)
+- [x] Run `cd::cd_baseline()` + `cd::cd_anomaly()` + `cd::cd_trend()` + `cd::cd_compare()` on AOI → regional outputs (cmp 59 rows mean_diff, cmp_pct 25 rows pct_change for pct_normal vars)
+- [x] Loop per ecoregion (intersect each ecoregion polygon with AOI, then run the full pipeline) — 8 ecoregions ordered by area: FAB, FAP, WRA, NCM, SRT, COH, CRM, EHM
+- [x] Build spatial tmean departure raster: `cd::cd_crop()` the tmean annual COG to AOI, `terra::app(..., fun = "mean")` for 2015–2025 minus 1951–1980, `terra::mask()` to AOI — range +1.10 to +2.02 °C across 627 non-NA cells. (Used `terra::app()` instead of `mean()` — `mean(SpatRaster)` doesn't S4-dispatch reliably across terra versions.)
+- [x] Compute WSG × ecoregion percentage table — 7 WSGs, with MORK straddling 6 ecoregions (Rocky Mountain mixed), FRAN/NECR/TABR dominantly FAB+FAP, UFRA dominantly WRA+NCM (Rockies), WILL dominantly COH
+- [x] Save: `data/gis/climate_departure.rds` (403 KB), `data/gis/climate_departure_tmean.tif` (4 KB compressed), `data/gis/climate_departure_wsg_ecoregion.csv` (487 B)
+- [x] Write snapshot manifest entry (file sha + cd version + run date) → `data/climate_departure_inputs_snapshot_manifest.txt`
+- [x] Atomic commit: "Snapshot script — cd pipeline outputs for Fraser climate departure (#6)"
 
 ## Phase 3 — Appendix draft (0835-appendix-climate-departure.Rmd)
 

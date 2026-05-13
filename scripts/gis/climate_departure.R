@@ -267,3 +267,186 @@ message(sprintf("  layers: %s",
                 paste(sf::st_layers(out_gpkg)$name, collapse = ", ")))
 message(sprintf("  size: %.1f MB",
                 file.size(out_gpkg) / 1024^2))
+
+# ============================================================================
+# Phase 2 — cd pipeline outputs
+# ============================================================================
+
+library(cd)
+
+# Variables where percent change is the meaningful comparison metric
+# (pct_normal anomaly type — see cd_variables()). Temperature variables
+# get mean_diff via regional_cmp below; these get a second comparison
+# in pct_change form for the recent-vs-baseline table.
+pct_normal_vars <- c("prcp", "soil_moisture", "swe", "snowfall", "snowmelt")
+
+# ---- 11. STAC catalog + regional pipeline -------------------------------
+
+# GDAL retry env vars — the regen pulls ~1300 COG range requests from
+# S3 across AOI + 8 ecoregions, so we want resilience to transient
+# network blips even when not in CI.
+Sys.setenv(
+  GDAL_HTTP_MAX_RETRY = "3",
+  GDAL_HTTP_RETRY_DELAY = "2",
+  VSI_CACHE = "TRUE"
+)
+
+message("Fetching STAC catalog ...")
+catalog <- cd::cd_catalog()
+
+message("Regional cd_extract on AOI ...")
+regional_ts  <- cd::cd_extract(catalog, aoi)
+regional_bl  <- cd::cd_baseline(regional_ts, baseline_years = 1951:1980)
+regional_ano <- cd::cd_anomaly(regional_ts, regional_bl)
+regional_trn <- cd::cd_trend(regional_ano, trend_start = c(1951, 1981))
+# Defaults: window_a = 2015:2025, window_b = 1951:1980, test = "t".
+regional_cmp <- cd::cd_compare(regional_ts, method = "mean_diff")
+regional_cmp_pct <- cd::cd_compare(
+  regional_ts[regional_ts$variable %in% pct_normal_vars, ],
+  method = "pct_change"
+)
+
+# ---- 12. Per-ecoregion cd pipeline --------------------------------------
+
+# Order ecoregions by area descending so the rds list iterates
+# largest-first (same convention Peace uses for stable plotting order).
+ecoregions_for_cd <- ecoregions[order(-ecoregions$area_km2), ]
+
+ecoregion_results <- lapply(seq_len(nrow(ecoregions_for_cd)), function(i) {
+  er <- ecoregions_for_cd[i, ]
+  message(sprintf("Ecoregion %s (%d/%d) cd_extract ...",
+                  er$code, i, nrow(ecoregions_for_cd)))
+  ts  <- cd::cd_extract(catalog, er)
+  bl  <- cd::cd_baseline(ts, baseline_years = 1951:1980)
+  ano <- cd::cd_anomaly(ts, bl)
+  trn <- cd::cd_trend(ano, trend_start = c(1951, 1981))
+  cmp_pct <- cd::cd_compare(
+    ts[ts$variable %in% pct_normal_vars, ],
+    method = "pct_change"
+  )
+  list(ts = ts, ano = ano, trn = trn, cmp_pct = cmp_pct)
+})
+names(ecoregion_results) <- ecoregions_for_cd$code
+
+# Checkpoint: save the cd pipeline outputs before the spatial-tmean
+# raster step, so a failure there doesn't cost the ~10-minute cd
+# extracts.
+out_rds <- file.path(out_dir, "climate_departure.rds")
+saveRDS(
+  list(
+    regional = list(
+      ts = regional_ts, bl = regional_bl, ano = regional_ano,
+      trn = regional_trn, cmp = regional_cmp, cmp_pct = regional_cmp_pct
+    ),
+    ecoregion = ecoregion_results,
+    ecoregion_codes = ecoregions_for_cd$code
+  ),
+  out_rds,
+  compress = "xz"
+)
+message(sprintf("Checkpoint: wrote %s (%.0f KB)",
+                out_rds, file.size(out_rds) / 1024))
+
+# ---- 13. Spatial tmean departure raster --------------------------------
+
+message("Building spatial tmean departure raster ...")
+tmean_row <- catalog[catalog$variable == "tmean" & catalog$period == "annual", ]
+r_tmean <- cd::cd_crop(tmean_row$href, aoi)
+years <- as.integer(names(r_tmean))
+recent_idx     <- which(years >= 2015 & years <= 2025)
+historical_idx <- which(years >= 1951 & years <= 1980)
+# Use terra::app() rather than base::mean() — mean(SpatRaster) doesn't
+# always dispatch to the terra S4 method, depending on package load
+# order. app() is unambiguous.
+recent_mean     <- terra::app(r_tmean[[recent_idx]],     fun = "mean")
+historical_mean <- terra::app(r_tmean[[historical_idx]], fun = "mean")
+departure <- recent_mean - historical_mean
+departure <- terra::mask(departure, terra::vect(aoi))
+names(departure) <- "tmean_departure"
+
+# ---- 14. WSG × ecoregion percentage crosswalk --------------------------
+
+message("Computing WSG × ecoregion percentage crosswalk ...")
+sf::sf_use_s2(FALSE)
+wsgs_3005       <- sf::st_transform(wsgs, 3005)
+ecoregions_3005 <- sf::st_transform(ecoregions, 3005)
+
+overlap <- lapply(seq_len(nrow(wsgs_3005)), function(i) {
+  w <- wsgs_3005[i, ]
+  inter <- suppressWarnings(sf::st_intersection(ecoregions_3005, w))
+  if (nrow(inter) == 0) return(NULL)
+  inter$area_km2 <- as.numeric(sf::st_area(inter)) / 1e6
+  data.frame(
+    wsg_code = w$code,
+    wsg_name = w$name,
+    ecoregion_code = inter$code,
+    area_km2 = inter$area_km2,
+    stringsAsFactors = FALSE
+  )
+})
+overlap_df <- do.call(rbind, overlap)
+
+ecoregion_codes_sorted <- ecoregions_for_cd$code
+wide <- overlap_df |>
+  dplyr::group_by(wsg_code, wsg_name, ecoregion_code) |>
+  dplyr::summarise(area_km2 = sum(area_km2), .groups = "drop") |>
+  tidyr::pivot_wider(
+    id_cols = c(wsg_code, wsg_name),
+    names_from = ecoregion_code,
+    values_from = area_km2,
+    values_fill = 0
+  )
+for (ec in ecoregion_codes_sorted) {
+  if (!ec %in% names(wide)) wide[[ec]] <- 0
+}
+wide <- wide[, c("wsg_code", "wsg_name", ecoregion_codes_sorted)]
+
+wide$total_km2 <- rowSums(wide[, ecoregion_codes_sorted])
+pct_cols <- paste0(ecoregion_codes_sorted, "_pct")
+for (i in seq_along(ecoregion_codes_sorted)) {
+  wide[[pct_cols[i]]] <- round(100 * wide[[ecoregion_codes_sorted[i]]] / wide$total_km2, 1)
+}
+
+wsg_xref <- wide[, c("wsg_code", "wsg_name", "total_km2", pct_cols)]
+wsg_xref$total_km2 <- round(wsg_xref$total_km2, 0)
+wsg_xref <- wsg_xref[order(wsg_xref$wsg_code), ]
+sf::sf_use_s2(TRUE)
+
+# ---- 15. Write spatial + crosswalk outputs -----------------------------
+
+# rds was written at the checkpoint above (section 12).
+
+out_tif <- file.path(out_dir, "climate_departure_tmean.tif")
+terra::writeRaster(
+  departure, out_tif,
+  overwrite = TRUE,
+  gdal = c("COMPRESS=DEFLATE", "TILED=YES")
+)
+message(sprintf("Wrote %s (%.0f KB)",
+                out_tif, file.size(out_tif) / 1024))
+
+out_csv <- file.path(out_dir, "climate_departure_wsg_ecoregion.csv")
+write.csv(wsg_xref, out_csv, row.names = FALSE)
+message(sprintf("Wrote %s (%.0f KB)",
+                out_csv, file.size(out_csv) / 1024))
+
+# ---- 16. Snapshot manifest ---------------------------------------------
+
+manifest <- file.path("data",
+                     "climate_departure_inputs_snapshot_manifest.txt")
+files <- c(out_gpkg, out_rds, out_tif, out_csv)
+shas <- vapply(files, function(f) unname(tools::md5sum(f)), character(1))
+stamp <- format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z")
+cd_ver <- as.character(utils::packageVersion("cd"))
+lines <- c(
+  sprintf("# Climate-departure snapshot generated %s", stamp),
+  sprintf("# cd version: %s", cd_ver),
+  sprintf("# WSG codes: %s", paste(wsg_codes, collapse = ",")),
+  sprintf("# Ecoregions: %s", paste(ecoregions_for_cd$code, collapse = ",")),
+  "",
+  paste0(format(basename(files), width = 38), "  ", shas)
+)
+writeLines(lines, manifest)
+message(sprintf("Wrote %s", manifest))
+
+message("\nDone.")
