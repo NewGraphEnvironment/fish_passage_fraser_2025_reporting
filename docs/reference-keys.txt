@@ -70,8 +70,12 @@ fig:photo-203581-01
 fig:photo-203581-02
 fig:photo-196076-01
 fig:photo-196076-02
+tab:flood-table
+fig:flood-map-wsg
+fig:flood-map-detail
 introduction
 background
+approach
 project-location
 lhtakoh
 nechakoh
@@ -80,6 +84,7 @@ tsalakoh
 tabor-creek
 willow-river
 lower-salmon-river
+floodplains-and-watershed-function
 fisheries
 lhtakoh-1
 nechakoh-1
@@ -90,9 +95,10 @@ fish-species
 methods
 collaborative-gis-environment
 mapping
-planning
+planning-habitat-connectivity-and-floodplain-modelling
 habitat-modelling
 statistical-support-for-bcfishpass-fish-habitat-modelling-updates
+floodplain-delineation
 fish-passage-assessments
 natural-barriers-to-fish-passage
 road-stream-crossings
@@ -115,9 +121,10 @@ results-and-discussion
 site-assessment-data
 collaborative-gis-environment-1
 methodology
-planning-1
+planning-habitat-connectivity-and-floodplain-modelling-1
 habitat-modelling-1
 statistical-support-for-bcfishpass-fish-habitat-modelling-updates-1
+floodplain-delineation-1
 fish-passage-assessemnts
 habitat-confirmation-assessments-1
 environmental-dna-edna-sampling-1
