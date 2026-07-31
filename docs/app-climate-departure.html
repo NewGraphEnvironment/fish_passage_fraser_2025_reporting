@@ -434,18 +434,31 @@ div.csl-indent {
 <span id="cb58-9"><a href="app-climate-departure.html#cb58-9" tabindex="-1"></a>highways     <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(gpkg_cd, <span class="at">layer =</span> <span class="st">&quot;highways&quot;</span>,   <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb58-10"><a href="app-climate-departure.html#cb58-10" tabindex="-1"></a>wsgs         <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(gpkg_cd, <span class="at">layer =</span> <span class="st">&quot;wsgs&quot;</span>,       <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb58-11"><a href="app-climate-departure.html#cb58-11" tabindex="-1"></a></span>
-<span id="cb58-12"><a href="app-climate-departure.html#cb58-12" tabindex="-1"></a>cd_data    <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/gis/climate_departure.rds&quot;</span>)</span>
-<span id="cb58-13"><a href="app-climate-departure.html#cb58-13" tabindex="-1"></a>ts         <span class="ot">&lt;-</span> cd_data<span class="sc">$</span>regional<span class="sc">$</span>ts</span>
-<span id="cb58-14"><a href="app-climate-departure.html#cb58-14" tabindex="-1"></a>bl_early   <span class="ot">&lt;-</span> cd_data<span class="sc">$</span>regional<span class="sc">$</span>bl</span>
-<span id="cb58-15"><a href="app-climate-departure.html#cb58-15" tabindex="-1"></a>ano        <span class="ot">&lt;-</span> cd_data<span class="sc">$</span>regional<span class="sc">$</span>ano</span>
-<span id="cb58-16"><a href="app-climate-departure.html#cb58-16" tabindex="-1"></a>trn        <span class="ot">&lt;-</span> cd_data<span class="sc">$</span>regional<span class="sc">$</span>trn</span>
-<span id="cb58-17"><a href="app-climate-departure.html#cb58-17" tabindex="-1"></a>cmp        <span class="ot">&lt;-</span> cd_data<span class="sc">$</span>regional<span class="sc">$</span>cmp</span>
-<span id="cb58-18"><a href="app-climate-departure.html#cb58-18" tabindex="-1"></a>cmp_pct    <span class="ot">&lt;-</span> cd_data<span class="sc">$</span>regional<span class="sc">$</span>cmp_pct</span>
-<span id="cb58-19"><a href="app-climate-departure.html#cb58-19" tabindex="-1"></a>departure  <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="st">&quot;data/gis/climate_departure_tmean.tif&quot;</span>)</span>
-<span id="cb58-20"><a href="app-climate-departure.html#cb58-20" tabindex="-1"></a><span class="fu">names</span>(departure) <span class="ot">&lt;-</span> <span class="st">&quot;Temperature departure&quot;</span></span>
-<span id="cb58-21"><a href="app-climate-departure.html#cb58-21" tabindex="-1"></a></span>
-<span id="cb58-22"><a href="app-climate-departure.html#cb58-22" tabindex="-1"></a>aoi_km2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">sum</span>(sf<span class="sc">::</span><span class="fu">st_area</span>(sf<span class="sc">::</span><span class="fu">st_transform</span>(aoi, <span class="dv">3005</span>)))) <span class="sc">/</span> <span class="fl">1e6</span></span>
-<span id="cb58-23"><a href="app-climate-departure.html#cb58-23" tabindex="-1"></a>aoi_bb  <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_bbox</span>(aoi)</span></code></pre></div>
+<span id="cb58-12"><a href="app-climate-departure.html#cb58-12" tabindex="-1"></a><span class="co"># Derive the analysis extent from the data instead of restating it in prose.</span></span>
+<span id="cb58-13"><a href="app-climate-departure.html#cb58-13" tabindex="-1"></a><span class="co"># scripts/gis/climate_departure.R builds the AOI from an explicit `wsg_codes`</span></span>
+<span id="cb58-14"><a href="app-climate-departure.html#cb58-14" tabindex="-1"></a><span class="co"># vector that is NOT the same as params$wsg_code — Lower Salmon River is in the</span></span>
+<span id="cb58-15"><a href="app-climate-departure.html#cb58-15" tabindex="-1"></a><span class="co"># project but not in the climate run. Deriving here means the prose below cannot</span></span>
+<span id="cb58-16"><a href="app-climate-departure.html#cb58-16" tabindex="-1"></a><span class="co"># drift from what was actually analysed if either list changes.</span></span>
+<span id="cb58-17"><a href="app-climate-departure.html#cb58-17" tabindex="-1"></a>n_cd_wsg      <span class="ot">&lt;-</span> <span class="fu">nrow</span>(wsgs)</span>
+<span id="cb58-18"><a href="app-climate-departure.html#cb58-18" tabindex="-1"></a>n_cd_wsg_word <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;one&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;three&quot;</span>, <span class="st">&quot;four&quot;</span>, <span class="st">&quot;five&quot;</span>, <span class="st">&quot;six&quot;</span>, <span class="st">&quot;seven&quot;</span>,</span>
+<span id="cb58-19"><a href="app-climate-departure.html#cb58-19" tabindex="-1"></a>                   <span class="st">&quot;eight&quot;</span>, <span class="st">&quot;nine&quot;</span>, <span class="st">&quot;ten&quot;</span>)[n_cd_wsg]</span>
+<span id="cb58-20"><a href="app-climate-departure.html#cb58-20" tabindex="-1"></a>cd_wsg_codes  <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">sort</span>(<span class="fu">as.character</span>(wsgs<span class="sc">$</span>code)), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>)</span>
+<span id="cb58-21"><a href="app-climate-departure.html#cb58-21" tabindex="-1"></a>cd_wsg_list   <span class="ot">&lt;-</span> knitr<span class="sc">::</span><span class="fu">combine_words</span>(</span>
+<span id="cb58-22"><a href="app-climate-departure.html#cb58-22" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="fu">as.character</span>(wsgs<span class="sc">$</span>name), <span class="st">&quot; (&quot;</span>, <span class="fu">as.character</span>(wsgs<span class="sc">$</span>code), <span class="st">&quot;)&quot;</span>)</span>
+<span id="cb58-23"><a href="app-climate-departure.html#cb58-23" tabindex="-1"></a>)</span>
+<span id="cb58-24"><a href="app-climate-departure.html#cb58-24" tabindex="-1"></a></span>
+<span id="cb58-25"><a href="app-climate-departure.html#cb58-25" tabindex="-1"></a>cd_data    <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/gis/climate_departure.rds&quot;</span>)</span>
+<span id="cb58-26"><a href="app-climate-departure.html#cb58-26" tabindex="-1"></a>ts         <span class="ot">&lt;-</span> cd_data<span class="sc">$</span>regional<span class="sc">$</span>ts</span>
+<span id="cb58-27"><a href="app-climate-departure.html#cb58-27" tabindex="-1"></a>bl_early   <span class="ot">&lt;-</span> cd_data<span class="sc">$</span>regional<span class="sc">$</span>bl</span>
+<span id="cb58-28"><a href="app-climate-departure.html#cb58-28" tabindex="-1"></a>ano        <span class="ot">&lt;-</span> cd_data<span class="sc">$</span>regional<span class="sc">$</span>ano</span>
+<span id="cb58-29"><a href="app-climate-departure.html#cb58-29" tabindex="-1"></a>trn        <span class="ot">&lt;-</span> cd_data<span class="sc">$</span>regional<span class="sc">$</span>trn</span>
+<span id="cb58-30"><a href="app-climate-departure.html#cb58-30" tabindex="-1"></a>cmp        <span class="ot">&lt;-</span> cd_data<span class="sc">$</span>regional<span class="sc">$</span>cmp</span>
+<span id="cb58-31"><a href="app-climate-departure.html#cb58-31" tabindex="-1"></a>cmp_pct    <span class="ot">&lt;-</span> cd_data<span class="sc">$</span>regional<span class="sc">$</span>cmp_pct</span>
+<span id="cb58-32"><a href="app-climate-departure.html#cb58-32" tabindex="-1"></a>departure  <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="st">&quot;data/gis/climate_departure_tmean.tif&quot;</span>)</span>
+<span id="cb58-33"><a href="app-climate-departure.html#cb58-33" tabindex="-1"></a><span class="fu">names</span>(departure) <span class="ot">&lt;-</span> <span class="st">&quot;Temperature departure&quot;</span></span>
+<span id="cb58-34"><a href="app-climate-departure.html#cb58-34" tabindex="-1"></a></span>
+<span id="cb58-35"><a href="app-climate-departure.html#cb58-35" tabindex="-1"></a>aoi_km2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">sum</span>(sf<span class="sc">::</span><span class="fu">st_area</span>(sf<span class="sc">::</span><span class="fu">st_transform</span>(aoi, <span class="dv">3005</span>)))) <span class="sc">/</span> <span class="fl">1e6</span></span>
+<span id="cb58-36"><a href="app-climate-departure.html#cb58-36" tabindex="-1"></a>aoi_bb  <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_bbox</span>(aoi)</span></code></pre></div>
 <div id="climate-departure-and-fish-passage" class="section level2 unnumbered hasAnchor">
 <h2>Climate departure and fish passage<a href="app-climate-departure.html#climate-departure-and-fish-passage" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Stream crossings are the visible structures in a fish-passage
@@ -479,9 +492,7 @@ biological inputs.</p>
 <h2>Area of interest<a href="app-climate-departure.html#area-of-interest" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The study area for this climate-departure analysis is the union of
 seven Freshwater Atlas watershed groups in the upper and central
-Fraser drainage: Lower Chilako (LCHL), Nechako (NECR), Francois
-Lake (FRAN), Morkill River (MORK), Upper Fraser (UFRA), Tabor
-River (TABR), and Willow River (WILL). Together they cover
+Fraser drainage: Francois Lake (FRAN), Lower Chilako River (LCHL), Morkill River (MORK), Nechako River (NECR), Tabor River (TABR), Upper Fraser River (UFRA), and Willow River (WILL). Together they cover
 34,020 km² and span
 8 ecoregions
 (Figure <a href="app-climate-departure.html#fig:cd-map-aoi">5.1</a>) — broad climate-physiography zones
@@ -511,7 +522,7 @@ watershed groups at the end of the appendix.</p>
 <span id="cb59-19"><a href="app-climate-departure.html#cb59-19" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(aoi_bb[<span class="st">&quot;xmin&quot;</span>] <span class="sc">-</span> <span class="fl">0.4</span>, aoi_bb[<span class="st">&quot;xmax&quot;</span>] <span class="sc">+</span> <span class="fl">0.4</span>),</span>
 <span id="cb59-20"><a href="app-climate-departure.html#cb59-20" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(aoi_bb[<span class="st">&quot;ymin&quot;</span>] <span class="sc">-</span> <span class="fl">0.4</span>, aoi_bb[<span class="st">&quot;ymax&quot;</span>] <span class="sc">+</span> <span class="fl">0.3</span>)) <span class="sc">+</span></span>
 <span id="cb59-21"><a href="app-climate-departure.html#cb59-21" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="fu">format</span>(<span class="fu">round</span>(aoi_km2), <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>),</span>
-<span id="cb59-22"><a href="app-climate-departure.html#cb59-22" tabindex="-1"></a>                          <span class="st">&quot; km² — &quot;</span>, <span class="fu">nrow</span>(ecoregions), <span class="st">&quot; ecoregions, 7 watershed groups&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb59-22"><a href="app-climate-departure.html#cb59-22" tabindex="-1"></a>                          <span class="st">&quot; km² — &quot;</span>, <span class="fu">nrow</span>(ecoregions), <span class="st">&quot; ecoregions, &quot;</span>, n_cd_wsg, <span class="st">&quot; watershed groups&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb59-23"><a href="app-climate-departure.html#cb59-23" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">11</span>) <span class="sc">+</span></span>
 <span id="cb59-24"><a href="app-climate-departure.html#cb59-24" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb59-25"><a href="app-climate-departure.html#cb59-25" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
@@ -5935,7 +5946,7 @@ FAB — Fraser Basin; FAP — Fraser Plateau; WRA — Western Continental Ranges
 <p>The study area is reported and managed at the watershed-group
 scale — the British Columbia Freshwater Atlas hydrological
 reporting unit, and the unit that drives barrier prioritisation
-in this report. The seven watershed groups (LCHL, NECR, FRAN,
+in this report. The seven watershed groups (FRAN, LCHL, MORK, NECR, TABR, UFRA, WILL)
 MORK, UFRA, TABR, WILL) span the eight ecoregions in different
 ways: some sit cleanly within one or two, others split across
 several (Figure <a href="app-climate-departure.html#fig:cd-map-wsgs">5.16</a>). The table that follows
