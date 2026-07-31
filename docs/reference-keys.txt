@@ -8,7 +8,6 @@ fig:hydrograph-tabor2
 fig:hydrograph-willow
 fig:hydrograph-salmon
 tab:stock-assess-dat-all
-tab:fiss-species-table
 tab:tab-fish-grad
 fig:fish-plot-grad
 tab:tab-fish-width
@@ -23,10 +22,6 @@ tab:tab-cost-mult
 tab:tab-moti-params
 tab:tab-monitoring-metrics
 fig:map-interactive
-tab:tab-sites-sum-cap
-tab:tab-sites-cap
-tab:tab-uav-imagery-cap
-tab:tab-rfp-tracking
 tab:cost-est-phase-1
 tab:tab-overview
 tab:phase-2-cv-assess-sum
@@ -36,6 +31,11 @@ tab:tab-wshd-sum-all
 fig:plot-model-all
 tab:tab-edna-summary
 tab:tab-mon-overview
+tab:tab-sites-sum-cap
+tab:tab-sites-cap
+tab:fiss-species-table
+tab:tab-uav-imagery-cap
+tab:tab-rfp-tracking
 tab:tab-wshd-126158
 tab:tab-culvert-bcfp-126158
 tab:tab-culvert-126158
@@ -156,8 +156,6 @@ monitoring
 results-and-discussion
 site-assessment-data
 climate-departure-1
-collaborative-gis-environment-1
-methodology
 planning-habitat-connectivity-and-floodplain-modelling-1
 habitat-modelling-1
 statistical-support-for-bcfishpass-fish-habitat-modelling-updates-1
@@ -167,4 +165,6 @@ habitat-confirmation-assessments-1
 environmental-dna-edna-sampling-1
 engineering-design-1
 monitoring-1
+collaborative-gis-environment-1
 recommendations
+methodology

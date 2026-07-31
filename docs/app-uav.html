@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Attachment - Maps | Restoring Fish Passage in the Fraser Region - 2025</title>
+  <title>Appendix - UAV Imagery | Restoring Fish Passage in the Fraser Region - 2025</title>
   <meta name="description" content="My Description." />
   <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Attachment - Maps | Restoring Fish Passage in the Fraser Region - 2025" />
+  <meta property="og:title" content="Appendix - UAV Imagery | Restoring Fish Passage in the Fraser Region - 2025" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="My Description." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Attachment - Maps | Restoring Fish Passage in the Fraser Region - 2025" />
+  <meta name="twitter:title" content="Appendix - UAV Imagery | Restoring Fish Passage in the Fraser Region - 2025" />
   
   <meta name="twitter:description" content="My Description." />
   
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="session-info.html"/>
-<link rel="next" href="attach-dat.html"/>
+<link rel="prev" href="app-fish-species.html"/>
+<link rel="next" href="app-gis.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -422,17 +422,85 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="attach-maps" class="section level1 unnumbered hasAnchor">
-<h1><strong>Attachment - Maps</strong><a href="attach-maps.html#attach-maps" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>All georeferenced field maps are presented at:</p>
-<ul>
-<li><a href="https://hillcrestgeo.ca/outgoing/fishpassage/projects/parsnip/archive/2022-05-27/">https://hillcrestgeo.ca/outgoing/fishpassage/projects/parsnip/archive/2022-05-27/</a></li>
-</ul>
+<div id="app-uav" class="section level1 unnumbered hasAnchor">
+<h1>Appendix - UAV Imagery<a href="app-uav.html#app-uav" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Since 2023, orthoimagery and elevation model rasters have been generated and stored as Cloud Optimized Geotiffs on a cloud service provider (AWS) with select imagery linked to in the collaborative GIS project. Additionally - a tile service has been set up to facilitate viewing and downloading of individual images, provided in Table <a href="app-uav.html#tab:tab-uav-imagery-cap">5.4</a>.</p>
 <p><br></p>
-<p>Maps are also available zipped for bulk download at:</p>
-<ul>
-<li><a href="https://hillcrestgeo.ca/outgoing/fishpassage/projects/parsnip/archive/2022-05-27/parsnip_2022-05-27.zip">https://hillcrestgeo.ca/outgoing/fishpassage/projects/parsnip/archive/2022-05-27/2022-05-27.zip</a></li>
-</ul>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="app-uav.html#cb64-1" tabindex="-1"></a><span class="co"># only needs to be run at the beginning or if we want to update</span></span>
+<span id="cb64-2"><a href="app-uav.html#cb64-2" tabindex="-1"></a></span>
+<span id="cb64-3"><a href="app-uav.html#cb64-3" tabindex="-1"></a><span class="co"># Grab the imagery from the stac</span></span>
+<span id="cb64-4"><a href="app-uav.html#cb64-4" tabindex="-1"></a></span>
+<span id="cb64-5"><a href="app-uav.html#cb64-5" tabindex="-1"></a><span class="co"># bc bounding box</span></span>
+<span id="cb64-6"><a href="app-uav.html#cb64-6" tabindex="-1"></a>bcbbox <span class="ot">&lt;-</span>  <span class="fu">as.numeric</span>(</span>
+<span id="cb64-7"><a href="app-uav.html#cb64-7" tabindex="-1"></a>  sf<span class="sc">::</span><span class="fu">st_bbox</span>(bcmaps<span class="sc">::</span><span class="fu">bc_bound</span>()) <span class="sc">|&gt;</span> sf<span class="sc">::</span><span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb64-8"><a href="app-uav.html#cb64-8" tabindex="-1"></a>)</span>
+<span id="cb64-9"><a href="app-uav.html#cb64-9" tabindex="-1"></a></span>
+<span id="cb64-10"><a href="app-uav.html#cb64-10" tabindex="-1"></a><span class="co"># use rstac to query the collection</span></span>
+<span id="cb64-11"><a href="app-uav.html#cb64-11" tabindex="-1"></a>q <span class="ot">&lt;-</span> rstac<span class="sc">::</span><span class="fu">stac</span>(<span class="st">&quot;https://images.a11s.one/&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb64-12"><a href="app-uav.html#cb64-12" tabindex="-1"></a>    rstac<span class="sc">::</span><span class="fu">stac_search</span>(</span>
+<span id="cb64-13"><a href="app-uav.html#cb64-13" tabindex="-1"></a>      <span class="at">collections =</span> <span class="st">&quot;imagery-uav-bc-prod&quot;</span>,</span>
+<span id="cb64-14"><a href="app-uav.html#cb64-14" tabindex="-1"></a>                      <span class="at">bbox =</span> bcbbox</span>
+<span id="cb64-15"><a href="app-uav.html#cb64-15" tabindex="-1"></a>                      </span>
+<span id="cb64-16"><a href="app-uav.html#cb64-16" tabindex="-1"></a>                     ) <span class="sc">|&gt;</span></span>
+<span id="cb64-17"><a href="app-uav.html#cb64-17" tabindex="-1"></a>  rstac<span class="sc">::</span><span class="fu">post_request</span>()</span>
+<span id="cb64-18"><a href="app-uav.html#cb64-18" tabindex="-1"></a></span>
+<span id="cb64-19"><a href="app-uav.html#cb64-19" tabindex="-1"></a><span class="co"># get deets of the items</span></span>
+<span id="cb64-20"><a href="app-uav.html#cb64-20" tabindex="-1"></a>r <span class="ot">&lt;-</span> q <span class="sc">|&gt;</span></span>
+<span id="cb64-21"><a href="app-uav.html#cb64-21" tabindex="-1"></a>  rstac<span class="sc">::</span><span class="fu">items_fetch</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="app-uav.html#cb65-1" tabindex="-1"></a><span class="co"># build the table to display the info</span></span>
+<span id="cb65-2"><a href="app-uav.html#cb65-2" tabindex="-1"></a>tab_uav <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="at">url_download =</span> purrr<span class="sc">::</span><span class="fu">map_chr</span>(r<span class="sc">$</span>features, <span class="sc">~</span> purrr<span class="sc">::</span><span class="fu">pluck</span>(.x, <span class="st">&quot;assets&quot;</span>, <span class="st">&quot;image&quot;</span>, <span class="st">&quot;href&quot;</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb65-3"><a href="app-uav.html#cb65-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">stub =</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(url_download, <span class="st">&quot;https://imagery-uav-bc.s3.amazonaws.com/&quot;</span>, <span class="st">&quot;&quot;</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb65-4"><a href="app-uav.html#cb65-4" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">separate</span>(</span>
+<span id="cb65-5"><a href="app-uav.html#cb65-5" tabindex="-1"></a>    <span class="at">col =</span> stub, </span>
+<span id="cb65-6"><a href="app-uav.html#cb65-6" tabindex="-1"></a>    <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;region&quot;</span>, <span class="st">&quot;watershed_group&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;item&quot;</span>, <span class="st">&quot;rest&quot;</span>),</span>
+<span id="cb65-7"><a href="app-uav.html#cb65-7" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">&quot;/&quot;</span>,</span>
+<span id="cb65-8"><a href="app-uav.html#cb65-8" tabindex="-1"></a>    <span class="at">extra =</span> <span class="st">&quot;drop&quot;</span></span>
+<span id="cb65-9"><a href="app-uav.html#cb65-9" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb65-10"><a href="app-uav.html#cb65-10" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb65-11"><a href="app-uav.html#cb65-11" tabindex="-1"></a>    <span class="at">link_view =</span> </span>
+<span id="cb65-12"><a href="app-uav.html#cb65-12" tabindex="-1"></a>                  dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb65-13"><a href="app-uav.html#cb65-13" tabindex="-1"></a>                    <span class="sc">!</span>tools<span class="sc">::</span><span class="fu">file_path_sans_ext</span>(<span class="fu">basename</span>(url_download)) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;dsm&quot;</span>, <span class="st">&quot;dtm&quot;</span>) <span class="sc">~</span> </span>
+<span id="cb65-14"><a href="app-uav.html#cb65-14" tabindex="-1"></a>                      ngr<span class="sc">::</span><span class="fu">ngr_str_link_url</span>(</span>
+<span id="cb65-15"><a href="app-uav.html#cb65-15" tabindex="-1"></a>                        <span class="at">url_base =</span> <span class="st">&quot;https://viewer.a11s.one/?cog=&quot;</span>,</span>
+<span id="cb65-16"><a href="app-uav.html#cb65-16" tabindex="-1"></a>                        <span class="at">url_resource =</span> url_download, </span>
+<span id="cb65-17"><a href="app-uav.html#cb65-17" tabindex="-1"></a>                        <span class="at">url_resource_path =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb65-18"><a href="app-uav.html#cb65-18" tabindex="-1"></a>                        <span class="co"># anchor_text= &quot;URL View&quot;</span></span>
+<span id="cb65-19"><a href="app-uav.html#cb65-19" tabindex="-1"></a>                        <span class="at">anchor_text=</span> tools<span class="sc">::</span><span class="fu">file_path_sans_ext</span>(<span class="fu">basename</span>(url_download))),</span>
+<span id="cb65-20"><a href="app-uav.html#cb65-20" tabindex="-1"></a>                    T <span class="sc">~</span> <span class="st">&quot;-&quot;</span>),</span>
+<span id="cb65-21"><a href="app-uav.html#cb65-21" tabindex="-1"></a>                        <span class="at">link_download =</span> ngr<span class="sc">::</span><span class="fu">ngr_str_link_url</span>(<span class="at">url_base =</span> url_download, <span class="at">anchor_text =</span> url_download)</span>
+<span id="cb65-22"><a href="app-uav.html#cb65-22" tabindex="-1"></a>    )<span class="sc">|&gt;</span> </span>
+<span id="cb65-23"><a href="app-uav.html#cb65-23" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(region, watershed_group, year, item, link_view, link_download)</span>
+<span id="cb65-24"><a href="app-uav.html#cb65-24" tabindex="-1"></a></span>
+<span id="cb65-25"><a href="app-uav.html#cb65-25" tabindex="-1"></a></span>
+<span id="cb65-26"><a href="app-uav.html#cb65-26" tabindex="-1"></a></span>
+<span id="cb65-27"><a href="app-uav.html#cb65-27" tabindex="-1"></a><span class="co"># grab the imagery for this project area</span></span>
+<span id="cb65-28"><a href="app-uav.html#cb65-28" tabindex="-1"></a>project_region <span class="ot">&lt;-</span> <span class="st">&quot;skeena&quot;</span></span>
+<span id="cb65-29"><a href="app-uav.html#cb65-29" tabindex="-1"></a></span>
+<span id="cb65-30"><a href="app-uav.html#cb65-30" tabindex="-1"></a>project_uav <span class="ot">&lt;-</span> tab_uav <span class="sc">|&gt;</span> </span>
+<span id="cb65-31"><a href="app-uav.html#cb65-31" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(region <span class="sc">==</span> project_region)</span>
+<span id="cb65-32"><a href="app-uav.html#cb65-32" tabindex="-1"></a></span>
+<span id="cb65-33"><a href="app-uav.html#cb65-33" tabindex="-1"></a><span class="co"># how many distinct items are there</span></span>
+<span id="cb65-34"><a href="app-uav.html#cb65-34" tabindex="-1"></a><span class="co"># length(unique(project_uav$item))</span></span>
+<span id="cb65-35"><a href="app-uav.html#cb65-35" tabindex="-1"></a></span>
+<span id="cb65-36"><a href="app-uav.html#cb65-36" tabindex="-1"></a><span class="co"># Burn to sqlite </span></span>
+<span id="cb65-37"><a href="app-uav.html#cb65-37" tabindex="-1"></a>conn <span class="ot">&lt;-</span> readwritesqlite<span class="sc">::</span><span class="fu">rws_connect</span>(<span class="st">&quot;data/bcfishpass.sqlite&quot;</span>)</span>
+<span id="cb65-38"><a href="app-uav.html#cb65-38" tabindex="-1"></a>readwritesqlite<span class="sc">::</span><span class="fu">rws_list_tables</span>(conn)</span>
+<span id="cb65-39"><a href="app-uav.html#cb65-39" tabindex="-1"></a>readwritesqlite<span class="sc">::</span><span class="fu">rws_drop_table</span>(<span class="st">&quot;project_uav&quot;</span>, <span class="at">conn =</span> conn)</span>
+<span id="cb65-40"><a href="app-uav.html#cb65-40" tabindex="-1"></a>readwritesqlite<span class="sc">::</span><span class="fu">rws_write</span>(project_uav, <span class="at">exists =</span> F, <span class="at">delete =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb65-41"><a href="app-uav.html#cb65-41" tabindex="-1"></a>                           <span class="at">conn =</span> conn, <span class="at">x_name =</span> <span class="st">&quot;project_uav&quot;</span>)</span>
+<span id="cb65-42"><a href="app-uav.html#cb65-42" tabindex="-1"></a>readwritesqlite<span class="sc">::</span><span class="fu">rws_disconnect</span>(conn)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="app-uav.html#cb66-1" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="st">&quot;Drone imagery download and viewer links.&quot;</span></span>
+<span id="cb66-2"><a href="app-uav.html#cb66-2" tabindex="-1"></a></span>
+<span id="cb66-3"><a href="app-uav.html#cb66-3" tabindex="-1"></a><span class="fu">my_tab_caption</span>()</span></code></pre></div>
+<table>
+<caption>
+<span id="tab:tab-uav-imagery-cap">Table 5.4: </span>Drone imagery download and viewer links. <b>NOTE: To view all columns in the table - please click on one of the sort arrows within column headers before scrolling to the right.</b>
+</caption>
+</table>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="app-uav.html#cb67-1" tabindex="-1"></a>project_uav <span class="sc">|&gt;</span></span>
+<span id="cb67-2"><a href="app-uav.html#cb67-2" tabindex="-1"></a>  <span class="fu">my_dt_table</span>(<span class="at">cols_freeze_left =</span> <span class="dv">2</span>, <span class="at">escape =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-f317bb67b19d54e5e531" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f317bb67b19d54e5e531">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\" disabled=\"\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons","FixedColumns","ColReorder"],"data":[["mackenzie","mackenzie","mackenzie","mackenzie","mackenzie","mackenzie","mackenzie","mackenzie","mackenzie","mackenzie","mackenzie","mackenzie","mackenzie","mackenzie","mackenzie","mackenzie","mackenzie","mackenzie"],["parsnip","parsnip","parsnip","parsnip","parsnip","parsnip","parsnip","parsnip","parsnip","parsnip","parsnip","parsnip","parsnip","parsnip","parsnip","carp","carp","carp"],["2023","2023","2023","2023","2023","2023","2024","2024","2024","2022","2022","2022","2022","2022","2022","2024","2024","2024"],["125231_table_trib_tablefsr_21k","125231_table_trib_tablefsr_21k","125231_table_trib_tablefsr_21k","125261_fern_tablefsr_2k","125261_fern_tablefsr_2k","125261_fern_tablefsr_2k","125231_table_trib_tablefsr_21k","125231_table_trib_tablefsr_21k","125231_table_trib_tablefsr_21k","125000_parsnip_trib_arctic","125000_parsnip_trib_arctic","125000_parsnip_trib_arctic","125179_missinka_trib","125179_missinka_trib","125179_missinka_trib","198692_kerry_lake_trib","198692_kerry_lake_trib","198692_kerry_lake_trib"],["<a href=\"https://viewer.a11s.one/?cog=https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2023/125231_table_trib_tablefsr_21k/odm_orthophoto/odm_orthophoto.tif\" target=\"_blank\">odm_orthophoto<\/a>","-","-","<a href=\"https://viewer.a11s.one/?cog=https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2023/125261_fern_tablefsr_2k/odm_orthophoto/odm_orthophoto.tif\" target=\"_blank\">odm_orthophoto<\/a>","-","-","<a href=\"https://viewer.a11s.one/?cog=https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2024/125231_table_trib_tablefsr_21k/odm_orthophoto/odm_orthophoto.tif\" target=\"_blank\">odm_orthophoto<\/a>","-","-","<a href=\"https://viewer.a11s.one/?cog=https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2022/125000_parsnip_trib_arctic/odm_orthophoto/odm_orthophoto.tif\" target=\"_blank\">odm_orthophoto<\/a>","-","-","<a href=\"https://viewer.a11s.one/?cog=https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2022/125179_missinka_trib/odm_orthophoto/odm_orthophoto.tif\" target=\"_blank\">odm_orthophoto<\/a>","-","-","<a href=\"https://viewer.a11s.one/?cog=https://imagery-uav-bc.s3.amazonaws.com/mackenzie/carp/2024/198692_kerry_lake_trib/odm_orthophoto/odm_orthophoto.tif\" target=\"_blank\">odm_orthophoto<\/a>","-","-"],["<a href=\"https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2023/125231_table_trib_tablefsr_21k/odm_orthophoto/odm_orthophoto.tif\" target=\"_blank\">https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2023/125231_table_trib_tablefsr_21k/odm_orthophoto/odm_orthophoto.tif<\/a>","<a href=\"https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2023/125231_table_trib_tablefsr_21k/odm_dem/dtm.tif\" target=\"_blank\">https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2023/125231_table_trib_tablefsr_21k/odm_dem/dtm.tif<\/a>","<a href=\"https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2023/125231_table_trib_tablefsr_21k/odm_dem/dsm.tif\" target=\"_blank\">https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2023/125231_table_trib_tablefsr_21k/odm_dem/dsm.tif<\/a>","<a href=\"https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2023/125261_fern_tablefsr_2k/odm_orthophoto/odm_orthophoto.tif\" target=\"_blank\">https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2023/125261_fern_tablefsr_2k/odm_orthophoto/odm_orthophoto.tif<\/a>","<a href=\"https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2023/125261_fern_tablefsr_2k/odm_dem/dtm.tif\" target=\"_blank\">https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2023/125261_fern_tablefsr_2k/odm_dem/dtm.tif<\/a>","<a href=\"https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2023/125261_fern_tablefsr_2k/odm_dem/dsm.tif\" target=\"_blank\">https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2023/125261_fern_tablefsr_2k/odm_dem/dsm.tif<\/a>","<a href=\"https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2024/125231_table_trib_tablefsr_21k/odm_orthophoto/odm_orthophoto.tif\" target=\"_blank\">https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2024/125231_table_trib_tablefsr_21k/odm_orthophoto/odm_orthophoto.tif<\/a>","<a href=\"https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2024/125231_table_trib_tablefsr_21k/odm_dem/dtm.tif\" target=\"_blank\">https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2024/125231_table_trib_tablefsr_21k/odm_dem/dtm.tif<\/a>","<a href=\"https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2024/125231_table_trib_tablefsr_21k/odm_dem/dsm.tif\" target=\"_blank\">https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2024/125231_table_trib_tablefsr_21k/odm_dem/dsm.tif<\/a>","<a href=\"https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2022/125000_parsnip_trib_arctic/odm_orthophoto/odm_orthophoto.tif\" target=\"_blank\">https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2022/125000_parsnip_trib_arctic/odm_orthophoto/odm_orthophoto.tif<\/a>","<a href=\"https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2022/125000_parsnip_trib_arctic/odm_dem/dtm.tif\" target=\"_blank\">https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2022/125000_parsnip_trib_arctic/odm_dem/dtm.tif<\/a>","<a href=\"https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2022/125000_parsnip_trib_arctic/odm_dem/dsm.tif\" target=\"_blank\">https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2022/125000_parsnip_trib_arctic/odm_dem/dsm.tif<\/a>","<a href=\"https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2022/125179_missinka_trib/odm_orthophoto/odm_orthophoto.tif\" target=\"_blank\">https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2022/125179_missinka_trib/odm_orthophoto/odm_orthophoto.tif<\/a>","<a href=\"https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2022/125179_missinka_trib/odm_dem/dtm.tif\" target=\"_blank\">https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2022/125179_missinka_trib/odm_dem/dtm.tif<\/a>","<a href=\"https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2022/125179_missinka_trib/odm_dem/dsm.tif\" target=\"_blank\">https://imagery-uav-bc.s3.amazonaws.com/mackenzie/parsnip/2022/125179_missinka_trib/odm_dem/dsm.tif<\/a>","<a href=\"https://imagery-uav-bc.s3.amazonaws.com/mackenzie/carp/2024/198692_kerry_lake_trib/odm_orthophoto/odm_orthophoto.tif\" target=\"_blank\">https://imagery-uav-bc.s3.amazonaws.com/mackenzie/carp/2024/198692_kerry_lake_trib/odm_orthophoto/odm_orthophoto.tif<\/a>","<a href=\"https://imagery-uav-bc.s3.amazonaws.com/mackenzie/carp/2024/198692_kerry_lake_trib/odm_dem/dtm.tif\" target=\"_blank\">https://imagery-uav-bc.s3.amazonaws.com/mackenzie/carp/2024/198692_kerry_lake_trib/odm_dem/dtm.tif<\/a>","<a href=\"https://imagery-uav-bc.s3.amazonaws.com/mackenzie/carp/2024/198692_kerry_lake_trib/odm_dem/dsm.tif\" target=\"_blank\">https://imagery-uav-bc.s3.amazonaws.com/mackenzie/carp/2024/198692_kerry_lake_trib/odm_dem/dsm.tif<\/a>"]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>region<\/th>\n      <th>watershed_group<\/th>\n      <th>year<\/th>\n      <th>item<\/th>\n      <th>link_view<\/th>\n      <th>link_download<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-center","targets":"_all"},{"name":"region","targets":0},{"name":"watershed_group","targets":1},{"name":"year","targets":2},{"name":"item","targets":3},{"name":"link_view","targets":4},{"name":"link_download","targets":5}],"pageLength":10,"dom":"lrtipB","buttons":["excel","csv"],"fixedColumns":{"leftColumns":2},"lengthMenu":[[5,10,25,50,-1],["5","10","25","50","All"]],"colReorder":true,"initComplete":"function(settings, json) { $(this.api().table().container()).css({'font-size': '11px'}); }","order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":["options.initComplete"],"jsHooks":[]}</script>
 
 </div>
             </section>
@@ -440,8 +508,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="session-info.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="attach-dat.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="app-fish-species.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="app-gis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
