@@ -380,10 +380,16 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="app-climate-departure.html"><a href="app-climate-departure.html#watershed-groups-across-ecoregions"><i class="fa fa-check"></i>Watershed groups across ecoregions</a></li>
 <li class="chapter" data-level="" data-path="app-climate-departure.html"><a href="app-climate-departure.html#interpretation-for-fish-passage"><i class="fa fa-check"></i>Interpretation for fish passage</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="app-edna.html"><a href="app-edna.html"><i class="fa fa-check"></i>Appendix - Environmental DNA Results</a>
+<ul>
+<li class="chapter" data-level="" data-path="app-edna.html"><a href="app-edna.html#per-site-detection-results"><i class="fa fa-check"></i>Per-site detection results</a></li>
+<li class="chapter" data-level="" data-path="app-edna.html"><a href="app-edna.html#field-blanks"><i class="fa fa-check"></i>Field blanks</a></li>
+<li class="chapter" data-level="" data-path="app-edna.html"><a href="app-edna.html#retests"><i class="fa fa-check"></i>Retests</a></li>
+<li class="chapter" data-level="" data-path="app-edna.html"><a href="app-edna.html#interactive-map"><i class="fa fa-check"></i>Interactive map</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i>Session Info</a></li>
 <li class="chapter" data-level="" data-path="attach-maps.html"><a href="attach-maps.html"><i class="fa fa-check"></i><strong>Attachment - Maps</strong></a></li>
-<li class="chapter" data-level="" data-path="attach-pdf-phase1-dat.html"><a href="attach-pdf-phase1-dat.html"><i class="fa fa-check"></i><strong>Attachment - Phase 1 Data and Photos</strong></a></li>
 <li class="chapter" data-level="" data-path="attach-dat.html"><a href="attach-dat.html"><i class="fa fa-check"></i><strong>Attachment - Habitat Assessment and Fish Sampling Data</strong></a></li>
 <li class="chapter" data-level="" data-path="attach-bayes.html"><a href="attach-bayes.html"><i class="fa fa-check"></i><strong>Attachment - Bayesian analysis to map stream discharge and temperature causal effects pathways</strong></a></li>
 <li class="divider"></li>
@@ -412,9 +418,9 @@ div.csl-indent {
 <h2>Site Location<a href="tabor-creek---196085-203582---appendix.html#site-location-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>PSCIS crossings 196085 and 203582 are located on Tabor Creek , approximately 8km south of Prince George, BC, in the Tabor River watershed group (Figure <a href="tabor-creek---196085-203582---appendix.html#fig:map-196085">5.3</a>). Crossing 196085 is located 1.4km upstream Tabor Creek’s confluence with the Fraser River. The crossing is located on Willow-Cale FSR and is the responsibility of the Ministry of Transportation and Infrastructure (<code>chris_culvert_id</code>: 31046). Approximately 400m upstream, crossing 203582 is located on and the responsibility of the CN Railway.
 <br></p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="tabor-creek---196085-203582---appendix.html#cb88-1" tabindex="-1"></a> my_caption <span class="ot">&lt;-</span> <span class="st">&quot;Map of Tabor Creek&quot;</span></span>
-<span id="cb88-2"><a href="tabor-creek---196085-203582---appendix.html#cb88-2" tabindex="-1"></a> </span>
-<span id="cb88-3"><a href="tabor-creek---196085-203582---appendix.html#cb88-3" tabindex="-1"></a> knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/gis/map_tabor.jpeg&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="tabor-creek---196085-203582---appendix.html#cb90-1" tabindex="-1"></a> my_caption <span class="ot">&lt;-</span> <span class="st">&quot;Map of Tabor Creek&quot;</span></span>
+<span id="cb90-2"><a href="tabor-creek---196085-203582---appendix.html#cb90-2" tabindex="-1"></a> </span>
+<span id="cb90-3"><a href="tabor-creek---196085-203582---appendix.html#cb90-3" tabindex="-1"></a> knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/gis/map_tabor.jpeg&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:map-196085"></span>
 <img src="fig/gis/map_tabor.jpeg" alt="Map of Tabor Creek" width="100%" />
 <p class="caption">
@@ -430,20 +436,20 @@ fifth order stream and drains a watershed of approximately
 145.6km<sup>2</sup>. The watershed ranges in elevation from
 a maximum of 1254m to
 592m near the crossing (Table
-<a href="tabor-creek---196085-203582---appendix.html#tab:tab-wshd-196085">5.6</a>).</p>
+<a href="tabor-creek---196085-203582---appendix.html#tab:tab-wshd-196085">5.7</a>).</p>
 <p><br></p>
 <p>Crossing 196085 on Willow-Cale FSR was previously assessed in 2014 by <span class="citation">Hooft (2015)</span> and ranked as a barrier to fish passage, with medium value habitat documented and fish observed at the time of assessment. Chinook were recorded downstream of the crossing in 2004, and upstream of the crossing rainbow trout and dolly varden have been previously documented <span class="citation">(Norris [2018] 2024; MoE 2024)</span>. Crossing 203582 on the CN Railway had not been assessed prior to this project. Barrier assessments were completed at both crossings, and a habitat confirmation encompassing both sites was conducted.</p>
 <p><br></p>
 <p>A summary of habitat modelling outputs for the crossing are presented in Table
-<a href="tabor-creek---196085-203582---appendix.html#tab:tab-culvert-bcfp-196085">5.7</a>.</p>
+<a href="tabor-creek---196085-203582---appendix.html#tab:tab-culvert-bcfp-196085">5.8</a>.</p>
 <p><br></p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="tabor-creek---196085-203582---appendix.html#cb89-1" tabindex="-1"></a>fpr<span class="sc">::</span><span class="fu">fpr_table_wshd_sum</span>(<span class="at">site_id =</span> my_site) <span class="sc">|&gt;</span></span>
-<span id="cb89-2"><a href="tabor-creek---196085-203582---appendix.html#cb89-2" tabindex="-1"></a>  fpr<span class="sc">::</span><span class="fu">fpr_kable</span>(<span class="at">caption_text =</span> <span class="fu">paste0</span>(<span class="st">&#39;Summary of derived upstream watershed statistics for PSCIS crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>),</span>
-<span id="cb89-3"><a href="tabor-creek---196085-203582---appendix.html#cb89-3" tabindex="-1"></a>           <span class="at">footnote_text =</span> <span class="st">&#39;Elev P60 = Elevation at which 60% of the watershed area is above&#39;</span>,</span>
-<span id="cb89-4"><a href="tabor-creek---196085-203582---appendix.html#cb89-4" tabindex="-1"></a>           <span class="at">scroll =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="tabor-creek---196085-203582---appendix.html#cb91-1" tabindex="-1"></a>fpr<span class="sc">::</span><span class="fu">fpr_table_wshd_sum</span>(<span class="at">site_id =</span> my_site) <span class="sc">|&gt;</span></span>
+<span id="cb91-2"><a href="tabor-creek---196085-203582---appendix.html#cb91-2" tabindex="-1"></a>  fpr<span class="sc">::</span><span class="fu">fpr_kable</span>(<span class="at">caption_text =</span> <span class="fu">paste0</span>(<span class="st">&#39;Summary of derived upstream watershed statistics for PSCIS crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>),</span>
+<span id="cb91-3"><a href="tabor-creek---196085-203582---appendix.html#cb91-3" tabindex="-1"></a>           <span class="at">footnote_text =</span> <span class="st">&#39;Elev P60 = Elevation at which 60% of the watershed area is above&#39;</span>,</span>
+<span id="cb91-4"><a href="tabor-creek---196085-203582---appendix.html#cb91-4" tabindex="-1"></a>           <span class="at">scroll =</span> F)</span></code></pre></div>
 <table class="table table-condensed table-responsive" style="font-size: 11px; margin-left: auto; margin-right: auto;border-bottom: 0;">
 <caption style="font-size: initial !important;">
-<span id="tab:tab-wshd-196085">Table 5.6: </span>Summary of derived upstream watershed statistics for PSCIS crossing 196085.
+<span id="tab:tab-wshd-196085">Table 5.7: </span>Summary of derived upstream watershed statistics for PSCIS crossing 196085.
 </caption>
 <thead>
 <tr>
@@ -510,10 +516,10 @@ SSW
 </tfoot>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="tabor-creek---196085-203582---appendix.html#cb90-1" tabindex="-1"></a>fpr<span class="sc">::</span><span class="fu">fpr_table_bcfp</span>(<span class="at">scroll =</span> F) </span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="tabor-creek---196085-203582---appendix.html#cb92-1" tabindex="-1"></a>fpr<span class="sc">::</span><span class="fu">fpr_table_bcfp</span>(<span class="at">scroll =</span> F) </span></code></pre></div>
 <table class="table table-condensed table-responsive" style="font-size: 11px; margin-left: auto; margin-right: auto;border-bottom: 0;">
 <caption style="font-size: initial !important;">
-<span id="tab:tab-culvert-bcfp-196085">Table 5.7: </span>Summary of fish habitat modelling for PSCIS crossing 196085.
+<span id="tab:tab-culvert-bcfp-196085">Table 5.8: </span>Summary of fish habitat modelling for PSCIS crossing 196085.
 </caption>
 <thead>
 <tr>
@@ -685,16 +691,16 @@ BT Slopeclass15 (km)
 </div>
 <div id="stream-characteristics-at-crossings-196085-and-203582" class="section level2 unnumbered hasAnchor">
 <h2>Stream Characteristics at Crossings 196085 and 203582<a href="tabor-creek---196085-203582---appendix.html#stream-characteristics-at-crossings-196085-and-203582" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>At the time of the 2025 assessment, both PSCIS crossing 196085 and 203582 on Willow-Cale FSR were un-embedded, non-backwatered and ranked as a barrier to upstream fish passage according to the provincial protocol <span class="citation">(MoE 2011)</span> (Tables <a href="tabor-creek---196085-203582---appendix.html#tab:tab-culvert-196085">5.8</a> - <a href="tabor-creek---196085-203582---appendix.html#tab:tab-culvert-203582">5.9</a>). In 2019, work was completed at crossing 196085 on Willow-Cale FSR to backwater the outlet and remove the outlet drop as well as to put baffles within the culvert.</p>
+<p>At the time of the 2025 assessment, both PSCIS crossing 196085 and 203582 on Willow-Cale FSR were un-embedded, non-backwatered and ranked as a barrier to upstream fish passage according to the provincial protocol <span class="citation">(MoE 2011)</span> (Tables <a href="tabor-creek---196085-203582---appendix.html#tab:tab-culvert-196085">5.9</a> - <a href="tabor-creek---196085-203582---appendix.html#tab:tab-culvert-203582">5.10</a>). In 2019, work was completed at crossing 196085 on Willow-Cale FSR to backwater the outlet and remove the outlet drop as well as to put baffles within the culvert.</p>
 <p><br></p>
 <p>Water temperature was 9<span class="math inline">\(^\circ\)</span>C,
 pH was 7.6 and
 conductivity was 497 uS/cm.</p>
 <p><br></p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="tabor-creek---196085-203582---appendix.html#cb91-1" tabindex="-1"></a>fpr<span class="sc">::</span><span class="fu">fpr_table_cv_summary_memo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="tabor-creek---196085-203582---appendix.html#cb93-1" tabindex="-1"></a>fpr<span class="sc">::</span><span class="fu">fpr_table_cv_summary_memo</span>()</span></code></pre></div>
 <table class="table table-condensed table-responsive" style="font-size: 11px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:tab-culvert-196085">Table 5.8: </span>Summary of fish passage assessment for PSCIS crossing 196085.
+<span id="tab:tab-culvert-196085">Table 5.9: </span>Summary of fish passage assessment for PSCIS crossing 196085.
 </caption>
 <thead>
 <tr>
@@ -958,10 +964,10 @@ Fix Span / Diameter
 </table></li>
 </ul>
 <p><br></p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="tabor-creek---196085-203582---appendix.html#cb92-1" tabindex="-1"></a>fpr<span class="sc">::</span><span class="fu">fpr_table_cv_summary_memo</span>(<span class="at">site =</span> my_site2, <span class="at">site_photo_id =</span> my_site2)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="tabor-creek---196085-203582---appendix.html#cb94-1" tabindex="-1"></a>fpr<span class="sc">::</span><span class="fu">fpr_table_cv_summary_memo</span>(<span class="at">site =</span> my_site2, <span class="at">site_photo_id =</span> my_site2)</span></code></pre></div>
 <table class="table table-condensed table-responsive" style="font-size: 11px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:tab-culvert-203582">Table 5.9: </span>Summary of fish passage assessment for PSCIS crossing 203582.
+<span id="tab:tab-culvert-203582">Table 5.10: </span>Summary of fish passage assessment for PSCIS crossing 203582.
 </caption>
 <thead>
 <tr>
@@ -1225,13 +1231,13 @@ Fix Span / Diameter
 </table></li>
 </ul>
 <p><br></p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="tabor-creek---196085-203582---appendix.html#cb93-1" tabindex="-1"></a><span class="do">##this is useful to get some comments for the report</span></span>
-<span id="cb93-2"><a href="tabor-creek---196085-203582---appendix.html#cb93-2" tabindex="-1"></a>hab_site <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;ds&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments)</span>
-<span id="cb93-3"><a href="tabor-creek---196085-203582---appendix.html#cb93-3" tabindex="-1"></a>hab_site <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;us&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments)</span>
-<span id="cb93-4"><a href="tabor-creek---196085-203582---appendix.html#cb93-4" tabindex="-1"></a></span>
-<span id="cb93-5"><a href="tabor-creek---196085-203582---appendix.html#cb93-5" tabindex="-1"></a></span>
-<span id="cb93-6"><a href="tabor-creek---196085-203582---appendix.html#cb93-6" tabindex="-1"></a>hab_site <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site2 <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;ds&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments)</span>
-<span id="cb93-7"><a href="tabor-creek---196085-203582---appendix.html#cb93-7" tabindex="-1"></a>hab_site <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site2 <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;us&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="tabor-creek---196085-203582---appendix.html#cb95-1" tabindex="-1"></a><span class="do">##this is useful to get some comments for the report</span></span>
+<span id="cb95-2"><a href="tabor-creek---196085-203582---appendix.html#cb95-2" tabindex="-1"></a>hab_site <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;ds&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments)</span>
+<span id="cb95-3"><a href="tabor-creek---196085-203582---appendix.html#cb95-3" tabindex="-1"></a>hab_site <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;us&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments)</span>
+<span id="cb95-4"><a href="tabor-creek---196085-203582---appendix.html#cb95-4" tabindex="-1"></a></span>
+<span id="cb95-5"><a href="tabor-creek---196085-203582---appendix.html#cb95-5" tabindex="-1"></a></span>
+<span id="cb95-6"><a href="tabor-creek---196085-203582---appendix.html#cb95-6" tabindex="-1"></a>hab_site <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site2 <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;ds&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments)</span>
+<span id="cb95-7"><a href="tabor-creek---196085-203582---appendix.html#cb95-7" tabindex="-1"></a>hab_site <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site2 <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;us&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments)</span></code></pre></div>
 </div>
 <div id="stream-characteristics-downstream-of-crossing-196085" class="section level2 unnumbered hasAnchor">
 <h2>Stream Characteristics Downstream of Crossing 196085<a href="tabor-creek---196085-203582---appendix.html#stream-characteristics-downstream-of-crossing-196085" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -1240,42 +1246,42 @@ Fix Span / Diameter
 </div>
 <div id="stream-characteristics-upstream-of-crossing-196085-and-downstream-of-crossing-203582" class="section level2 unnumbered hasAnchor">
 <h2>Stream Characteristics Upstream of Crossing 196085 and Downstream of Crossing 203582<a href="tabor-creek---196085-203582---appendix.html#stream-characteristics-upstream-of-crossing-196085-and-downstream-of-crossing-203582" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The stream was surveyed upstream from crossing 196085 for 410m , up to crossing 203582 (Figure <a href="tabor-creek---196085-203582---appendix.html#fig:photo-196085-03">5.6</a>). The habitat was rated as medium value. Total cover amount was rated as trace with boulders dominant. Cover was also present as undercut banks.The dominant substrate was gravels with cobbles sub-dominant.The average channel width was 11m, the average wetted width was 1.9m, and the average gradient was 1.5%. The channel was dewatered at the time of assessment with shallow pools present at the downstream end of the site. Gravels were abundant throughout and suitable for chinook and sockeye spawning under adequate flow conditions. Deep pools were likely present when the stream was flowing.</p>
+<p>The stream was surveyed upstream from crossing 196085 for 410m , up to crossing 203582 (Figure <a href="tabor-creek---196085-203582---appendix.html#fig:photo-196085-03">5.6</a>). The habitat was rated as medium value. The dominant substrate was gravels with cobbles sub-dominant.The average channel width was 11m, the average wetted width was 1.9m, and the average gradient was 1.5%.Total cover amount was rated as trace with boulders dominant. Cover was also present as undercut banks. The channel was dewatered at the time of assessment with shallow pools present at the downstream end of the site. Gravels were abundant throughout and suitable for chinook and sockeye spawning under adequate flow conditions. Deep pools were likely present when the stream was flowing.</p>
 <p><br></p>
 </div>
 <div id="stream-characteristics-upstream-of-crossing-203582" class="section level2 unnumbered hasAnchor">
 <h2>Stream Characteristics Upstream of Crossing 203582<a href="tabor-creek---196085-203582---appendix.html#stream-characteristics-upstream-of-crossing-203582" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The stream was surveyed upstream from crossing 203582 for 650m (Figure <a href="tabor-creek---196085-203582---appendix.html#fig:photo-203582-01">5.7</a>). The habitat was rated as medium value. The stream was dewatered until approximately 360m upstream of the railway culverts, and the farthest downstream pool contained numerous fry. Upstream, occasional pools transitioned to increasing flow toward the upper end of the site where a continually flowing channel reemerged. The system was extremely large with high flows during freshet based on the size of the substrates. Gravels were abundant throughout, with limited woody debris or in stream cover at low flow, restricted mainly to interstitial spaces between cobbles and boulders. The average channel width was 14.6m, the average wetted width was 2.5m, and the average gradient was 0.8%.The dominant substrate was gravels with cobbles sub-dominant.Total cover amount was rated as trace with boulders dominant. Cover was also present as undercut banks.</p>
+<p>The stream was surveyed upstream from crossing 203582 for 650m (Figure <a href="tabor-creek---196085-203582---appendix.html#fig:photo-203582-01">5.7</a>). The habitat was rated as medium value. The stream was dewatered until approximately 360m upstream of the railway culverts, and the farthest downstream pool contained numerous fry. Upstream, occasional pools transitioned to increasing flow toward the upper end of the site where a continually flowing channel reemerged. The system was extremely large with high flows during freshet based on the size of the substrates. Gravels were abundant throughout, with limited woody debris or in stream cover at low flow, restricted mainly to interstitial spaces between cobbles and boulders. Total cover amount was rated as trace with boulders dominant. Cover was also present as undercut banks.The dominant substrate was gravels with cobbles sub-dominant.The average channel width was 14.6m, the average wetted width was 2.5m, and the average gradient was 0.8%.</p>
 <p><br></p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="tabor-creek---196085-203582---appendix.html#cb94-1" tabindex="-1"></a><span class="do">##this is useful to get some comments for the report</span></span>
-<span id="cb94-2"><a href="tabor-creek---196085-203582---appendix.html#cb94-2" tabindex="-1"></a>form_edna <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;ds&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments_field)</span>
-<span id="cb94-3"><a href="tabor-creek---196085-203582---appendix.html#cb94-3" tabindex="-1"></a>form_edna <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;ds&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments_lab)</span>
-<span id="cb94-4"><a href="tabor-creek---196085-203582---appendix.html#cb94-4" tabindex="-1"></a></span>
-<span id="cb94-5"><a href="tabor-creek---196085-203582---appendix.html#cb94-5" tabindex="-1"></a></span>
-<span id="cb94-6"><a href="tabor-creek---196085-203582---appendix.html#cb94-6" tabindex="-1"></a>form_edna <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;us&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments_field)</span>
-<span id="cb94-7"><a href="tabor-creek---196085-203582---appendix.html#cb94-7" tabindex="-1"></a>form_edna <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;us&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments_lab)</span>
-<span id="cb94-8"><a href="tabor-creek---196085-203582---appendix.html#cb94-8" tabindex="-1"></a></span>
-<span id="cb94-9"><a href="tabor-creek---196085-203582---appendix.html#cb94-9" tabindex="-1"></a>form_edna <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site2 <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;ds&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments_field)</span>
-<span id="cb94-10"><a href="tabor-creek---196085-203582---appendix.html#cb94-10" tabindex="-1"></a>form_edna <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site2 <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;ds&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments_lab)</span>
-<span id="cb94-11"><a href="tabor-creek---196085-203582---appendix.html#cb94-11" tabindex="-1"></a></span>
-<span id="cb94-12"><a href="tabor-creek---196085-203582---appendix.html#cb94-12" tabindex="-1"></a></span>
-<span id="cb94-13"><a href="tabor-creek---196085-203582---appendix.html#cb94-13" tabindex="-1"></a>form_edna <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site2 <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;us&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments_field)</span>
-<span id="cb94-14"><a href="tabor-creek---196085-203582---appendix.html#cb94-14" tabindex="-1"></a>form_edna <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site2 <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;us&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments_lab)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="tabor-creek---196085-203582---appendix.html#cb96-1" tabindex="-1"></a><span class="do">##this is useful to get some comments for the report</span></span>
+<span id="cb96-2"><a href="tabor-creek---196085-203582---appendix.html#cb96-2" tabindex="-1"></a>form_edna <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;ds&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments_field)</span>
+<span id="cb96-3"><a href="tabor-creek---196085-203582---appendix.html#cb96-3" tabindex="-1"></a>form_edna <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;ds&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments_lab)</span>
+<span id="cb96-4"><a href="tabor-creek---196085-203582---appendix.html#cb96-4" tabindex="-1"></a></span>
+<span id="cb96-5"><a href="tabor-creek---196085-203582---appendix.html#cb96-5" tabindex="-1"></a></span>
+<span id="cb96-6"><a href="tabor-creek---196085-203582---appendix.html#cb96-6" tabindex="-1"></a>form_edna <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;us&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments_field)</span>
+<span id="cb96-7"><a href="tabor-creek---196085-203582---appendix.html#cb96-7" tabindex="-1"></a>form_edna <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;us&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments_lab)</span>
+<span id="cb96-8"><a href="tabor-creek---196085-203582---appendix.html#cb96-8" tabindex="-1"></a></span>
+<span id="cb96-9"><a href="tabor-creek---196085-203582---appendix.html#cb96-9" tabindex="-1"></a>form_edna <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site2 <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;ds&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments_field)</span>
+<span id="cb96-10"><a href="tabor-creek---196085-203582---appendix.html#cb96-10" tabindex="-1"></a>form_edna <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site2 <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;ds&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments_lab)</span>
+<span id="cb96-11"><a href="tabor-creek---196085-203582---appendix.html#cb96-11" tabindex="-1"></a></span>
+<span id="cb96-12"><a href="tabor-creek---196085-203582---appendix.html#cb96-12" tabindex="-1"></a></span>
+<span id="cb96-13"><a href="tabor-creek---196085-203582---appendix.html#cb96-13" tabindex="-1"></a>form_edna <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site2 <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;us&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments_field)</span>
+<span id="cb96-14"><a href="tabor-creek---196085-203582---appendix.html#cb96-14" tabindex="-1"></a>form_edna <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site2 <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;us&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments_lab)</span></code></pre></div>
 </div>
 <div id="environmental-dna-sampling-1" class="section level2 unnumbered hasAnchor">
 <h2>Environmental DNA Sampling<a href="tabor-creek---196085-203582---appendix.html#environmental-dna-sampling-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>One eDNA sample was collected downstream of crossing 196085 on Willow-Cale FSR, and two samples were collected upstream of the crossing in a pool where fish were observed, using different pore sizes. Upstream of the CN railway crossing, two samples were collected using different pore sizes, and the pool sampled contained numerous fry. Sampling techniques are summarized in Table <a href="tabor-creek---196085-203582---appendix.html#tab:tab-edna-196085">5.10</a>.</p>
+<p>One eDNA sample was collected downstream of crossing 196085 on Willow-Cale FSR, and two samples were collected upstream of the crossing in a pool where fish were observed, using different pore sizes. Upstream of the CN railway crossing, two samples were collected using different pore sizes, and the pool sampled contained numerous fry. Sampling techniques are summarized in Table <a href="tabor-creek---196085-203582---appendix.html#tab:tab-edna-196085">5.11</a>.</p>
 <p><br></p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="tabor-creek---196085-203582---appendix.html#cb95-1" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Summary of eDNA samples collected at sites &quot;</span>, my_site, <span class="st">&quot; and &quot;</span>, my_site2, <span class="st">&quot;.&quot;</span>)</span>
-<span id="cb95-2"><a href="tabor-creek---196085-203582---appendix.html#cb95-2" tabindex="-1"></a></span>
-<span id="cb95-3"><a href="tabor-creek---196085-203582---appendix.html#cb95-3" tabindex="-1"></a>tab_edna <span class="sc">|&gt;</span> </span>
-<span id="cb95-4"><a href="tabor-creek---196085-203582---appendix.html#cb95-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(site <span class="sc">%in%</span> <span class="fu">c</span>(my_site, my_site2)) <span class="sc">|&gt;</span> </span>
-<span id="cb95-5"><a href="tabor-creek---196085-203582---appendix.html#cb95-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>site) <span class="sc">|&gt;</span></span>
-<span id="cb95-6"><a href="tabor-creek---196085-203582---appendix.html#cb95-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(Site) <span class="sc">|&gt;</span> </span>
-<span id="cb95-7"><a href="tabor-creek---196085-203582---appendix.html#cb95-7" tabindex="-1"></a>  fpr<span class="sc">::</span><span class="fu">fpr_kable</span>(<span class="at">caption_text =</span> my_caption, <span class="at">scroll =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="tabor-creek---196085-203582---appendix.html#cb97-1" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Summary of eDNA samples collected at sites &quot;</span>, my_site, <span class="st">&quot; and &quot;</span>, my_site2, <span class="st">&quot;.&quot;</span>)</span>
+<span id="cb97-2"><a href="tabor-creek---196085-203582---appendix.html#cb97-2" tabindex="-1"></a></span>
+<span id="cb97-3"><a href="tabor-creek---196085-203582---appendix.html#cb97-3" tabindex="-1"></a>tab_edna <span class="sc">|&gt;</span> </span>
+<span id="cb97-4"><a href="tabor-creek---196085-203582---appendix.html#cb97-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(site <span class="sc">%in%</span> <span class="fu">c</span>(my_site, my_site2)) <span class="sc">|&gt;</span> </span>
+<span id="cb97-5"><a href="tabor-creek---196085-203582---appendix.html#cb97-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>site) <span class="sc">|&gt;</span></span>
+<span id="cb97-6"><a href="tabor-creek---196085-203582---appendix.html#cb97-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(Site) <span class="sc">|&gt;</span> </span>
+<span id="cb97-7"><a href="tabor-creek---196085-203582---appendix.html#cb97-7" tabindex="-1"></a>  fpr<span class="sc">::</span><span class="fu">fpr_kable</span>(<span class="at">caption_text =</span> my_caption, <span class="at">scroll =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class="table table-condensed table-responsive" style="font-size: 11px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:tab-edna-196085">Table 5.10: </span>Summary of eDNA samples collected at sites 196085 and 203582.
+<span id="tab:tab-edna-196085">Table 5.11: </span>Summary of eDNA samples collected at sites 196085 and 203582.
 </caption>
 <thead>
 <tr>
@@ -1438,6 +1444,124 @@ Sample collected 360m upstream of the railway culverts. Sampled from right bank.
 </tr>
 </tbody>
 </table>
+<p>Detection results are presented in Table <a href="tabor-creek---196085-203582---appendix.html#tab:tab-edna-results-196085">5.12</a>. Format is <code>CODE(max_droplets)</code>, with <code>*</code> flagging samples UNBC reran. Detected means at least 4 positive droplets, the standard ddPCR call threshold; sub-threshold signals of 1-3 droplets are not interpretable as species presence. Site-level detail for the whole project, along with field blanks and retests, is in <a href="app-edna.html#app-edna">Appendix - Environmental DNA Results</a>.</p>
+<p><br></p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="tabor-creek---196085-203582---appendix.html#cb98-1" tabindex="-1"></a>edna_results_196085 <span class="sc">|&gt;</span></span>
+<span id="cb98-2"><a href="tabor-creek---196085-203582---appendix.html#cb98-2" tabindex="-1"></a>  fpr<span class="sc">::</span><span class="fu">fpr_kable</span>(</span>
+<span id="cb98-3"><a href="tabor-creek---196085-203582---appendix.html#cb98-3" tabindex="-1"></a>    <span class="at">caption_text =</span> <span class="fu">paste0</span>(<span class="st">&quot;eDNA detection results at PSCIS crossings &quot;</span>, my_site, <span class="st">&quot; and &quot;</span>, my_site2, <span class="st">&quot;.&quot;</span>),</span>
+<span id="cb98-4"><a href="tabor-creek---196085-203582---appendix.html#cb98-4" tabindex="-1"></a>    <span class="at">scroll =</span> <span class="cn">FALSE</span></span>
+<span id="cb98-5"><a href="tabor-creek---196085-203582---appendix.html#cb98-5" tabindex="-1"></a>  )</span></code></pre></div>
+<table class="table table-condensed table-responsive" style="font-size: 11px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:tab-edna-results-196085">Table 5.12: </span>eDNA detection results at PSCIS crossings 196085 and 203582.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Site ID
+</th>
+<th style="text-align:left;">
+UNBC ID
+</th>
+<th style="text-align:left;">
+Detected
+</th>
+<th style="text-align:left;">
+Sub-threshold
+</th>
+<th style="text-align:left;">
+Not detected
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+196085_ds_ed1
+</td>
+<td style="text-align:left;">
+F40915
+</td>
+<td style="text-align:left;">
+BURB(8), CHIN(181)
+</td>
+<td style="text-align:left;">
+BULT(1)
+</td>
+<td style="text-align:left;">
+SOCK(0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+196085_us_ed1a
+</td>
+<td style="text-align:left;">
+F41019
+</td>
+<td style="text-align:left;">
+CHIN(8), RAIN(6)
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+BULT(0), BURB(0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+196085_us_ed1b
+</td>
+<td style="text-align:left;">
+F41020
+</td>
+<td style="text-align:left;">
+CHIN(144), RAIN(128)
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+BULT(0), BURB(0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+203582_us_ed1a
+</td>
+<td style="text-align:left;">
+F60506
+</td>
+<td style="text-align:left;">
+CHIN(56)*, RAIN(1281)
+</td>
+<td style="text-align:left;">
+SOCK(1)
+</td>
+<td style="text-align:left;">
+BULT(0), COHO(0)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+203582_us_ed1b
+</td>
+<td style="text-align:left;">
+F60507
+</td>
+<td style="text-align:left;">
+CHIN(37)*, RAIN(1871)
+</td>
+<td style="text-align:left;">
+—
+</td>
+<td style="text-align:left;">
+BULT(0), COHO(0), SOCK(0)
+</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div id="structure-remediation-and-cost-estimate-1" class="section level2 unnumbered hasAnchor">
@@ -1452,13 +1576,13 @@ Sample collected 360m upstream of the railway culverts. Sampled from right bank.
 <p>Tabor Creek provided medium value habitat for salmonid spawning and rearing, with chinook documented downstream of the Willow-Cale FSR crossing. Due to previous remediation work completed at this site, the crossing is ranked as a moderate priority for replacement. The upstream crossing on the CN Railway is ranked as a moderate priority for replacement due to a 0.3m outlet drop. Replacement would be costly because the structure is located on the railway, and the stream exhibited sections of dewatering above Willow-Cale FSR; however, flow was regained upstream and evidence of high flows was observed. Both crossings are situated near the Fraser River and are in close proximity to the City of Prince George, offering opportunities for community engagement.</p>
 <p><br></p>
 <p><br></p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="tabor-creek---196085-203582---appendix.html#cb96-1" tabindex="-1"></a>tab_hab_summary <span class="sc">|&gt;</span></span>
-<span id="cb96-2"><a href="tabor-creek---196085-203582---appendix.html#cb96-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Site <span class="sc">%in%</span> <span class="fu">c</span>(my_site, my_site2)) <span class="sc">|&gt;</span> </span>
-<span id="cb96-3"><a href="tabor-creek---196085-203582---appendix.html#cb96-3" tabindex="-1"></a>  fpr<span class="sc">::</span><span class="fu">fpr_kable</span>(<span class="at">caption_text =</span> <span class="fu">paste0</span>(<span class="st">&quot;Summary of habitat details for PSCIS crossings &quot;</span>, my_site, <span class="st">&quot; and &quot;</span>, my_site2, <span class="st">&quot;.&quot;</span>),</span>
-<span id="cb96-4"><a href="tabor-creek---196085-203582---appendix.html#cb96-4" tabindex="-1"></a>                 <span class="at">scroll =</span> F) </span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="tabor-creek---196085-203582---appendix.html#cb99-1" tabindex="-1"></a>tab_hab_summary <span class="sc">|&gt;</span></span>
+<span id="cb99-2"><a href="tabor-creek---196085-203582---appendix.html#cb99-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(Site <span class="sc">%in%</span> <span class="fu">c</span>(my_site, my_site2)) <span class="sc">|&gt;</span> </span>
+<span id="cb99-3"><a href="tabor-creek---196085-203582---appendix.html#cb99-3" tabindex="-1"></a>  fpr<span class="sc">::</span><span class="fu">fpr_kable</span>(<span class="at">caption_text =</span> <span class="fu">paste0</span>(<span class="st">&quot;Summary of habitat details for PSCIS crossings &quot;</span>, my_site, <span class="st">&quot; and &quot;</span>, my_site2, <span class="st">&quot;.&quot;</span>),</span>
+<span id="cb99-4"><a href="tabor-creek---196085-203582---appendix.html#cb99-4" tabindex="-1"></a>                 <span class="at">scroll =</span> F) </span></code></pre></div>
 <table class="table table-condensed table-responsive" style="font-size: 11px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:tab-habitat-summary-196085">Table 5.11: </span>Summary of habitat details for PSCIS crossings 196085 and 203582.
+<span id="tab:tab-habitat-summary-196085">Table 5.13: </span>Summary of habitat details for PSCIS crossings 196085 and 203582.
 </caption>
 <thead>
 <tr>
@@ -1582,10 +1706,10 @@ medium
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="tabor-creek---196085-203582---appendix.html#cb97-1" tabindex="-1"></a>my_photo1 <span class="ot">=</span> fpr<span class="sc">::</span><span class="fu">fpr_photo_pull_by_str</span>(<span class="at">str_to_pull =</span> <span class="st">&#39;ds_typical_2_&#39;</span>)</span>
-<span id="cb97-2"><a href="tabor-creek---196085-203582---appendix.html#cb97-2" tabindex="-1"></a></span>
-<span id="cb97-3"><a href="tabor-creek---196085-203582---appendix.html#cb97-3" tabindex="-1"></a>my_caption1 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Typical habitat downstream of PSCIS crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="tabor-creek---196085-203582---appendix.html#cb98-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(my_photo1)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="tabor-creek---196085-203582---appendix.html#cb100-1" tabindex="-1"></a>my_photo1 <span class="ot">=</span> fpr<span class="sc">::</span><span class="fu">fpr_photo_pull_by_str</span>(<span class="at">str_to_pull =</span> <span class="st">&#39;ds_typical_2_&#39;</span>)</span>
+<span id="cb100-2"><a href="tabor-creek---196085-203582---appendix.html#cb100-2" tabindex="-1"></a></span>
+<span id="cb100-3"><a href="tabor-creek---196085-203582---appendix.html#cb100-3" tabindex="-1"></a>my_caption1 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Typical habitat downstream of PSCIS crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="tabor-creek---196085-203582---appendix.html#cb101-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(my_photo1)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:photo-196085-01"></span>
 <img src="data/photos/196085/20250925_142155_ds_typical_2_k_.JPG" alt="Typical habitat downstream of PSCIS crossing 196085." width="100%" />
 <p class="caption">
@@ -1593,26 +1717,26 @@ Figure 5.4: Typical habitat downstream of PSCIS crossing 196085.
 </p>
 </div>
 <p><br></p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="tabor-creek---196085-203582---appendix.html#cb99-1" tabindex="-1"></a>my_photo2 <span class="ot">=</span> fpr<span class="sc">::</span><span class="fu">fpr_photo_pull_by_str</span>(<span class="at">str_to_pull =</span> <span class="st">&#39;ds_algaenearroad&#39;</span>)</span>
-<span id="cb99-2"><a href="tabor-creek---196085-203582---appendix.html#cb99-2" tabindex="-1"></a></span>
-<span id="cb99-3"><a href="tabor-creek---196085-203582---appendix.html#cb99-3" tabindex="-1"></a>my_caption2 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Algae observed dowstream of crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="tabor-creek---196085-203582---appendix.html#cb100-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(my_photo2)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="tabor-creek---196085-203582---appendix.html#cb102-1" tabindex="-1"></a>my_photo2 <span class="ot">=</span> fpr<span class="sc">::</span><span class="fu">fpr_photo_pull_by_str</span>(<span class="at">str_to_pull =</span> <span class="st">&#39;ds_algaenearroad&#39;</span>)</span>
+<span id="cb102-2"><a href="tabor-creek---196085-203582---appendix.html#cb102-2" tabindex="-1"></a></span>
+<span id="cb102-3"><a href="tabor-creek---196085-203582---appendix.html#cb102-3" tabindex="-1"></a>my_caption2 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Algae observed dowstream of crossing &#39;</span>, my_site, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="tabor-creek---196085-203582---appendix.html#cb103-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(my_photo2)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:photo-196085-02"></span>
 <img src="data/photos/196085/20250925_142633_ds_algaenearroad_k_.JPG" alt="Algae observed dowstream of crossing 196085." width="100%" />
 <p class="caption">
 Figure 5.5: Algae observed dowstream of crossing 196085.
 </p>
 </div>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="tabor-creek---196085-203582---appendix.html#cb101-1" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&#39;Left: &#39;</span>, my_caption1, <span class="st">&#39; Right: &#39;</span>, my_caption2)</span>
-<span id="cb101-2"><a href="tabor-creek---196085-203582---appendix.html#cb101-2" tabindex="-1"></a></span>
-<span id="cb101-3"><a href="tabor-creek---196085-203582---appendix.html#cb101-3" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(my_photo1)</span>
-<span id="cb101-4"><a href="tabor-creek---196085-203582---appendix.html#cb101-4" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/pixel.png&quot;</span>)</span>
-<span id="cb101-5"><a href="tabor-creek---196085-203582---appendix.html#cb101-5" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(my_photo2)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="tabor-creek---196085-203582---appendix.html#cb104-1" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&#39;Left: &#39;</span>, my_caption1, <span class="st">&#39; Right: &#39;</span>, my_caption2)</span>
+<span id="cb104-2"><a href="tabor-creek---196085-203582---appendix.html#cb104-2" tabindex="-1"></a></span>
+<span id="cb104-3"><a href="tabor-creek---196085-203582---appendix.html#cb104-3" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(my_photo1)</span>
+<span id="cb104-4"><a href="tabor-creek---196085-203582---appendix.html#cb104-4" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/pixel.png&quot;</span>)</span>
+<span id="cb104-5"><a href="tabor-creek---196085-203582---appendix.html#cb104-5" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(my_photo2)</span></code></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="tabor-creek---196085-203582---appendix.html#cb102-1" tabindex="-1"></a>my_photo1 <span class="ot">=</span> fpr<span class="sc">::</span><span class="fu">fpr_photo_pull_by_str</span>(<span class="at">str_to_pull =</span> <span class="st">&#39;us_typical_1_&#39;</span>)</span>
-<span id="cb102-2"><a href="tabor-creek---196085-203582---appendix.html#cb102-2" tabindex="-1"></a></span>
-<span id="cb102-3"><a href="tabor-creek---196085-203582---appendix.html#cb102-3" tabindex="-1"></a>my_caption1 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Typical habitat upstream of PSCIS crossing &#39;</span>, my_site, <span class="st">&#39; and downstream of PSCIS crossing &#39;</span>, my_site2, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="tabor-creek---196085-203582---appendix.html#cb103-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(my_photo1)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="tabor-creek---196085-203582---appendix.html#cb105-1" tabindex="-1"></a>my_photo1 <span class="ot">=</span> fpr<span class="sc">::</span><span class="fu">fpr_photo_pull_by_str</span>(<span class="at">str_to_pull =</span> <span class="st">&#39;us_typical_1_&#39;</span>)</span>
+<span id="cb105-2"><a href="tabor-creek---196085-203582---appendix.html#cb105-2" tabindex="-1"></a></span>
+<span id="cb105-3"><a href="tabor-creek---196085-203582---appendix.html#cb105-3" tabindex="-1"></a>my_caption1 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Typical habitat upstream of PSCIS crossing &#39;</span>, my_site, <span class="st">&#39; and downstream of PSCIS crossing &#39;</span>, my_site2, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="tabor-creek---196085-203582---appendix.html#cb106-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(my_photo1)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:photo-196085-03"></span>
 <img src="data/photos/196085/20250925_163921_us_typical_1_k_.JPG" alt="Typical habitat upstream of PSCIS crossing 196085 and downstream of PSCIS crossing 203582." width="100%" />
 <p class="caption">
@@ -1620,27 +1744,27 @@ Figure 5.6: Typical habitat upstream of PSCIS crossing 196085 and downstream of 
 </p>
 </div>
 <p><br></p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="tabor-creek---196085-203582---appendix.html#cb104-1" tabindex="-1"></a>my_photo2 <span class="ot">=</span> fpr<span class="sc">::</span><span class="fu">fpr_photo_pull_by_str</span>(<span class="at">site =</span> my_site2, <span class="at">str_to_pull =</span> <span class="st">&#39;us_typical_2_&#39;</span>)</span>
-<span id="cb104-2"><a href="tabor-creek---196085-203582---appendix.html#cb104-2" tabindex="-1"></a></span>
-<span id="cb104-3"><a href="tabor-creek---196085-203582---appendix.html#cb104-3" tabindex="-1"></a>my_caption2 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Typical habitat upstream of PSCIS crossing &#39;</span>, my_site2, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="tabor-creek---196085-203582---appendix.html#cb105-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(my_photo2)</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="tabor-creek---196085-203582---appendix.html#cb107-1" tabindex="-1"></a>my_photo2 <span class="ot">=</span> fpr<span class="sc">::</span><span class="fu">fpr_photo_pull_by_str</span>(<span class="at">site =</span> my_site2, <span class="at">str_to_pull =</span> <span class="st">&#39;us_typical_2_&#39;</span>)</span>
+<span id="cb107-2"><a href="tabor-creek---196085-203582---appendix.html#cb107-2" tabindex="-1"></a></span>
+<span id="cb107-3"><a href="tabor-creek---196085-203582---appendix.html#cb107-3" tabindex="-1"></a>my_caption2 <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&#39;Typical habitat upstream of PSCIS crossing &#39;</span>, my_site2, <span class="st">&#39;.&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="tabor-creek---196085-203582---appendix.html#cb108-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(my_photo2)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:photo-203582-01"></span>
 <img src="data/photos/203582/20250925_175000_us_typical_2_k_.JPG" alt="Typical habitat upstream of PSCIS crossing 203582." width="100%" />
 <p class="caption">
 Figure 5.7: Typical habitat upstream of PSCIS crossing 203582.
 </p>
 </div>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="tabor-creek---196085-203582---appendix.html#cb106-1" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&#39;Left: &#39;</span>, my_caption1, <span class="st">&#39; Right: &#39;</span>, my_caption2)</span>
-<span id="cb106-2"><a href="tabor-creek---196085-203582---appendix.html#cb106-2" tabindex="-1"></a></span>
-<span id="cb106-3"><a href="tabor-creek---196085-203582---appendix.html#cb106-3" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(my_photo1)</span>
-<span id="cb106-4"><a href="tabor-creek---196085-203582---appendix.html#cb106-4" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/pixel.png&quot;</span>)</span>
-<span id="cb106-5"><a href="tabor-creek---196085-203582---appendix.html#cb106-5" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(my_photo2)</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="tabor-creek---196085-203582---appendix.html#cb109-1" tabindex="-1"></a>my_caption <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&#39;Left: &#39;</span>, my_caption1, <span class="st">&#39; Right: &#39;</span>, my_caption2)</span>
+<span id="cb109-2"><a href="tabor-creek---196085-203582---appendix.html#cb109-2" tabindex="-1"></a></span>
+<span id="cb109-3"><a href="tabor-creek---196085-203582---appendix.html#cb109-3" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(my_photo1)</span>
+<span id="cb109-4"><a href="tabor-creek---196085-203582---appendix.html#cb109-4" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/pixel.png&quot;</span>)</span>
+<span id="cb109-5"><a href="tabor-creek---196085-203582---appendix.html#cb109-5" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(my_photo2)</span></code></pre></div>
 
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="tabor-creek---196085-203582---appendix.html#cb107-1" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo=</span><span class="cn">FALSE</span>, <span class="at">message=</span><span class="cn">FALSE</span>, <span class="at">warning=</span><span class="cn">FALSE</span>)</span>
-<span id="cb107-2"><a href="tabor-creek---196085-203582---appendix.html#cb107-2" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;scripts/packages.R&#39;</span>)</span>
-<span id="cb107-3"><a href="tabor-creek---196085-203582---appendix.html#cb107-3" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;scripts/tables.R&#39;</span>)</span>
-<span id="cb107-4"><a href="tabor-creek---196085-203582---appendix.html#cb107-4" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;scripts/functions.R&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="tabor-creek---196085-203582---appendix.html#cb108-1" tabindex="-1"></a>my_site <span class="ot">&lt;-</span> <span class="dv">196332</span></span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="tabor-creek---196085-203582---appendix.html#cb110-1" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo=</span><span class="cn">FALSE</span>, <span class="at">message=</span><span class="cn">FALSE</span>, <span class="at">warning=</span><span class="cn">FALSE</span>)</span>
+<span id="cb110-2"><a href="tabor-creek---196085-203582---appendix.html#cb110-2" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;scripts/packages.R&#39;</span>)</span>
+<span id="cb110-3"><a href="tabor-creek---196085-203582---appendix.html#cb110-3" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;scripts/tables.R&#39;</span>)</span>
+<span id="cb110-4"><a href="tabor-creek---196085-203582---appendix.html#cb110-4" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;scripts/functions.R&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="tabor-creek---196085-203582---appendix.html#cb111-1" tabindex="-1"></a>my_site <span class="ot">&lt;-</span> <span class="dv">196332</span></span></code></pre></div>
 </div>
 </div>
             </section>
