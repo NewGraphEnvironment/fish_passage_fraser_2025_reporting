@@ -102,6 +102,10 @@ fig:photo-203581-01
 fig:photo-203581-02
 fig:photo-196076-01
 fig:photo-196076-02
+fig:photo-196200-before
+fig:photo-196200-after
+fig:lidar-196200
+tab:tab-edna-results-196200
 introduction
 background
 approach
