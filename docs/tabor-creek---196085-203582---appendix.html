@@ -1262,12 +1262,12 @@ Fix Span / Diameter
 </div>
 <div id="stream-characteristics-upstream-of-crossing-196085-and-downstream-of-crossing-203582" class="section level2 unnumbered hasAnchor">
 <h2>Stream Characteristics Upstream of Crossing 196085 and Downstream of Crossing 203582<a href="tabor-creek---196085-203582---appendix.html#stream-characteristics-upstream-of-crossing-196085-and-downstream-of-crossing-203582" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The stream was surveyed upstream from crossing 196085 for 410m , up to crossing 203582 (Figure <a href="tabor-creek---196085-203582---appendix.html#fig:photo-196085-03">5.24</a>). The habitat was rated as medium value. Total cover amount was rated as trace with boulders dominant. Cover was also present as undercut banks.The dominant substrate was gravels with cobbles sub-dominant.The average channel width was 11m, the average wetted width was 1.9m, and the average gradient was 1.5%. The channel was dewatered at the time of assessment with shallow pools present at the downstream end of the site. Gravels were abundant throughout and suitable for chinook and sockeye spawning under adequate flow conditions. Deep pools were likely present when the stream was flowing.</p>
+<p>The stream was surveyed upstream from crossing 196085 for 410m , up to crossing 203582 (Figure <a href="tabor-creek---196085-203582---appendix.html#fig:photo-196085-03">5.24</a>). The habitat was rated as medium value. Total cover amount was rated as trace with boulders dominant. Cover was also present as undercut banks.The average channel width was 11m, the average wetted width was 1.9m, and the average gradient was 1.5%.The dominant substrate was gravels with cobbles sub-dominant. The channel was dewatered at the time of assessment with shallow pools present at the downstream end of the site. Gravels were abundant throughout and suitable for chinook and sockeye spawning under adequate flow conditions. Deep pools were likely present when the stream was flowing.</p>
 <p><br></p>
 </div>
 <div id="stream-characteristics-upstream-of-crossing-203582" class="section level2 unnumbered hasAnchor">
 <h2>Stream Characteristics Upstream of Crossing 203582<a href="tabor-creek---196085-203582---appendix.html#stream-characteristics-upstream-of-crossing-203582" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The stream was surveyed upstream from crossing 203582 for 650m (Figure <a href="tabor-creek---196085-203582---appendix.html#fig:photo-203582-01">5.25</a>). The habitat was rated as medium value. The stream was dewatered until approximately 360m upstream of the railway culverts, and the farthest downstream pool contained numerous fry. Upstream, occasional pools transitioned to increasing flow toward the upper end of the site where a continually flowing channel reemerged. The system was extremely large with high flows during freshet based on the size of the substrates. Gravels were abundant throughout, with limited woody debris or in stream cover at low flow, restricted mainly to interstitial spaces between cobbles and boulders. The dominant substrate was gravels with cobbles sub-dominant.Total cover amount was rated as trace with boulders dominant. Cover was also present as undercut banks.The average channel width was 14.6m, the average wetted width was 2.5m, and the average gradient was 0.8%.</p>
+<p>The stream was surveyed upstream from crossing 203582 for 650m (Figure <a href="tabor-creek---196085-203582---appendix.html#fig:photo-203582-01">5.25</a>). The habitat was rated as medium value. The stream was dewatered until approximately 360m upstream of the railway culverts, and the farthest downstream pool contained numerous fry. Upstream, occasional pools transitioned to increasing flow toward the upper end of the site where a continually flowing channel reemerged. The system was extremely large with high flows during freshet based on the size of the substrates. Gravels were abundant throughout, with limited woody debris or in stream cover at low flow, restricted mainly to interstitial spaces between cobbles and boulders. Total cover amount was rated as trace with boulders dominant. Cover was also present as undercut banks.The dominant substrate was gravels with cobbles sub-dominant.The average channel width was 14.6m, the average wetted width was 2.5m, and the average gradient was 0.8%.</p>
 <p><br></p>
 <div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="tabor-creek---196085-203582---appendix.html#cb124-1" tabindex="-1"></a><span class="do">##this is useful to get some comments for the report</span></span>
 <span id="cb124-2"><a href="tabor-creek---196085-203582---appendix.html#cb124-2" tabindex="-1"></a>form_edna <span class="sc">|&gt;</span><span class="fu">filter</span>(site <span class="sc">==</span> my_site <span class="sc">&amp;</span> location <span class="sc">==</span> <span class="st">&#39;ds&#39;</span>) <span class="sc">|&gt;</span><span class="fu">pull</span>(comments_field)</span>
@@ -1460,7 +1460,7 @@ Sample collected 360m upstream of the railway culverts. Sampled from right bank.
 </tr>
 </tbody>
 </table>
-<p>Detection results are presented in Table <a href="tabor-creek---196085-203582---appendix.html#tab:tab-edna-results-196085">5.27</a>. Format is <code>CODE(max_droplets)</code>, with <code>*</code> flagging samples UNBC reran. Detected means at least 4 positive droplets, the standard ddPCR call threshold; sub-threshold signals of 1-3 droplets are not interpretable as species presence. Site-level detail for the whole project, along with field blanks and retests, is in <a href="app-edna.html#app-edna">Appendix - Environmental DNA Results</a>.</p>
+<p>Detection results are presented in Table <a href="tabor-creek---196085-203582---appendix.html#tab:tab-edna-results-196085">5.27</a>. Format is <code>CODE(max_droplets)</code>, with <code>*</code> flagging samples UNBC reran. Detected means four or more positive droplets, the call threshold applied by the laboratory; results below that threshold are reported as not detected. Site-level detail for the whole project, along with field blanks and retests, is in <a href="app-edna.html#app-edna">Appendix - Environmental DNA Results</a>.</p>
 <p><br></p>
 <div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="tabor-creek---196085-203582---appendix.html#cb126-1" tabindex="-1"></a>edna_results_196085 <span class="sc">|&gt;</span></span>
 <span id="cb126-2"><a href="tabor-creek---196085-203582---appendix.html#cb126-2" tabindex="-1"></a>  fpr<span class="sc">::</span><span class="fu">fpr_kable</span>(</span>
@@ -1483,9 +1483,6 @@ UNBC ID
 Detected
 </th>
 <th style="text-align:left;">
-Sub-threshold
-</th>
-<th style="text-align:left;">
 Not detected
 </th>
 </tr>
@@ -1502,10 +1499,7 @@ F40915
 BURB(8), CHIN(181)
 </td>
 <td style="text-align:left;">
-BULT(1)
-</td>
-<td style="text-align:left;">
-SOCK(0)
+BULT(1), SOCK(0)
 </td>
 </tr>
 <tr>
@@ -1517,9 +1511,6 @@ F41019
 </td>
 <td style="text-align:left;">
 CHIN(8), RAIN(6)
-</td>
-<td style="text-align:left;">
-—
 </td>
 <td style="text-align:left;">
 BULT(0), BURB(0)
@@ -1536,9 +1527,6 @@ F41020
 CHIN(144), RAIN(128)
 </td>
 <td style="text-align:left;">
-—
-</td>
-<td style="text-align:left;">
 BULT(0), BURB(0)
 </td>
 </tr>
@@ -1553,10 +1541,7 @@ F60506
 CHIN(56)*, RAIN(1281)
 </td>
 <td style="text-align:left;">
-SOCK(1)
-</td>
-<td style="text-align:left;">
-BULT(0), COHO(0)
+BULT(0), COHO(0), SOCK(1)
 </td>
 </tr>
 <tr>
@@ -1568,9 +1553,6 @@ F60507
 </td>
 <td style="text-align:left;">
 CHIN(37)*, RAIN(1871)
-</td>
-<td style="text-align:left;">
-—
 </td>
 <td style="text-align:left;">
 BULT(0), COHO(0), SOCK(0)

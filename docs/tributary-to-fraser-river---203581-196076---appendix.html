@@ -1257,13 +1257,13 @@ Fix Span / Diameter
 </div>
 <div id="stream-characteristics-upstream-of-crossing-203581" class="section level2 unnumbered hasAnchor">
 <h2>Stream Characteristics Upstream of Crossing 203581<a href="tributary-to-fraser-river---203581-196076---appendix.html#stream-characteristics-upstream-of-crossing-203581" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The stream was surveyed upstream from crossing 203581 for 650m (Figure <a href="tributary-to-fraser-river---203581-196076---appendix.html#fig:photo-203581-02">5.29</a>). The habitat was rated as medium value. The dominant substrate was gravels with fines sub-dominant.The average channel width was 4.5m, the average wetted width was 1.9m, and the average gradient was 2.5%.Total cover amount was rated as moderate with small woody debris dominant. Cover was also present as large woody debris, boulders, undercut banks, deep pools, and overhanging vegetation. A landslide was located approximately 300m upstream of the railway crossing. The stream was low-gradient with abundant gravels and numerous fish to 60mm observed. The channel flowed through an entrenched, steep-walled valley with several sections where clay banks had collapsed into the stream.</p>
+<p>The stream was surveyed upstream from crossing 203581 for 650m (Figure <a href="tributary-to-fraser-river---203581-196076---appendix.html#fig:photo-203581-02">5.29</a>). The habitat was rated as medium value. The average channel width was 4.5m, the average wetted width was 1.9m, and the average gradient was 2.5%.Total cover amount was rated as moderate with small woody debris dominant. Cover was also present as large woody debris, boulders, undercut banks, deep pools, and overhanging vegetation.The dominant substrate was gravels with fines sub-dominant. A landslide was located approximately 300m upstream of the railway crossing. The stream was low-gradient with abundant gravels and numerous fish to 60mm observed. The channel flowed through an entrenched, steep-walled valley with several sections where clay banks had collapsed into the stream.</p>
 <p><br></p>
 </div>
 <div id="stream-characteristics-downstream-of-crossing-196076" class="section level2 unnumbered hasAnchor">
 <h2>Stream Characteristics Downstream of Crossing 196076<a href="tributary-to-fraser-river---203581-196076---appendix.html#stream-characteristics-downstream-of-crossing-196076" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The stream was surveyed downstream from crossing 196076 for 250m (Figure <a href="tributary-to-fraser-river---203581-196076---appendix.html#fig:photo-196076-01">5.30</a>). The habitat was rated as medium value.
-Beaver dams ranging from 0.6–1m in height began approximately 150m downstream of the culvert within an incised gully. Upstream of the dams, abundant gravels, shallow pools, and small woody debris provided habitat suitable for parr and juvenile rearing. The average channel width was 7m, the average wetted width was 5.7m, and the average gradient was 3%.Total cover amount was rated as moderate with deep pools dominant. Cover was also present as small woody debris, undercut banks, and overhanging vegetation.The dominant substrate was NA with NA sub-dominant.</p>
+Beaver dams ranging from 0.6–1m in height began approximately 150m downstream of the culvert within an incised gully. Upstream of the dams, abundant gravels, shallow pools, and small woody debris provided habitat suitable for parr and juvenile rearing. The dominant substrate was NA with NA sub-dominant.Total cover amount was rated as moderate with deep pools dominant. Cover was also present as small woody debris, undercut banks, and overhanging vegetation.The average channel width was 7m, the average wetted width was 5.7m, and the average gradient was 3%.</p>
 <p><br></p>
 </div>
 <div id="stream-characteristics-upstream-of-crossing-196076" class="section level2 unnumbered hasAnchor">
@@ -1454,7 +1454,7 @@ mce
 </tr>
 </tbody>
 </table>
-<p>Detection results are presented in Table <a href="tributary-to-fraser-river---203581-196076---appendix.html#tab:tab-edna-results-203581">5.40</a>. Format is <code>CODE(max_droplets)</code>, with <code>*</code> flagging samples UNBC reran. Detected means at least 4 positive droplets, the standard ddPCR call threshold; sub-threshold signals of 1-3 droplets are not interpretable as species presence. Site-level detail for the whole project, along with field blanks and retests, is in <a href="app-edna.html#app-edna">Appendix - Environmental DNA Results</a>.</p>
+<p>Detection results are presented in Table <a href="tributary-to-fraser-river---203581-196076---appendix.html#tab:tab-edna-results-203581">5.40</a>. Format is <code>CODE(max_droplets)</code>, with <code>*</code> flagging samples UNBC reran. Detected means four or more positive droplets, the call threshold applied by the laboratory; results below that threshold are reported as not detected. Site-level detail for the whole project, along with field blanks and retests, is in <a href="app-edna.html#app-edna">Appendix - Environmental DNA Results</a>.</p>
 <p><br></p>
 <div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="tributary-to-fraser-river---203581-196076---appendix.html#cb162-1" tabindex="-1"></a>edna_results_203581 <span class="sc">|&gt;</span></span>
 <span id="cb162-2"><a href="tributary-to-fraser-river---203581-196076---appendix.html#cb162-2" tabindex="-1"></a>  fpr<span class="sc">::</span><span class="fu">fpr_kable</span>(</span>
@@ -1477,9 +1477,6 @@ UNBC ID
 Detected
 </th>
 <th style="text-align:left;">
-Sub-threshold
-</th>
-<th style="text-align:left;">
 Not detected
 </th>
 </tr>
@@ -1496,10 +1493,7 @@ F41016
 RAIN(23)
 </td>
 <td style="text-align:left;">
-BURB(1)
-</td>
-<td style="text-align:left;">
-BULT(0), CHIN(0)
+BULT(0), BURB(1), CHIN(0)
 </td>
 </tr>
 <tr>
@@ -1511,9 +1505,6 @@ F41017
 </td>
 <td style="text-align:left;">
 RAIN(5)
-</td>
-<td style="text-align:left;">
-—
 </td>
 <td style="text-align:left;">
 BULT(0), BURB(0), CHIN(0)
@@ -1530,9 +1521,6 @@ F61125
 RAIN(44)
 </td>
 <td style="text-align:left;">
-—
-</td>
-<td style="text-align:left;">
 BULT(0), CHIN(0), COHO(0)
 </td>
 </tr>
@@ -1547,10 +1535,7 @@ F61123
 RAIN(54)
 </td>
 <td style="text-align:left;">
-BULT(2)<em>, CHIN(2)</em>
-</td>
-<td style="text-align:left;">
-COHO(0)
+BULT(2)<em>, CHIN(2)</em>, COHO(0)
 </td>
 </tr>
 <tr>
@@ -1564,10 +1549,7 @@ F61124
 RAIN(51)
 </td>
 <td style="text-align:left;">
-CHIN(3)*
-</td>
-<td style="text-align:left;">
-BULT(0), COHO(0)
+BULT(0), CHIN(3)*, COHO(0)
 </td>
 </tr>
 </tbody>
