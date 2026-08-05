@@ -433,7 +433,7 @@ div.csl-indent {
 <p>This appendix carries the site-level detail behind the headline counts in the Results chapter. Field blanks are reported separately because they test the sampling protocol rather than a location. Office blanks are excluded entirely — they are distilled-water controls filtered at the end of a session at accommodation, so although they carry real GPS coordinates, those coordinates record where the filtering happened rather than a stream site. The interactive map is linked at the end.</p>
 <div id="per-site-detection-results" class="section level2 unnumbered hasAnchor">
 <h2>Per-site detection results<a href="app-edna.html#per-site-detection-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Format: <code>CODE(max_droplets)</code>, with <code>*</code> flagging samples that UNBC reran. Detected = ≥4 positive droplets per the standard ddPCR call threshold; Sub-threshold = 1-3 droplets, not interpretable as species presence under ddPCR convention; Not detected = 0 droplets across all runs.</p>
+<p>Format: <code>CODE(max_droplets)</code>, with <code>*</code> flagging samples that UNBC reran. Detected = ≥4 positive droplets, the call threshold applied by the laboratory. Everything below that threshold is reported as not detected, including 2-3 droplet results that were retested without reaching the cutoff.</p>
 <p>A non-detection is only as strong as the evidence that the reaction worked. Internal amplification controls — the lambda-phage and exogenous-plant spike-ins that show a well amplified — were reported for only a minority of samples in this batch. Where they are absent, a zero cannot be distinguished from a failed or inhibited reaction, and the “Not detected” column below should be read as untested rather than negative. Detections are unaffected, since a well returning positive droplets demonstrably amplified.</p>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="app-edna.html#cb98-1" tabindex="-1"></a>edna_per_site <span class="sc">|&gt;</span></span>
 <span id="cb98-2"><a href="app-edna.html#cb98-2" tabindex="-1"></a>  fpr<span class="sc">::</span><span class="fu">fpr_kable</span>(</span>
@@ -463,9 +463,6 @@ Pos. control
 Detected
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-Sub-threshold
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 Not detected
 </th>
 </tr>
@@ -485,9 +482,6 @@ F61121
 </td>
 <td style="text-align:left;">
 RAIN(77)
-</td>
-<td style="text-align:left;">
-—
 </td>
 <td style="text-align:left;">
 BULT(0), CHIN(0), COHO(0)
@@ -510,9 +504,6 @@ yes
 RAIN(21)
 </td>
 <td style="text-align:left;">
-—
-</td>
-<td style="text-align:left;">
 BULT(0), CHIN(0), COHO(0)
 </td>
 </tr>
@@ -530,9 +521,6 @@ F21236
 </td>
 <td style="text-align:left;">
 RAIN(39)
-</td>
-<td style="text-align:left;">
-—
 </td>
 <td style="text-align:left;">
 BULT(0)
@@ -554,10 +542,7 @@ F41016
 RAIN(23)
 </td>
 <td style="text-align:left;">
-BURB(1)
-</td>
-<td style="text-align:left;">
-BULT(0), CHIN(0)
+BULT(0), BURB(1), CHIN(0)
 </td>
 </tr>
 <tr>
@@ -574,9 +559,6 @@ F41017
 </td>
 <td style="text-align:left;">
 RAIN(5)
-</td>
-<td style="text-align:left;">
-—
 </td>
 <td style="text-align:left;">
 BULT(0), BURB(0), CHIN(0)
@@ -598,9 +580,6 @@ F61125
 RAIN(44)
 </td>
 <td style="text-align:left;">
-—
-</td>
-<td style="text-align:left;">
 BULT(0), CHIN(0), COHO(0)
 </td>
 </tr>
@@ -620,10 +599,7 @@ F40915
 BURB(8), CHIN(181)
 </td>
 <td style="text-align:left;">
-BULT(1)
-</td>
-<td style="text-align:left;">
-SOCK(0)
+BULT(1), SOCK(0)
 </td>
 </tr>
 <tr>
@@ -640,9 +616,6 @@ F41019
 </td>
 <td style="text-align:left;">
 CHIN(8), RAIN(6)
-</td>
-<td style="text-align:left;">
-—
 </td>
 <td style="text-align:left;">
 BULT(0), BURB(0)
@@ -664,9 +637,6 @@ F41020
 CHIN(144), RAIN(128)
 </td>
 <td style="text-align:left;">
-—
-</td>
-<td style="text-align:left;">
 BULT(0), BURB(0)
 </td>
 </tr>
@@ -681,9 +651,6 @@ Bittner Creek
 F60808
 </td>
 <td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-—
 </td>
 <td style="text-align:left;">
 —
@@ -708,9 +675,6 @@ F21237
 —
 </td>
 <td style="text-align:left;">
-—
-</td>
-<td style="text-align:left;">
 BULT(0), RAIN2(0)
 </td>
 </tr>
@@ -730,10 +694,7 @@ F21238
 —
 </td>
 <td style="text-align:left;">
-BULT(2)*
-</td>
-<td style="text-align:left;">
-RAIN(0)*, RAIN2(0)
+BULT(2)<em>, RAIN(0)</em>, RAIN2(0)
 </td>
 </tr>
 <tr>
@@ -750,9 +711,6 @@ F60503
 </td>
 <td style="text-align:left;">
 RAIN(4)
-</td>
-<td style="text-align:left;">
-—
 </td>
 <td style="text-align:left;">
 BULT(0), CHIN(0), SOCK(0)
@@ -774,10 +732,7 @@ F60504
 —
 </td>
 <td style="text-align:left;">
-CHIN(1), RAIN(3)
-</td>
-<td style="text-align:left;">
-BULT(0), SOCK(0)
+BULT(0), CHIN(1), RAIN(3), SOCK(0)
 </td>
 </tr>
 <tr>
@@ -796,10 +751,7 @@ F61126
 CHIN(16), RAIN(255)
 </td>
 <td style="text-align:left;">
-COHO(1)
-</td>
-<td style="text-align:left;">
-BULT(0)
+BULT(0), COHO(1)
 </td>
 </tr>
 <tr>
@@ -817,9 +769,6 @@ yes
 </td>
 <td style="text-align:left;">
 RAIN(512)
-</td>
-<td style="text-align:left;">
-—
 </td>
 <td style="text-align:left;">
 BULT(0), CHIN(0), COHO(0)
@@ -841,9 +790,6 @@ F61128
 RAIN(38)
 </td>
 <td style="text-align:left;">
-—
-</td>
-<td style="text-align:left;">
 BULT(0), CHIN(0), COHO(0)
 </td>
 </tr>
@@ -863,9 +809,6 @@ F60505
 RAIN(17)
 </td>
 <td style="text-align:left;">
-—
-</td>
-<td style="text-align:left;">
 BULT(0), CHIN(0)*, COHO(0), SOCK(0)
 </td>
 </tr>
@@ -880,9 +823,6 @@ Creek Creek
 F61129
 </td>
 <td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-—
 </td>
 <td style="text-align:left;">
 —
@@ -907,9 +847,6 @@ F60809
 —
 </td>
 <td style="text-align:left;">
-—
-</td>
-<td style="text-align:left;">
 BULT(0), CHIN(0), COHO(0), SOCK(0)
 </td>
 </tr>
@@ -924,9 +861,6 @@ Snowshoe Creek
 F60810
 </td>
 <td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-—
 </td>
 <td style="text-align:left;">
 —
@@ -951,10 +885,7 @@ F60811
 CHIN(4)
 </td>
 <td style="text-align:left;">
-BULT(1)
-</td>
-<td style="text-align:left;">
-COHO(0), SOCK(0)
+BULT(1), COHO(0), SOCK(0)
 </td>
 </tr>
 <tr>
@@ -973,10 +904,7 @@ F20401
 —
 </td>
 <td style="text-align:left;">
-BULT(1)
-</td>
-<td style="text-align:left;">
-CHIN(0)
+BULT(1), CHIN(0)
 </td>
 </tr>
 <tr>
@@ -993,9 +921,6 @@ F60812
 </td>
 <td style="text-align:left;">
 BULT(10)
-</td>
-<td style="text-align:left;">
-—
 </td>
 <td style="text-align:left;">
 CHIN(0), COHO(0), SOCK(0)
@@ -1017,9 +942,6 @@ F61131
 BULT(127), RAIN(47)
 </td>
 <td style="text-align:left;">
-—
-</td>
-<td style="text-align:left;">
 CHIN(0), COHO(0)
 </td>
 </tr>
@@ -1037,9 +959,6 @@ F61132
 </td>
 <td style="text-align:left;">
 BULT(138), RAIN(20)
-</td>
-<td style="text-align:left;">
-—
 </td>
 <td style="text-align:left;">
 CHIN(0), COHO(0)
@@ -1061,9 +980,6 @@ F61135
 RAIN(67)
 </td>
 <td style="text-align:left;">
-—
-</td>
-<td style="text-align:left;">
 BULT(0), CHIN(0), COHO(0)
 </td>
 </tr>
@@ -1083,10 +999,7 @@ F61123
 RAIN(54)
 </td>
 <td style="text-align:left;">
-BULT(2)<em>, CHIN(2)</em>
-</td>
-<td style="text-align:left;">
-COHO(0)
+BULT(2)<em>, CHIN(2)</em>, COHO(0)
 </td>
 </tr>
 <tr>
@@ -1105,10 +1018,7 @@ F61124
 RAIN(51)
 </td>
 <td style="text-align:left;">
-CHIN(3)*
-</td>
-<td style="text-align:left;">
-BULT(0), COHO(0)
+BULT(0), CHIN(3)*, COHO(0)
 </td>
 </tr>
 <tr>
@@ -1127,10 +1037,7 @@ F60506
 CHIN(56)*, RAIN(1281)
 </td>
 <td style="text-align:left;">
-SOCK(1)
-</td>
-<td style="text-align:left;">
-BULT(0), COHO(0)
+BULT(0), COHO(0), SOCK(1)
 </td>
 </tr>
 <tr>
@@ -1147,9 +1054,6 @@ F60507
 </td>
 <td style="text-align:left;">
 CHIN(37)*, RAIN(1871)
-</td>
-<td style="text-align:left;">
-—
 </td>
 <td style="text-align:left;">
 BULT(0), COHO(0), SOCK(0)
@@ -1172,9 +1076,6 @@ yes
 BULT(62), CHIN(138), SOCK(332)
 </td>
 <td style="text-align:left;">
-—
-</td>
-<td style="text-align:left;">
 COHO(0)
 </td>
 </tr>
@@ -1192,9 +1093,6 @@ F20402
 </td>
 <td style="text-align:left;">
 BULT(4), CHIN(49)
-</td>
-<td style="text-align:left;">
-—
 </td>
 <td style="text-align:left;">
 —
@@ -1232,10 +1130,7 @@ UNBC ID
 Detected
 </th>
 <th style="text-align:left;">
-Sub-threshold
-</th>
-<th style="text-align:left;">
-Clean (0 droplets)
+Not detected
 </th>
 </tr>
 </thead>
@@ -1254,9 +1149,6 @@ F61130
 —
 </td>
 <td style="text-align:left;">
-—
-</td>
-<td style="text-align:left;">
 BULT(0), CHIN(0), COHO(0), RAIN(0)
 </td>
 </tr>
@@ -1269,9 +1161,6 @@ Swift Creek
 </td>
 <td style="text-align:left;">
 F60814
-</td>
-<td style="text-align:left;">
-—
 </td>
 <td style="text-align:left;">
 —
@@ -1353,7 +1242,7 @@ environmental
 2
 </td>
 <td style="text-align:left;">
-Sub-threshold (1-3 droplets, NOT a detection)
+No detection (0 droplets)
 </td>
 </tr>
 <tr>
@@ -1431,7 +1320,7 @@ environmental
 2
 </td>
 <td style="text-align:left;">
-Sub-threshold (1-3 droplets, NOT a detection)
+No detection (0 droplets)
 </td>
 </tr>
 <tr>
@@ -1457,7 +1346,7 @@ environmental
 2
 </td>
 <td style="text-align:left;">
-Sub-threshold (1-3 droplets, NOT a detection)
+No detection (0 droplets)
 </td>
 </tr>
 <tr>
@@ -1483,7 +1372,7 @@ environmental
 3
 </td>
 <td style="text-align:left;">
-Sub-threshold (1-3 droplets, NOT a detection)
+No detection (0 droplets)
 </td>
 </tr>
 <tr>
@@ -1545,7 +1434,7 @@ Detected (≥4 droplets)
 </div>
 <div id="interactive-map" class="section level2 unnumbered hasAnchor">
 <h2>Interactive map<a href="app-edna.html#interactive-map" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The interactive Fraser eDNA map shows site-level detection results with toggleable per-species layers, an opt-in sub-threshold-signals layer (off by default), and an opt-in Controls layer for field blanks. See the <a href="https://www.newgraphenvironment.com/fish_passage_fraser_2025_reporting//edna_unbc_results_2025_fraser_map.html" target="_blank">interactive Fraser eDNA map</a>.</p>
+<p>The interactive Fraser eDNA map shows site-level detection results with toggleable per-species layers and an opt-in Controls layer for field blanks. See the <a href="https://www.newgraphenvironment.com/fish_passage_fraser_2025_reporting//edna_unbc_results_2025_fraser_map.html" target="_blank">interactive Fraser eDNA map</a>.</p>
 
 <div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="app-edna.html#cb101-1" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo=</span><span class="cn">FALSE</span>, <span class="at">message=</span><span class="cn">FALSE</span>, <span class="at">warning=</span><span class="cn">FALSE</span>)</span>
 <span id="cb101-2"><a href="app-edna.html#cb101-2" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;scripts/packages.R&#39;</span>)</span>
