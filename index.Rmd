@@ -15,7 +15,7 @@ author: |
 
 date: |
  |
- | Version 0.4.0 DRAFT `r format(Sys.Date(), "%Y-%m-%d")`
+ | Version 0.5.0 DRAFT `r format(Sys.Date(), "%Y-%m-%d")`
  |
  | *Claude Opus 5 (Anthropic) assisted with literature synthesis, drafting, and technical writing. All scientific interpretation, data analysis, and conclusions are the responsibility of the authors.*
 toc-title: Table of Contents
@@ -107,6 +107,9 @@ source("scripts/02_reporting/0100-load-bcfishpass-data.R")
 source("scripts/02_reporting/0120-read-sqlite.R")
 source("scripts/02_reporting/0105-params-derived.R")
 source('scripts/02_reporting/0130-tables.R')
+# site map functions - must follow 0120, which creates the globals they read
+# (`wshds`, `habitat_confirmation_tracks`, `pscis_assessment_svw`)
+source("scripts/02_reporting/0420-map-site.R")
 
 
 

@@ -8,12 +8,13 @@
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/Vancouver
- date     2026-08-04
+ date     2026-08-05
  pandoc   3.9.0.2 @ /opt/homebrew/bin/ (via rmarkdown)
  quarto   1.4.553 @ /usr/local/bin/quarto
 
 ─ Packages ───────────────────────────────────────────────────────────────────
  package           * version    date (UTC) lib source
+ abind             * 1.4-8      2024-09-12 [2] CRAN (R 4.5.0)
  arrow             * 25.0.0     2026-07-16 [1] CRAN (R 4.5.2)
  askpass             1.2.1      2024-10-04 [1] CRAN (R 4.5.0)
  assertthat          0.2.1      2019-03-21 [1] CRAN (R 4.5.0)
@@ -32,6 +33,8 @@
  classInt            0.4-11     2025-01-08 [1] CRAN (R 4.5.0)
  cli                 3.6.6      2026-04-09 [1] CRAN (R 4.5.2)
  codetools           0.2-20     2024-03-31 [2] CRAN (R 4.5.2)
+ colorspace          2.1-2      2025-09-22 [1] CRAN (R 4.5.0)
+ cols4all            0.10       2025-10-27 [2] CRAN (R 4.5.0)
  crayon              1.5.3      2024-06-20 [1] CRAN (R 4.5.0)
  crosstalk           1.2.2      2025-08-26 [1] CRAN (R 4.5.0)
  curl                7.1.0      2026-04-22 [1] CRAN (R 4.5.2)
@@ -52,15 +55,18 @@
  fasstr              0.5.3      2024-09-27 [2] CRAN (R 4.5.0)
  fastmap             1.2.0      2024-05-15 [1] CRAN (R 4.5.0)
  fishbc            * 0.2.1.9000 2026-01-15 [2] Github (lucy-schick/fishbc@0607ffd)
+ flooded           * 0.3.0      2026-05-07 [1] local
  forcats           * 1.0.1      2025-09-25 [2] CRAN (R 4.5.0)
  foreach             1.5.2      2022-02-02 [2] CRAN (R 4.5.0)
  fpr               * 1.2.0      2026-02-03 [2] Github (NewGraphEnvironment/fpr@2817533)
+ fresh             * 0.32.0     2026-07-30 [1] local
  fs                  2.1.0      2026-04-18 [1] CRAN (R 4.5.2)
  generics            0.1.4      2025-05-09 [1] CRAN (R 4.5.0)
  ggplot2           * 4.0.3      2026-04-22 [1] CRAN (R 4.5.2)
  ggrepel             0.9.7      2026-02-25 [2] CRAN (R 4.5.2)
  gh                  1.6.1      2026-07-20 [1] CRAN (R 4.5.2)
  glue                1.8.1      2026-04-17 [1] CRAN (R 4.5.2)
+ gq                * 0.1.0      2026-06-25 [1] local
  gtable              0.3.6      2024-10-25 [1] CRAN (R 4.5.0)
  here                1.0.2      2025-09-15 [2] CRAN (R 4.5.0)
  hms                 1.1.4      2025-10-17 [1] CRAN (R 4.5.0)
@@ -78,17 +84,23 @@
  labeling            0.4.3      2023-08-29 [1] CRAN (R 4.5.0)
  lattice             0.22-9     2026-02-09 [2] CRAN (R 4.5.2)
  leafem            * 0.2.5      2025-08-28 [2] CRAN (R 4.5.0)
+ leaflegend          1.2.1      2024-05-09 [2] CRAN (R 4.5.0)
  leaflet           * 2.2.3      2025-09-04 [1] CRAN (R 4.5.0)
  leaflet.extras      2.0.1      2024-08-19 [2] CRAN (R 4.5.0)
  leaflet.providers   3.0.0      2026-03-18 [1] CRAN (R 4.5.2)
  leafpop             0.1.0      2021-05-22 [2] CRAN (R 4.5.0)
+ leafsync            0.1.0      2019-03-05 [2] CRAN (R 4.5.0)
  lifecycle           1.0.5      2026-01-08 [1] CRAN (R 4.5.2)
+ logger              0.4.1      2025-09-11 [2] CRAN (R 4.5.0)
  lubridate         * 1.9.5      2026-02-04 [1] CRAN (R 4.5.2)
+ lwgeom              0.2-15     2026-01-12 [2] CRAN (R 4.5.2)
  magick              2.9.0      2025-09-08 [2] CRAN (R 4.5.0)
  magrittr            2.0.5      2026-04-04 [1] CRAN (R 4.5.2)
+ maptiles          * 0.11.0     2025-12-12 [2] CRAN (R 4.5.2)
  Matrix              1.7-4      2025-08-28 [2] CRAN (R 4.5.2)
  memoise             2.0.1      2021-11-26 [1] CRAN (R 4.5.0)
  mgcv                1.9-3      2025-04-04 [2] CRAN (R 4.5.2)
+ microbenchmark      1.5.0      2024-09-04 [2] CRAN (R 4.5.0)
  ngr               * 0.0.1      2026-08-05 [1] Github (NewGraphEnvironment/ngr@519c03b)
  nlme                3.1-168    2025-03-31 [2] CRAN (R 4.5.2)
  otel                0.2.0      2025-08-29 [1] CRAN (R 4.5.0)
@@ -100,7 +112,7 @@
  pkgconfig           2.0.3      2019-09-22 [1] CRAN (R 4.5.0)
  pkgload             1.5.0      2026-02-03 [2] CRAN (R 4.5.2)
  plyr                1.8.9      2023-10-02 [1] CRAN (R 4.5.0)
- png                 0.1-9      2026-03-15 [1] CRAN (R 4.5.2)
+ png               * 0.1-9      2026-03-15 [1] CRAN (R 4.5.2)
  prettyunits         1.2.0      2023-09-24 [1] CRAN (R 4.5.0)
  processx            3.9.0      2026-04-22 [1] CRAN (R 4.5.2)
  progress            1.2.3      2023-12-06 [2] CRAN (R 4.5.0)
@@ -135,6 +147,8 @@
  sf                * 1.1-0      2026-02-24 [1] CRAN (R 4.5.2)
  snakecase           0.11.1     2023-08-27 [1] CRAN (R 4.5.0)
  sp                  2.2-1      2026-02-13 [1] CRAN (R 4.5.2)
+ spacesXYZ           1.6-0      2025-06-06 [2] CRAN (R 4.5.0)
+ stars             * 0.7-1      2026-02-13 [2] CRAN (R 4.5.2)
  staticimports     * 0.0.0.9001 2026-01-15 [2] Github (newgraphenvironment/staticimports@19cd73c)
  stringi             1.8.7      2025-03-27 [1] CRAN (R 4.5.0)
  stringr           * 1.6.0      2025-11-04 [1] CRAN (R 4.5.0)
@@ -150,6 +164,8 @@
  tidyverse         * 2.0.0      2023-02-22 [2] CRAN (R 4.5.0)
  tidyxl              1.0.10     2026-01-15 [1] Github (nacnudus/tidyxl@7e2fbe7)
  timechange          0.4.0      2026-01-29 [1] CRAN (R 4.5.2)
+ tmap              * 4.2.0.9000 2026-02-21 [2] Github (r-tmap/tmap@1129293)
+ tmaptools           3.3        2025-07-24 [2] CRAN (R 4.5.0)
  tzdb                0.5.0      2025-03-15 [1] CRAN (R 4.5.0)
  units               1.0-1      2026-03-11 [1] CRAN (R 4.5.2)
  usethis             3.2.1      2025-09-06 [2] CRAN (R 4.5.0)
@@ -160,6 +176,7 @@
  withr               3.0.2      2024-10-28 [1] CRAN (R 4.5.0)
  wk                  0.9.5      2025-12-18 [1] CRAN (R 4.5.2)
  xfun                0.57       2026-03-20 [1] CRAN (R 4.5.2)
+ XML                 3.99-0.20  2025-11-08 [2] CRAN (R 4.5.0)
  xml2                1.5.2      2026-01-17 [1] CRAN (R 4.5.2)
  yaml                2.3.12     2025-12-10 [1] CRAN (R 4.5.2)
  zyp                 0.11-1     2023-03-22 [2] CRAN (R 4.5.0)

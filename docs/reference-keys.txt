@@ -59,6 +59,7 @@ tab:tab-sites-cap
 tab:tab-edna-per-site
 tab:tab-edna-field-blanks
 tab:tab-edna-retests
+fig:map-126158
 tab:tab-wshd-126158
 tab:tab-culvert-bcfp-126158
 tab:tab-culvert-126158
@@ -76,6 +77,7 @@ tab:tab-edna-results-196085
 tab:tab-habitat-summary-196085
 fig:photo-196085-d01
 fig:photo-203582-d01
+fig:map-196332
 tab:tab-wshd-196332
 tab:tab-culvert-bcfp-196332
 tab:tab-culvert-196332
@@ -83,6 +85,7 @@ tab:tab-edna-196332
 tab:tab-edna-results-196332
 tab:tab-habitat-summary-196332
 fig:photo-196332-d01
+fig:map-203581
 tab:tab-wshd-203581
 tab:tab-culvert-bcfp-203581
 tab:tab-culvert-203581

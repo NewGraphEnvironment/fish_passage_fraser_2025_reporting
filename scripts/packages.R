@@ -24,12 +24,23 @@ pkgs_cran <- c(
   "pdftools",
   # reads data/snapshots/*.parquet in the Assessment Data Summary appendix, so
   # the report builds from a fresh clone with no database connection
-  "arrow"
+  "arrow",
+  # site maps - scripts/02_reporting/0420-map-site.R
+  "tmap",
+  "terra",
+  "maptiles",
+  "png",
+  "stars"
 )
 
 pkgs_gh <- c(
   "newgraphenvironment/fpr",
   "newgraphenvironment/ngr",
+  # site maps - gq carries the symbology registry, flooded the DEM fetch,
+  # fresh the AOI clip
+  "newgraphenvironment/gq",
+  "newgraphenvironment/fresh",
+  "newgraphenvironment/flooded",
   "newgraphenvironment/staticimports",
   "newgraphenvironment/fishbc@updated_data",
   "poissonconsulting/readwritesqlite", #https://github.com/poissonconsulting/readwritesqlite/issues/47
