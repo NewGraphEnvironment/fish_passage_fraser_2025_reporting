@@ -17,5 +17,8 @@
   during exploration; `v0.5.0`, this repo's next release name, had been squatted. Local tags now equal
   origin's 7.
 - Restored `data/bcfishpass.sqlite` after read-only inspection dirtied it via readwritesqlite log churn.
-- Next: Phase 1 — port `0410`/`0420` and the three sidecar CSVs from `template/main`, add the mapping
-  packages, and wire `0420` into `index.Rmd`'s source chain.
+- **Phase 1 complete.** `0410`/`0420` and the three sidecar CSVs ported verbatim from `template/main`;
+  `0410`'s `map_units` needed no edit, unlike the Skeena port. Mapping packages added to
+  `scripts/packages.R`, and `0420` wired into `index.Rmd` after `0130-tables.R`. Verified from a clean
+  `Rscript`: all eight `lfpr_*` entry points resolve and the sidecars parse at 10 / 3 / 11 rows.
+- Next: Phase 2 — bring the four map caches across (~21 MB) and verify their metadata.

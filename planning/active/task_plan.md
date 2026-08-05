@@ -46,15 +46,16 @@ PSCIS or form table (`126185_us/ds` → 126158, `205214_us/ds` → 203581, `2052
 
 ## Phase 1 — Port the machinery (network-free)
 
-- [ ] `git checkout template/main -- scripts/02_reporting/0410-map-site-prep.R scripts/02_reporting/0420-map-site.R`
-- [ ] `git checkout template/main -- data/gis/gq_reg_fish_passage.csv data/gis/xref_map_labels.csv data/gis/xref_tracks_site.csv`
-- [ ] Confirm `0410`'s `map_units` needs no edit (unlike Skeena, where it did)
-- [ ] `scripts/packages.R` — add `tmap`, `terra`, `maptiles`, `png`, `stars` to `pkgs_cran`;
+- [x] `git checkout template/main -- scripts/02_reporting/0410-map-site-prep.R scripts/02_reporting/0420-map-site.R`
+- [x] `git checkout template/main -- data/gis/gq_reg_fish_passage.csv data/gis/xref_map_labels.csv data/gis/xref_tracks_site.csv`
+- [x] Confirm `0410`'s `map_units` needs no edit (unlike Skeena, where it did) — it is already
+      `126158`, `196085+203582`, `196332`, `203581+196076`
+- [x] `scripts/packages.R` — add `tmap`, `terra`, `maptiles`, `png`, `stars` to `pkgs_cran`;
       `newgraphenvironment/gq`, `newgraphenvironment/flooded`, `newgraphenvironment/fresh` to `pkgs_gh`
-- [ ] `index.Rmd` `{r source}` — add `source("scripts/02_reporting/0420-map-site.R")` after `0130-tables.R`.
+- [x] `index.Rmd` `{r source}` — add `source("scripts/02_reporting/0420-map-site.R")` after `0130-tables.R`.
       **The step Skeena skipped**; without it the map chunks error on `lfpr_map_site` not found
-- [ ] **Verify:** a fresh `Rscript` sources `0420` and `lfpr_map_site`, `lfpr_map_credit`,
-      `lfpr_tracks_site` all resolve
+- [x] **Verify:** a fresh `Rscript` sources `0420` and all eight `lfpr_*` entry points resolve; the
+      three sidecar CSVs parse at 10 / 3 / 11 rows
 
 ## Phase 2 — Bring the caches
 
