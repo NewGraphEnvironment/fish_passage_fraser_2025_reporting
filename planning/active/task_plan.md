@@ -24,14 +24,14 @@ parties.
 
 Copy from `fish_passage_peace_2025_reporting` at the freshly-pulled `main`:
 
-- [ ] `data/templates/FDS_Template2026-03-11.xlsx` (3.7 MB) — nothing runs without it
-- [ ] `scripts/03_permit_submission/fds_prep_for_submission.R`; delete
+- [x] `data/templates/FDS_Template2026-03-11.xlsx` (3.7 MB) — nothing runs without it
+- [x] `scripts/03_permit_submission/fds_prep_for_submission.R`; delete
       `fds_prep_for_submission_2023.Rmd` (its per-season values stay in git history —
       the year in that filename is what let it be copied forward and go stale)
-- [ ] `scripts/01_prep_inputs/0210_fiss_export_to_template.Rmd` (fixed version)
-- [ ] `scripts/01_prep_inputs/0220_fish_data_tidy.R` (fixed version — port for parity and
+- [x] `scripts/01_prep_inputs/0210_fiss_export_to_template.Rmd` (fixed version)
+- [x] `scripts/01_prep_inputs/0220_fish_data_tidy.R` (fixed version — port for parity and
       to stop the drift, even though it is not run this season)
-- [ ] Fix `scripts/01_prep_inputs/README.md` if it still names `habitat_confirmations.xls`
+- [x] Fix `scripts/01_prep_inputs/README.md` if it still names `habitat_confirmations.xls`
 
 **Do not run, and do not port a run of, `0205_fiss_wrangle.R`.** It writes back to the
 field-form gpkgs with `sf::st_write(delete_dsn = TRUE)`, and its `source` column pools all
