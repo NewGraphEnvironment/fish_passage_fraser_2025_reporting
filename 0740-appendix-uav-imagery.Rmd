@@ -67,11 +67,20 @@ tab_uav <- tibble::tibble(url_download = purrr::map_chr(r$features, ~ purrr::plu
 
 
 
-# grab the imagery for this project area
-project_region <- "skeena"
-
-project_uav <- tab_uav |> 
-  dplyr::filter(region == project_region)
+# grab the imagery for this project area.
+#
+# Driven from the param, not a literal. A hardcoded region here shadows
+# params$project_region and, because this chunk is `eval = F`, the table it
+# writes to sqlite outlives the repo it was written in - a spawned report
+# inherits the ancestor's rows and republishes them. That is how this report
+# came to publish Peace imagery (#19).
+#
+# `region` is the first segment of the S3 key and is a basin name, which is not
+# always what params$project_region holds - the Peace report's project_region is
+# "peace" while its imagery is filed under "mackenzie". It matches here, checked
+# against the STAC index rather than assumed.
+project_uav <- tab_uav |>
+  dplyr::filter(region == params$project_region)
 
 # how many distinct items are there
 # length(unique(project_uav$item))
@@ -93,7 +102,17 @@ my_tab_caption()
 ```
 
 ```{r tab-uav-imagery, eval= gitbook_on}
-project_uav |>
-  my_dt_table(cols_freeze_left = 2, escape = FALSE)
+# Guarded because this table is burned by a chunk the build never runs, so a
+# spawned report inherits whatever its ancestor committed. An empty table should
+# read as "no imagery" rather than render an empty widget.
+if (!exists("project_uav") || is.null(project_uav) || nrow(project_uav) == 0) {
+  knitr::asis_output(
+    paste0("No orthoimagery is currently registered for the ", params$project_region,
+           " region.")
+  )
+} else {
+  project_uav |>
+    my_dt_table(cols_freeze_left = 2, escape = FALSE)
+}
 ```
 

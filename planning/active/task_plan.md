@@ -76,7 +76,7 @@ PSCIS or form table (`126185_us/ds` → 126158, `205214_us/ds` → 203581, `2052
 - [x] Keep every existing chunk label so the prose cross-references resolve untouched
 - [x] `git rm fig/gis/map_tabor.jpeg`
 - [x] Smoke-test all four maps standalone before building the book — all four render from the caches
-- [ ] **Verify:** no `>??<` in the rendered appendix pages; `fig/gis` appears nowhere in `docs/`
+- [x] **Verify:** no `>??<` in the rendered appendix pages; `fig/gis` appears nowhere in `docs/`
 
 **Open from the smoke test, to settle in Phase 4.** Against the template's reference PNG for 126158, the
 standalone render is missing the survey keymap inset and the eDNA sample diamond. Suspected harness
@@ -87,10 +87,17 @@ still absent, it is a genuine defect and not cosmetic.
 
 ## Phase 4 — Build and cartographic self-review
 
-- [ ] `scripts/run_gitbook.R`
-- [ ] Read all four PNGs against the 7-point cartography checklist. **Tabor hardest** — 145.6 km² across
-      a paired crossing, the widest extent of the four
-- [ ] `scripts/run_pagedown.R` (`render_book(envir = globalenv())`)
+- [x] `scripts/run_gitbook.R` — 393/393 chunks, clean
+- [x] Read all four PNGs against the 7-point cartography checklist. Three clean. **South Yuzkli (196332)
+      has a ragged basemap edge** leaving 0.14 % bare white in the map panel — measured identical in the
+      template's own render, so inherited with the caches, not introduced. Filed template#226; not a
+      release blocker, since the alternative it replaces is a dead cross-reference
+- [x] Checked against the template's reference renders: `map-126158-1.png` is byte-identical, the other
+      three differ only where this repo's `pscis_assessment_svw` and `form_edna` differ. The keymap and
+      eDNA diamond the smoke test appeared to be missing are both present — the harness drew at half the
+      device size knitr's `fig.retina = 2` gives
+- [x] `scripts/run_pagedown.R` — 393/393, PDF 16.1 MB, `gitbook_on` restored to TRUE; gitbook output in
+      `docs/` survives the PDF pass intact
 
 ## Phase 5 — #19, the UAV appendix publishing Peace imagery
 
@@ -102,15 +109,17 @@ rather than dropped — `fraser/morkill/2024` (3 assets) and `fraser/nechacko/20
 `199174_necr_trib_dog_settlement`, `chilako_mud1`). The bucket spells it `nechacko`. All 2024 — the 2025
 season is not represented, which is consistent with how Skeena's table reads but worth stating.
 
-- [ ] Drive the region from `params$project_region`, as in Skeena — verified that Fraser's two
+- [x] Drive the region from `params$project_region`, as in Skeena — verified that Fraser's two
       vocabularies agree (`fraser`)
-- [ ] Run `api1` + `uav-clean-burn` over the **full BC bbox the chunk uses**, not the reduced one used
-      for scoping — LCHL and LSAL sit outside that box and would be silently dropped
-- [ ] Guard the rendering chunk so an absent or empty `project_uav` degrades visibly rather than
+- [x] Run `api1` + `uav-clean-burn` over the **full BC bbox the chunk uses** — 230 assets province-wide:
+      `skeena` 176, `mackenzie` 33, `fraser` 15, `kootenay` 6. The reduced scoping box turned out to
+      hold all 15 Fraser assets anyway, but the full box is what the chunk does
+- [x] Guard the rendering chunk so an absent or empty `project_uav` degrades visibly rather than
       inheriting whatever the ancestor committed
-- [ ] **Verify:** `SELECT DISTINCT region FROM project_uav` returns `fraser` only; `docs/app-uav.html`
-      names no Peace watershed group
-- [ ] File the vocabulary fix against the template (below)
+- [x] **Verify:** `project_uav` holds 15 rows, `fraser` only; `docs/app-uav.html` carries 35 `fraser`
+      links and names no Peace watershed group. The single remaining "mackenzie" on that page is the
+      explanatory code comment, echoed by gitbook
+- [x] File the vocabulary fix against the template — template#225
 
 **The vocabulary trap.** The bucket's `region` segment is a basin name and is not reliably the same
 vocabulary as `params$project_region`:

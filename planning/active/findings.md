@@ -88,6 +88,32 @@ excludes LCHL and LSAL, so the burn must use the full BC bbox the chunk already 
 The S3 bucket denies anonymous listing (403); the STAC API at `images.a11s.one` is the only index, and a
 full-province `items_fetch()` takes over five minutes.
 
+## The port reproduces the template's renders
+
+The four maps built here were checked against the template's committed reference PNGs rather than just
+eyeballed. `map-126158-1.png` is **byte-identical**; the other three differ only where Fraser's own
+`pscis_assessment_svw` and `form_edna` rows differ from the template's. Geometry is identical to two
+decimal places on every measure taken.
+
+That comparison also settled the two things the smoke test appeared to be missing — the keymap inset and
+the eDNA diamond are both present in the real build. The harness drew at 1350×1050 where knitr's
+`fig.retina = 2` gives 2700×2100, and inset grobs are sized against the device.
+
+## One real cartographic defect, inherited
+
+South Yuzkli (196332) renders a ragged staircase edge along the right and bottom of the frame where the
+cached basemap runs out — bare white inside the map panel. Not introduced here: measured at **0.14 % of
+the map panel in both this repo's render and the template's**, identical.
+
+`0410-map-site-prep.R` pads the tile request by a fixed 10 % because Web Mercator → BC Albers rotates the
+quad (template commit `8d81b44`), and that pad is not enough at the smallest extent. The fix belongs in
+the prep script and needs a database and network re-run, so it is filed upstream rather than patched
+here — template#226.
+
+Note the earlier read of the 203581 map as having "white bands" was wrong: those are ~40 px top and
+bottom of 2100, uniform, and present identically in the template. That is the inner margin, not a
+letterbox.
+
 ## Incidental
 
 `rws_connect()` on `data/bcfishpass.sqlite` dirties the file even for read-only inspection —
