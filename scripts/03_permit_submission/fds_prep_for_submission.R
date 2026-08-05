@@ -84,7 +84,7 @@ path_workbook <- fs::path(dir_workbook, paste0(params$permit_id, ".xlsx"))
 # report title verbatim. Permit number comes from params. The rest are either
 # organisation constants or change per submission, so they are set here.
 hdr_recorder     <- "Allan Irvine"          # who assembled this spreadsheet
-hdr_permit_dfo   <- NA_character_           # Peace has no DFO permit; Skeena carries e.g. "XR 470 2025"
+hdr_permit_dfo   <- "XR 463 2025"           # DFO licence for Fraser 2025; Peace 2025 had none (NA)
 hdr_rpbio_name   <- "Allan Irvine"
 hdr_rpbio_reg    <- "2775"
 hdr_rpbio_prov   <- "British Columbia"
@@ -121,7 +121,23 @@ if (!has_fish) message("no fish data found - submitting locations and habitat on
 # happening to contain those letters. Anchor it instead.
 is_ef <- function(x) grepl("_ef[0-9]*$", x)
 
-stopifnot(sum(is_ef(step_4$local_name)) > 0)
+# A season with no small electrofishing sites is legitimate, not a data fault -
+# Fraser 2025 has none, and every one of its sites submits habitat. So this is not
+# a stopifnot. But an anchored regex is exactly what a naming change breaks
+# silently, and the failure is invisible: ef habitat rows would be submitted as
+# conforming 100 m sites. Separate the two cases.
+n_ef <- sum(is_ef(step_4$local_name))
+
+if (n_ef == 0) {
+  looks_ef <- grepl("ef", step_4$local_name, ignore.case = TRUE)
+  if (any(looks_ef)) {
+    stop("no local_name matches _ef[0-9]*$, but these look like ef sites - ",
+         "site naming has drifted from <crossing_id>_<location>_ef<n>:\n  ",
+         paste(step_4$local_name[looks_ef], collapse = "\n  "), call. = FALSE)
+  }
+  message("no small electrofishing sites this season - all ", nrow(step_4),
+          " habitat sites submitted")
+}
 
 # step_4 - carry the site id into comments, then drop the ef sites -----------
 #
@@ -256,6 +272,26 @@ step_1_submission <- step_1 |>
       paste0("00000", watershed_group_code))
   ) |>
   select(any_of(names(step_1)))
+
+# step_4 - take the waterbody id from step_1 rather than the geopackage ------
+#
+# step_4's waterbody_id arrives from 0210, i.e. from whatever 0205 last wrote to
+# the field-form geopackage. Two problems with submitting that: it is as stale as
+# the last 0205 run, and where the group code was missing, paste0() had already
+# turned it into the literal string "00000NA" - which looks like a real waterbody
+# id rather than a gap. Peace 2025 submitted "00000NA" on all six of its step_4
+# rows for exactly this reason; the 00000NA fix was applied to step_1 only.
+#
+# step_1 has just been re-resolved from bcfishpass above, so carry its value
+# across on reference_number. The two sheets then agree by construction, and a
+# genuine gap stays blank instead of reading as data.
+step_4_submission <- step_4_submission |>
+  select(-waterbody_id) |>
+  left_join(
+    step_1_submission |> select(reference_number, waterbody_id = waterbody_id_identifier),
+    by = "reference_number"
+  ) |>
+  select(any_of(names(step_4)))
 
 # step_3 passes through unchanged - every fish is submitted.
 step_3_submission <- step_3

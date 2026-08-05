@@ -13,9 +13,24 @@ editor_options:
 Export fiss site data to csv for cut and paste into the fish data submission spreadsheet. This script has been updated so that the csv contains as much of the data as possible, so that only a few copy/pastes are required. We are trying to move away from all the back and forths between the spreadsheet, R, and Q.
 
 ```{r params}
+# dplyr is used unqualified below (bind_rows, mutate, ...). Attach it rather than
+# leaning on a warm session - the "self-sufficient in a clean environment" claim
+# below only holds if the script attaches what it uses. Same pattern as
+# `scripts/03_permit_submission/fds_prep_for_submission.R`. `scripts/packages.R`
+# is deliberately not sourced: it reaches out to CRAN on every run.
+suppressMessages({
+  library(dplyr)
+})
+
 # Params come from the report front matter so there is one source of truth, and
 # so this script satisfies the `01_prep_inputs/README.md` contract of being
 # self-sufficient in a clean environment. Same pattern as `scripts/run_pagedown.R`.
+#
+# Render from the repo root WITH knit_root_dir, e.g.
+#   rmarkdown::render("scripts/01_prep_inputs/0210_fiss_export_to_template.Rmd",
+#                     knit_root_dir = getwd())
+# knitr otherwise moves the working directory to the Rmd's own folder and none of
+# the repo-relative paths below resolve.
 params <- rmarkdown::yaml_front_matter("index.Rmd")$params
 
 path_form_fiss_site <- fs::path_expand(fs::path('~/Projects/gis/', params$gis_project_name ,'/data_field/', params$project_year, paste0("form_fiss_site_", params$project_year, ".gpkg")))

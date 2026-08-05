@@ -41,38 +41,38 @@ not re-run it, which is why the watershed refresh lives in the submission script
 
 ## Phase 3: Wire Fraser's parameters
 
-- [ ] Add to `index.Rmd` params, with the comment Peace carries: `permit_id: "PG25-983997"`
-- [ ] Set `hdr_permit_dfo <- "XR 463 2025"` in `fds_prep_for_submission.R` (Peace has
+- [x] Add to `index.Rmd` params, with the comment Peace carries: `permit_id: "PG25-983997"`
+- [x] Set `hdr_permit_dfo <- "XR 463 2025"` in `fds_prep_for_submission.R` (Peace has
       `NA_character_` with a comment naming Skeena's `XR 470 2025`)
-- [ ] Confirm `hdr_title` picks up `"Restoring Fish Passage in the Fraser Region - 2025"`
+- [x] Confirm `hdr_title` picks up `"Restoring Fish Passage in the Fraser Region - 2025"`
       from the front matter
 
 ## Phase 4: Make the no-fish / no-ef season run
 
-- [ ] Relax `stopifnot(sum(is_ef(step_4$local_name)) > 0)` — a season with no small
+- [x] Relax `stopifnot(sum(is_ef(step_4$local_name)) > 0)` — a season with no small
       electrofishing sites is legitimate, not a data fault. Downgrade to a message so the
       ef-drop count still reports. Write it to stay correct for Peace/Skeena, since this
       is the file that gets back-ported.
-- [ ] Start the bcfishpass SSH tunnel on `:63333` with a long hold (`sleep 1200`, not the
+- [x] Start the bcfishpass SSH tunnel on `:63333` with a long hold (`sleep 1200`, not the
       `sleep 10` commented in `~/.Renviron`) — the step_1 watershed/TWC refresh queries
       `bcfishpass.crossings_vw`
-- [ ] Run `0210` → four-CSV prep; confirm `has_fish` reports "no fish data found"
-- [ ] Reconcile step_1 (11 locations) and step_4 (11 habitat rows, 0 dropped) against the
+- [x] Run `0210` → four-CSV prep; confirm `has_fish` reports "no fish data found"
+- [x] Reconcile step_1 (11 locations) and step_4 (11 habitat rows, 0 dropped) against the
       report's own site list
-- [ ] Review the missing-watershed-code gap report; resolve any gaps in QGIS against
+- [x] Review the missing-watershed-code gap report; resolve any gaps in QGIS against
       `whse_fish.wdic_waterbody_route_line_svw`, or let TWCs assign
-- [ ] Decide on `waterbody_id = 00000NA` in step_4 — Peace shipped this defect (the
+- [x] Decide on `waterbody_id = 00000NA` in step_4 — Peace shipped this defect (the
       `00000NA` fix was applied to step_1 only; step_4's value comes straight through from
       `0210`). Fix here rather than submit it twice.
 
 ## Phase 5: Build and review the workbook
 
-- [ ] Set `dir_workbook <- fs::path("hold")` and build the draft
-- [ ] Open it: dropdowns, sheet protection and Step 4 formulas intact; Steps 2 and 3 empty;
+- [x] Set `dir_workbook <- fs::path("hold")` and build the draft
+- [x] Open it: dropdowns, sheet protection and Step 4 formulas intact; Steps 2 and 3 empty;
       Step 1 header block filled including the DFO field; gradient displays as percent
       (the template's `AVERAGE(...)/100` with numFmt `0.0%` is correct — do not override,
       see the retraction in Peace's `75fb638`)
-- [ ] Flip `dir_workbook <- dir_out` and rebuild in place
+- [x] Flip `dir_workbook <- dir_out` and rebuild in place
 
 ## Phase 6: QA and submit
 
@@ -103,11 +103,11 @@ template lands one coherent generation instead of three partial ports.
 
 ## Validation
 
-- [ ] `0210` runs with no `habitat_confirmations.xls` present
-- [ ] Step CSV row counts reconcile against the report's own source
-- [ ] Workbook opens with dropdowns, protection and Step 4 formulas intact
-- [ ] Steps 2 and 3 empty; Step 1 and Step 4 populated
-- [ ] Every site carries a watershed code, or a TWC where none exists
+- [x] `0210` runs with no `habitat_confirmations.xls` present
+- [x] Step CSV row counts reconcile against the report's own source
+- [x] Workbook opens with dropdowns, protection and Step 4 formulas intact
+- [x] Steps 2 and 3 empty; Step 1 and Step 4 populated
+- [x] Every site carries a watershed code, or a TWC where none exists
 - [ ] Submitted under `PG25-983997`; confirmation captured
 - [ ] `WL25-993485` closed out as a nil return
 - [ ] `/code-check` clean on each commit
