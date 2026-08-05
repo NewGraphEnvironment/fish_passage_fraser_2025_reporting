@@ -59,12 +59,13 @@ PSCIS or form table (`126185_us/ds` → 126158, `205214_us/ds` → 203581, `2052
 
 ## Phase 2 — Bring the caches
 
-- [ ] `git checkout template/main -- data/gis/map_126158* data/gis/map_196076* data/gis/map_196085* data/gis/map_196332*`
-      — 16 files, ~21 MB (`map_196085.gpkg` alone is 12.4 MB, the 145.6 km² Tabor watershed)
-- [ ] **Verify:** each `_meta.rds` reads `species = bt`, `model_run_id = 133`; each `.gpkg` opens with the
-      expected layers (`habitat, streams, lakes, wetlands, rivers, roads, crossings_modelled, fish_obs`,
-      plus `railway` on 196076 and 196085)
-- [ ] Record the weight cost on #1 rather than letting it be discovered later
+- [x] `git checkout template/main -- data/gis/map_126158* data/gis/map_196076* data/gis/map_196085* data/gis/map_196332*`
+      — 16 files, 22 MB (`map_196085.gpkg` alone is 12.4 MB, the 145.6 km² Tabor watershed)
+- [x] **Verify:** all four `_meta.rds` read `species = bt`, `model_run_id = 133`, built 2026-08-03, units
+      matching the appendices; all four `.gpkg` open with the expected layers, `railway` present on
+      196076 and 196085 only; DEMs and basemaps in EPSG:3005, 3-band
+- [x] Record the weight cost on #1 rather than letting it be discovered later — commented with the
+      per-unit breakdown and where to look first if `data/` gets a diet
 
 ## Phase 3 — Wire the four appendices
 

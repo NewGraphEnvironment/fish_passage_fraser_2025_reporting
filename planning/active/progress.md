@@ -21,4 +21,8 @@
   `0410`'s `map_units` needed no edit, unlike the Skeena port. Mapping packages added to
   `scripts/packages.R`, and `0420` wired into `index.Rmd` after `0130-tables.R`. Verified from a clean
   `Rscript`: all eight `lfpr_*` entry points resolve and the sidecars parse at 10 / 3 / 11 rows.
-- Next: Phase 2 — bring the four map caches across (~21 MB) and verify their metadata.
+- **Phase 2 complete.** Four map caches ported, 16 files / 22 MB. All verified `species = bt`,
+  `model_run_id = 133`, built 2026-08-03, units matching the appendices; layers as expected with
+  `railway` on 196076 and 196085 only; DEMs and basemaps EPSG:3005. Weight cost recorded on #1 with a
+  per-unit breakdown — `map_196085.gpkg` is 12.4 MB of the 22, the 145.6 km² Tabor watershed.
+- Next: Phase 3 — swap the four `include_graphics()` chunks for `lfpr_map_site()` and drop the Tabor JPEG.
