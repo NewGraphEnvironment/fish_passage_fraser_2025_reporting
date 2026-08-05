@@ -26,11 +26,10 @@ PSCIS crossing `r as.character(my_site)` is located on `r fpr::fpr_my_pscis_info
 
 <br>
 
-```{r map-126158, fig.cap = my_caption, eval = F}
- my_caption <- "Map of Stony"
- 
- knitr::include_graphics("fig/gis/map_stony.jpeg")
- 
+```{r map-126158, fig.cap = my_caption, fig.width = 9, fig.height = 7, dpi = 150, out.width = photo_width}
+my_caption <- paste0("Habitat confirmation site map for PSCIS crossing ", my_site, ".", " ", lfpr_map_credit(my_site))
+
+lfpr_map_site(site = my_site)
 ```
 
 <br>

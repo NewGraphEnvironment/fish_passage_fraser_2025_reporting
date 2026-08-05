@@ -25,4 +25,11 @@
   `model_run_id = 133`, built 2026-08-03, units matching the appendices; layers as expected with
   `railway` on 196076 and 196085 only; DEMs and basemaps EPSG:3005. Weight cost recorded on #1 with a
   per-unit breakdown — `map_196085.gpkg` is 12.4 MB of the 22, the 145.6 km² Tabor watershed.
-- Next: Phase 3 — swap the four `include_graphics()` chunks for `lfpr_map_site()` and drop the Tabor JPEG.
+- **Phase 3 complete.** All four `include_graphics()` chunks replaced with the `lfpr_map_credit` +
+  `lfpr_map_site` pair; chunk labels kept so the prose cross-references resolve untouched. Tabor JPEG
+  deleted. Smoke-tested all four standalone before touching the book — every one renders from the
+  caches, including the two paired units.
+- Two differences from the template's reference PNG remain open — no keymap inset, no eDNA diamond.
+  Suspected device-size artefact of the smoke harness (`fig.retina = 2` means the real build draws at
+  2700×2100, twice the harness). Settle it on the real build in Phase 4.
+- Next: Phase 4 — build gitbook, read all four PNGs, then PDF.

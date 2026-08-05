@@ -69,13 +69,21 @@ PSCIS or form table (`126185_us/ds` → 126158, `205214_us/ds` → 203581, `2052
 
 ## Phase 3 — Wire the four appendices
 
-- [ ] Replace the `knitr::include_graphics()` chunk in each `0840-appendix-*.Rmd` with the template pair,
+- [x] Replace the `knitr::include_graphics()` chunk in each `0840-appendix-*.Rmd` with the template pair,
       options `fig.cap = my_caption, fig.width = 9, fig.height = 7, dpi = 150, out.width = photo_width`,
       no `eval`. `fig.width`/`fig.height` drive the bbox aspect; `dpi = 150` overrides the global `60`.
-      Paired sites pass a vector — `c(196085, 203582)` and `c(203581, 196076)`
-- [ ] Keep every existing chunk label so the prose cross-references resolve untouched
-- [ ] `git rm fig/gis/map_tabor.jpeg`
+      Paired sites pass `c(my_site, my_site2)`
+- [x] Keep every existing chunk label so the prose cross-references resolve untouched
+- [x] `git rm fig/gis/map_tabor.jpeg`
+- [x] Smoke-test all four maps standalone before building the book — all four render from the caches
 - [ ] **Verify:** no `>??<` in the rendered appendix pages; `fig/gis` appears nowhere in `docs/`
+
+**Open from the smoke test, to settle in Phase 4.** Against the template's reference PNG for 126158, the
+standalone render is missing the survey keymap inset and the eDNA sample diamond. Suspected harness
+artefact rather than a port defect: the template's committed PNG is 2700×2100 (knitr's `fig.retina = 2`
+doubling a 9×7in 150 dpi device) where the smoke harness drew at 1350×1050, and inset grobs are sized
+against the device and fail quietly when it is too small. Confirm on the real build — if the keymap is
+still absent, it is a genuine defect and not cosmetic.
 
 ## Phase 4 — Build and cartographic self-review
 
