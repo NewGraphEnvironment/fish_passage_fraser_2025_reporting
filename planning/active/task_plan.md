@@ -96,8 +96,17 @@ still absent, it is a genuine defect and not cosmetic.
       three differ only where this repo's `pscis_assessment_svw` and `form_edna` differ. The keymap and
       eDNA diamond the smoke test appeared to be missing are both present — the harness drew at half the
       device size knitr's `fig.retina = 2` gives
-- [x] `scripts/run_pagedown.R` — 393/393, PDF 16.1 MB, `gitbook_on` restored to TRUE; gitbook output in
-      `docs/` survives the PDF pass intact
+- [x] `scripts/run_pagedown.R` — 393/393, PDF 15.3 MB at v0.5.0, `gitbook_on` restored to TRUE; gitbook
+      output in `docs/` survives the PDF pass intact
+
+**Correction — the first PDF verification was invalid.** I recorded "PDF 16.1 MB, builds clean" from a
+check that had raced the build and measured the *previous* run's artifact. The PDF on disk still read
+v0.4.0 at that point. Cause: `Rscript foo.R` execs as `R --file=foo.R`, so the command line never
+contains the string `Rscript` and `pgrep -f 'Rscript scripts/run_pagedown'` could never match — the wait
+loop fell straight through and every check after it read stale files. The transient "Version 0.13.0" and
+the stale PDF timestamp were both artifacts of this, not real defects. Wait on
+`pgrep -f 'file=scripts/run_pagedown.R'` instead. The gitbook results were never affected; they were
+verified repeatedly against the rendered HTML.
 
 ## Phase 5 — #19, the UAV appendix publishing Peace imagery
 

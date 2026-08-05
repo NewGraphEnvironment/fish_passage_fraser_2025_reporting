@@ -47,4 +47,10 @@
 - **Weight is roughly double what the plan estimated.** 22 MB of caches plus ~28 MB of rendered PNGs,
   which land twice because `output_dir: "docs"` makes the rendered book a tracked artifact. ~45 MB net
   after the Tabor JPEG comes out. Recorded on #1.
-- Next: Phase 6 — v0.5.0, PR, merge, tag, verify live.
+- **Phase 6.** Bumped to v0.5.0 with three NEWS entries, rebuilt both formats. Verified on the artifacts
+  rather than the logs: `docs/index.html` reads Version 0.5.0, and `pdftotext` on the rebuilt PDF
+  (15.3 MB) reads Version 0.5.0.
+- Caught a false verification along the way and corrected it in `task_plan.md` — a wait loop keyed on
+  `pgrep -f 'Rscript ...'` can never match, because `Rscript` execs as `R --file=...`. The first PDF
+  check raced the build and measured the previous artifact. Recorded in `findings.md`.
+- Next: PR, merge, tag v0.5.0, verify live.

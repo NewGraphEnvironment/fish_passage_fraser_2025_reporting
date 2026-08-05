@@ -114,6 +114,26 @@ Note the earlier read of the 203581 map as having "white bands" was wrong: those
 bottom of 2100, uniform, and present identically in the template. That is the inner margin, not a
 letterbox.
 
+## `pgrep -f 'Rscript ...'` never matches a running Rscript
+
+`Rscript foo.R` execs the R binary, so the process command line is:
+
+```
+/Library/Frameworks/R.framework/Resources/bin/exec/R --no-echo --no-restore --file=scripts/run_pagedown.R
+```
+
+The string `Rscript` appears nowhere in it. A `while pgrep -f 'Rscript scripts/run_pagedown'; do sleep;
+done` wait loop therefore exits immediately, and every check after it reads the *previous* build's
+artifacts while the real build is still running. That produced a confident but wrong "PDF 16.1 MB,
+builds clean" here, plus a phantom "Version 0.13.0" read from a file mid-rewrite.
+
+Wait on `pgrep -f 'file=scripts/run_pagedown.R'`. Better still, verify the artifact rather than the
+process — compare the file's mtime before and after, and read the version out of the PDF itself with
+`pdftotext -f 1 -l 1`.
+
+Note `stat -f %m` is BSD syntax and fails on this machine, where `-f` means filesystem info. Use
+`stat -c %Y` or just `ls -la`.
+
 ## Incidental
 
 `rws_connect()` on `data/bcfishpass.sqlite` dirties the file even for read-only inspection —
