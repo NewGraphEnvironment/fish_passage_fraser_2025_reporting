@@ -132,7 +132,12 @@ form_fiss_site_prep2 <- dplyr::left_join(
 
   by = c('site' = 'stream_crossing_id')) |>
 
-  dplyr::mutate(waterbody_id = paste0('00000', watershed_group_code),
+  # paste0() turns a missing watershed_group_code into the literal string
+  # "00000NA", which looks like a real waterbody id and would be submitted as
+  # one. Keep missing as missing so a gap is visible rather than plausible.
+  dplyr::mutate(waterbody_id = dplyr::if_else(is.na(watershed_group_code),
+                                              NA_character_,
+                                              paste0('00000', watershed_group_code)),
                 waterbody_type = 'stream')
 
 

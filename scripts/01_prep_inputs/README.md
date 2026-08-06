@@ -56,12 +56,23 @@ These are designed to be self-sufficient scripts with everything in them necessa
 
 ### 0210_fiss_export_to_template.Rmd
 
-- Prepares FISS Site data for copy and paste into fish data submission spreadsheet (NewGraph calls this spreadsheet `habitat_confirmations.xls`)
-- Exports FISS data to csv for copy and paste into the fish data submission spreadsheet 
+- Shapes the QAed FISS site data to the provincial Fish Data Submission template, taking
+  the column names from the blank at `data/templates/FDS_Template2026-03-11.xlsx`
+- Writes `data/inputs_extracted/form_fiss_loc_tidy.csv` (Step 1) and
+  `form_fiss_site_tidy.csv` (Step 4), and assigns the `reference_number` that keys every
+  other sheet
 
 ### 0220_fish_data_tidy.R
 
 - Joins PIT tag data to the raw fish data
-- Prepares fish data for copy and paste into fish data submission spreadsheet (NewGraph calls this spreadsheet `habitat_confirmations.xls`)
-- Exports fish data to csv for copy and paste into the fish data submission spreadsheet
+- Writes `data/inputs_raw/fish_data_coll.csv` (Step 2) and `fish_data_ind.csv` (Step 3)
+- Runs **after** `0210` — it takes reference numbers from `form_fiss_loc_tidy.csv`
+- Skipped in a season with no fish sampled. `fds_prep_for_submission.R` detects the absence
+  of these two files and submits locations and habitat only
+
+Up to and including 2024 these fed a hand-filled workbook NewGraph called
+`habitat_confirmations.xls`. From 2025 the four CSVs go to
+`scripts/03_permit_submission/fds_prep_for_submission.R`, which writes them straight into a
+copy of the blank provincial template — there is no copy-and-paste step and no
+`habitat_confirmations.xls`.
 

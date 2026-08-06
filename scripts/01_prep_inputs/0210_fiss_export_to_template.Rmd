@@ -4,21 +4,41 @@ date: "Created: 2024-06-20 | Updated: `r format(Sys.Date(), '%Y-%m-%d')`"
 output: 
   html_document:
     code_folding: "hide"
-params:
-  repo_owner: "NewGraphEnvironment"
-  repo_name: "fish_passage_template_reporting"
-  gis_name: "sern_peace_fwcp_2023"
-  job_name: "2024-073-sern-peace-fish-passage"
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
 # Purpose of this script
 
-Export fiss site data to csv for cut and paste into the fish data submission spreadsheet (habitat_confirmations.xls). This script has been updated so that the csv contains as much of the data as possible, so that only a few copy/pastes are required. We are trying to move away from all the back and forths between the spreadsheet, R, and Q. 
+Export fiss site data to csv for cut and paste into the fish data submission spreadsheet. This script has been updated so that the csv contains as much of the data as possible, so that only a few copy/pastes are required. We are trying to move away from all the back and forths between the spreadsheet, R, and Q.
 
 ```{r params}
+# dplyr is used unqualified below (bind_rows, mutate, ...). Attach it rather than
+# leaning on a warm session - the "self-sufficient in a clean environment" claim
+# below only holds if the script attaches what it uses. Same pattern as
+# `scripts/03_permit_submission/fds_prep_for_submission.R`. `scripts/packages.R`
+# is deliberately not sourced: it reaches out to CRAN on every run.
+suppressMessages({
+  library(dplyr)
+})
+
+# Params come from the report front matter so there is one source of truth, and
+# so this script satisfies the `01_prep_inputs/README.md` contract of being
+# self-sufficient in a clean environment. Same pattern as `scripts/run_pagedown.R`.
+#
+# Render from the repo root WITH knit_root_dir, e.g.
+#   rmarkdown::render("scripts/01_prep_inputs/0210_fiss_export_to_template.Rmd",
+#                     knit_root_dir = getwd())
+# knitr otherwise moves the working directory to the Rmd's own folder and none of
+# the repo-relative paths below resolve.
+params <- rmarkdown::yaml_front_matter("index.Rmd")$params
+
 path_form_fiss_site <- fs::path_expand(fs::path('~/Projects/gis/', params$gis_project_name ,'/data_field/', params$project_year, paste0("form_fiss_site_", params$project_year, ".gpkg")))
+
+# Blank provincial FDS template - read only, to harvest target column names.
+# The populated workbook is no longer produced (see #23), so the names come from
+# the blank rather than from a filled `habitat_confirmations.xls`.
+path_fds_template <- "data/templates/FDS_Template2026-03-11.xlsx"
 ```
 
 
@@ -32,7 +52,11 @@ After QAing the data in QGIS, now we will prepare it for copy/paste into submiss
 
 ```{r backup}
 
-form_fiss_site <- fpr::fpr_sp_gpkg_backup(
+# Returns the QA'd form with UTM columns refreshed from geometry. This is the
+# data source for everything below - `0205_fiss_wrangle.R` writes the wrangled
+# form back to the gpkg, then removes its own `form_fiss_site_prep*` objects
+# (`0205:191`), so they are not available here.
+form_fiss_site_qa <- fpr::fpr_sp_gpkg_backup(
   path_gpkg = path_form_fiss_site,
   dir_backup = "data/backup/",
   update_utm = TRUE,
@@ -41,7 +65,7 @@ form_fiss_site <- fpr::fpr_sp_gpkg_backup(
   return_object = TRUE,
   col_easting = "utm_easting",
   col_northing = "utm_northing"
-) 
+)
 ```
 
 
@@ -49,24 +73,25 @@ form_fiss_site <- fpr::fpr_sp_gpkg_backup(
 
 ```{r cp-prep}
 # see the names of our form
-names(form_fiss_site_prep2)
+names(form_fiss_site_qa)
 
 # let's get the names of the input template
 # there is lots of work to do to pull out all the information we can use so we will start with one small step at a time
 # lets just populate the location and site info pages.
-form_raw_names_site <- fpr::fpr_import_hab_con(backup = F,
-  row_empty_remove = T) |> 
-  # pull out just the site info page for now
-  pluck(4) |> 
-  # only keep the names of the columns
+# Read the blank template once - it is ~3.7 MB across 8 sheets, so re-reading it
+# per lookup is wasteful. Plucked by name rather than position so a sheet order
+# change in a future template version fails loudly instead of silently.
+fds_names <- fpr::fpr_import_hab_con(path = path_fds_template,
+                                     backup = F,
+                                     row_empty_remove = T)
+
+form_raw_names_site <- fds_names |>
+  purrr::pluck("step_4_stream_site_data") |>
   names()
 
 # location names
-form_raw_names_location <- fpr::fpr_import_hab_con(backup = F,
-  row_empty_remove = T) |> 
-  # pull out just the site info page for now
-  pluck(1) |> 
-  # only keep the names of the columns
+form_raw_names_location <- fds_names |>
+  purrr::pluck("step_1_ref_and_loc_info") |>
   names()
 
 
@@ -80,8 +105,8 @@ form_raw_names_sl <- c(form_raw_names_location,
 
 
 # Rename the columns to match those in the spreadsheet
-form_site_info_prep <- form_fiss_site_prep2 |> 
-  sf::st_drop_geometry() |> 
+form_site_info_prep <- form_fiss_site_qa |>
+  sf::st_drop_geometry() |>
   # alias local name and gazetted_name is not called the same in both sheets so rename
   dplyr::rename(alias_local_name = local_name,
                 gazetted_name = gazetted_names,
@@ -106,11 +131,9 @@ Filter out the location data and burn to csv for copy paste into `step_1_ref_and
 form_fiss_loc <- bind_rows(
 
   # we need the raw form or we don't have all the right columns
-  fpr::fpr_import_hab_con(backup = F,
-                          row_empty_remove = T) |> 
-    # pull out just the site info page for now
-    purrr::pluck("step_1_ref_and_loc_info") |> 
-    dplyr::slice(0) |> 
+  fds_names |>
+    purrr::pluck("step_1_ref_and_loc_info") |>
+    dplyr::slice(0) |>
     dplyr::mutate(dplyr::across(dplyr::everything(), as.character)),
       
    form_site_info_prep |> 
@@ -140,12 +163,10 @@ Filter out the stream site data and burn to csv for copy paste into `step_4_stre
 form_fiss_site <- bind_rows(
 
   # we need the raw form or we don't have all the right columns
-  fpr::fpr_import_hab_con(backup = F,
-    row_empty_remove = T) |> 
-    # pull out just the site info page for now
-    purrr::pluck("step_4_stream_site_data") |> 
-    dplyr::slice(0) |> 
-    dplyr:: mutate(dplyr::across(dplyr::everything(), as.character)),
+  fds_names |>
+    purrr::pluck("step_4_stream_site_data") |>
+    dplyr::slice(0) |>
+    dplyr::mutate(dplyr::across(dplyr::everything(), as.character)),
                    
   form_site_info_prep |> 
     dplyr:: mutate(dplyr::across(dplyr::everything(), as.character)) |>
