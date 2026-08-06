@@ -1,3 +1,7 @@
+# fish_passage_fraser_2025_reporting 0.6.1 (2026-08-05)
+
+* Declare everything the book loads in `scripts/packages.R`. `leafpop` (interactive map popups), `english` (inline prose), `bcmaps` (UAV appendix) and `cd` (climate departure appendix) were used in rendered chunks but declared nowhere, so a fresh clone could not build. Also set a CRAN mirror when the session has none — `Rscript` starts with `repos` unset, which made the pak check fail outright while RStudio masked it — and read `params$update_packages` defensively, since several scripts source this file before defining `params` ([Issue #30](https://github.com/NewGraphEnvironment/fish_passage_fraser_2025_reporting/issues/30))
+
 # fish_passage_fraser_2025_reporting 0.6.0 (2026-08-05)
 
 * Build the provincial Fish Data Submission workbook for the 2025 habitat confirmations, at `data/permit_submission/PG25-983997.xlsx` under scientific fish collection permit PG25-983997, with DFO licence XR 463 2025. No fish were sampled, so the submission carries site locations and habitat measurements only and Steps 2 and 3 are empty. Ports the workflow from Peace 2025 rather than the reporting template, which is a generation behind and writes CSVs for manual copy-paste-special ([Issue #26](https://github.com/NewGraphEnvironment/fish_passage_fraser_2025_reporting/issues/26))
