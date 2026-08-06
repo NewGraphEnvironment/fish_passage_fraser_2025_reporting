@@ -56,3 +56,29 @@ gradient `/100` is correct against the cell's `0.0%` number format.
   out `WL25-993485` as a nil return
 - Phase 7 — repoint `2400-Attachment_data.Rmd` (currently a live broken link to
   `habitat_confirmations.xls`), bump to 0.3.0, rebuild
+
+### Rebased onto the real `main` (2026-08-05)
+
+The branch was originally cut from a **42-commit-stale** local `main` (`d22bf2d`) because a
+`git fetch` timed out and the `git pull --ff-only` step was skipped. `origin/main` was
+already at `2ee3478` / v0.5.0.
+
+What that spoiled, and what it did not:
+
+- **Unaffected.** Those 42 commits never touched `scripts/01_prep_inputs/`,
+  `scripts/03_permit_submission/` or `2400-Attachment_data.Rmd`, so all three source
+  commits cherry-picked onto the real `main` with no conflict. The workbook, the `00000NA`
+  fix and the no-ef fix are unchanged.
+- **Wrong, and redone.** The release was bumped 0.2.1 → 0.3.0 against a `main` already at
+  0.5.0; it is now 0.6.0 with the NEWS entry above 0.5.0's. The `index.Rmd` date field was
+  "fixed" from `Version 0.0.1`, which was not stale — just old; current `main` tracks
+  DESCRIPTION and now reads 0.6.0 DRAFT.
+- **Discarded.** The first `docs/` rebuild was generated from 42-commit-old content and
+  would have reverted the site maps, eDNA appendices and executive-summary fixes. That
+  commit was dropped and the book rebuilt from current content; the v0.5.0 site maps are
+  present in the rebuilt `docs/`.
+
+Old tip kept as `backup/26-stale-base` (`43ced3d`). Branch force-pushed.
+
+**Lesson for next time:** if `git fetch` times out, do not branch — retry or stop. A stale
+base is invisible until the PR reports CONFLICTING.

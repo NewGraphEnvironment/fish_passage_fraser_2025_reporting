@@ -86,13 +86,13 @@ not re-run it, which is why the watershed refresh lives in the submission script
 
 ## Phase 7: Report wiring and release
 
-- [ ] Point `2400-Attachment_data.Rmd` at `data/permit_submission/<permit_id>.xlsx`. It
+- [x] Point `2400-Attachment_data.Rmd` at `data/permit_submission/<permit_id>.xlsx`. It
       currently links to `data/habitat_confirmations.xls`, which does not exist — a live
       broken link in the published book. Use the no-fish wording: drop Peace's PIT-tagging
       clause and its raw-fish-data paragraph.
-- [ ] Bump `DESCRIPTION` 0.2.1 → 0.3.0 and add the NEWS.md entry
-- [ ] `index.Rmd` `date:` still reads `Version 0.0.1` — stale against DESCRIPTION/NEWS
-- [ ] Rebuild the book; confirm the attachment link resolves
+- [x] Bump `DESCRIPTION` 0.5.0 → 0.6.0 and add the NEWS.md entry
+- [x] `index.Rmd` `date:` version line tracks DESCRIPTION
+- [x] Rebuild the book; confirm the attachment link resolves
 
 ## Out of scope — separate issue, after Fraser *and* Skeena
 
