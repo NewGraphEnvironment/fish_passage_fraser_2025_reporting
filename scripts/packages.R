@@ -1,8 +1,21 @@
-# ensure pak is installed and up to date from CRAN
+# A session started by Rscript has no repository set (`@CRAN@`), which makes
+# install.packages() and available.packages() below fail outright. RStudio sets a
+# mirror for you, so this only ever bites headless builds.
+if (!nzchar(getOption("repos")[[1]]) || identical(unname(getOption("repos")[[1]]), "@CRAN@")) {
+  options(repos = c(CRAN = "https://cloud.r-project.org"))
+}
+
+# Several scripts source this file BEFORE they define `params` - see
+# 01_prep_inputs/0220_fish_data_tidy.R, which sources on line 2 and reads the
+# report front matter on line 7. Read it defensively so that still works.
+update_packages <- isTRUE(tryCatch(params$update_packages, error = function(e) FALSE))
+
+# ensure pak is installed, and up to date from CRAN when we are already updating
 if (!requireNamespace("pak", quietly = TRUE)) {
   install.packages("pak")
-} else {
-  # Only run this if an update is needed
+} else if (update_packages) {
+  # available.packages() is a network round trip, and it used to run on every
+  # source() of this file rather than only when updating.
   current <- packageVersion("pak")
   latest <- package_version(available.packages()["pak", "Version"])
   if (current < latest) {
@@ -30,7 +43,13 @@ pkgs_cran <- c(
   "terra",
   "maptiles",
   "png",
-  "stars"
+  "stars",
+  # popupTable()/popupImage() on the interactive maps - 0400-results.Rmd
+  "leafpop",
+  # as.english()/ordinal() in inline prose - 0400-results.Rmd, site appendices
+  "english",
+  # bc_bound() - 0740-appendix-uav-imagery.Rmd
+  "bcmaps"
 )
 
 pkgs_gh <- c(
@@ -41,6 +60,8 @@ pkgs_gh <- c(
   "newgraphenvironment/gq",
   "newgraphenvironment/fresh",
   "newgraphenvironment/flooded",
+  # climate departure appendix - 0710-appendix-climate-departure.Rmd
+  "newgraphenvironment/cd",
   "newgraphenvironment/staticimports",
   "newgraphenvironment/fishbc@updated_data",
   "poissonconsulting/readwritesqlite", #https://github.com/poissonconsulting/readwritesqlite/issues/47
@@ -52,8 +73,7 @@ pkgs_all <- c(pkgs_cran,
 
 
 # install or upgrade all the packages with pak
-# install or upgrade all the packages with pak
-if(params$update_packages){
+if (update_packages) {
   lapply(pkgs_all, pak::pkg_install, ask = FALSE)
 }
 
