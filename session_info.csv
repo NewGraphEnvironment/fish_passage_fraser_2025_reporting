@@ -8,7 +8,7 @@
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/Vancouver
- date     2026-08-05
+ date     2026-08-06
  pandoc   3.9.0.2 @ /opt/homebrew/bin/ (via rmarkdown)
  quarto   1.4.553 @ /usr/local/bin/quarto
 
@@ -59,7 +59,7 @@
  forcats           * 1.0.1      2025-09-25 [2] CRAN (R 4.5.0)
  foreach             1.5.2      2022-02-02 [2] CRAN (R 4.5.0)
  fpr               * 1.2.0      2026-02-03 [2] Github (NewGraphEnvironment/fpr@2817533)
- fresh             * 0.32.0     2026-07-30 [1] local
+ fresh             * 0.33.0     2026-08-06 [1] local
  fs                  2.1.0      2026-04-18 [1] CRAN (R 4.5.2)
  generics            0.1.4      2025-05-09 [1] CRAN (R 4.5.0)
  ggplot2           * 4.0.3      2026-04-22 [1] CRAN (R 4.5.2)
