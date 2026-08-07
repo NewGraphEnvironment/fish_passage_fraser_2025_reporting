@@ -15,7 +15,7 @@ author: |
 
 date: |
  |
- | Version 0.6.0 DRAFT `r format(Sys.Date(), "%Y-%m-%d")`
+ | Version 0.6.2 DRAFT `r format(Sys.Date(), "%Y-%m-%d")`
  |
  | *Claude Opus 5 (Anthropic) assisted with literature synthesis, drafting, and technical writing. All scientific interpretation, data analysis, and conclusions are the responsibility of the authors.*
 toc-title: Table of Contents
@@ -34,6 +34,11 @@ params:
   project_region: "fraser"
   project_year: "2025"
   project_start_year: "2023"
+  # provincial scientific fish collection permit. Names the submission workbook at
+  # data/permit_submission/<permit_id>.xlsx and is linked from 2400-Attachment_data.Rmd.
+  # A second permit, WL25-993485 (Williams Lake / Cariboo), produced no data and is
+  # closed out with the Province as a nil return - nothing is submitted under it.
+  permit_id: "PG25-983997"
   model_species: "bt"
   wsg_code: [LCHL, NECR, FRAN, MORK, UFRA, WILL, TABR, LSAL]
   update_packages: FALSE

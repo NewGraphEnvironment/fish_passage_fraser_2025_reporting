@@ -1,6 +1,11 @@
 
 source('scripts/packages.R')
 
+# Params come from the report front matter so there is one source of truth, and so
+# this script satisfies the `01_prep_inputs/README.md` contract of being
+# self-sufficient in a clean environment. Same pattern as `scripts/run_pagedown.R`.
+params <- rmarkdown::yaml_front_matter("index.Rmd")$params
+
 # Paths ------------------------------------------------------
 # Pit tag data for ALL years is currently being stored on OneDrive .
 path_tag_previous_years <- fs::path("~/Library/CloudStorage/OneDrive-Personal/Projects/pit_tag_data/pit_tag_data_all_years.csv")
@@ -16,8 +21,6 @@ path_form_fiss_site <- fs::path("~/Projects/gis/", params$gis_project_name, "/da
 # Path for where to store the fish data with the pit tags joined.
 path_onedrive_tags_joined <-  fs::path("~/Library/CloudStorage/OneDrive-Personal/Projects/", paste0(params$project_year, "_data"), "fish", paste0("fish_data_tags_joined_", params$project_year,".csv"))
 
-pit_tag
-
 # Repo path to individual fish data ready to c/p into `step_3_individual_fish_data`
 path_repo_fish_data_ind <-  fs::path("data/inputs_raw/fish_data_ind.csv")
 
@@ -30,18 +33,42 @@ path_repo_fish_data_coll <-  fs::path("data/inputs_raw/fish_data_coll.csv")
 # First we need to update the csv that contains the pit tag data from ALL YEAR with the tag data from 2025. The csv needs to contains ALL YEARS of data for the correct tag_row_id to be assigned.
 
 
-pit_tag_2025 <- readr::read_csv(path_tag_project_year, col_names = F)
-pit_tag_previous_years <- readr::read_csv(path_tag_previous_years, col_names = F)
+# The all-years file is the source of truth for `rowid`, which is what joins tags to
+# individual fish below. It is written back in place at the end of this block, so the
+# merge MUST be idempotent: the previous form read the all-years file with
+# `col_names = FALSE` and unconditionally `bind_rows()`ed the project-year file into
+# it. Because the write-back stores the *parsed* shape (rowid, date, tag_id) while the
+# read expected the *raw* shape (one `... TAG <id>` column), a second run appended the
+# same tags again and renumbered `rowid` - silently breaking the join for every prior
+# year. Guard on tag_id instead.
 
+# raw reader-output shape: a single column of "<date> TAG <tag_id>"
+pit_tag_project_year <- readr::read_csv(path_tag_project_year, col_names = FALSE,
+                                        show_col_types = FALSE) |>
+  tidyr::separate(col = X1, into = c("date", "tag_id"), sep = "\\s*TAG\\s*")
 
-pit_tag_all_years <- dplyr::bind_rows(pit_tag_previous_years, pit_tag_2025) |>
-  #separate the pit tag out from the rest of the info in the pit tag csv
-  # https://stackoverflow.com/questions/66696779/separate-by-pattern-word-in-tidyr-and-dplyr
-  tidyr::separate(col=X1, into=c('date', 'tag_id'), sep='\\s*TAG\\s*') |>
+# parsed shape, written by a previous run of this block
+pit_tag_previous_years <- readr::read_csv(path_tag_previous_years,
+                                          show_col_types = FALSE) |>
+  dplyr::select(dplyr::any_of(c("rowid", "date", "tag_id")))
+
+# only tags we have not already recorded - keeps rowid stable across re-runs
+pit_tag_new <- pit_tag_project_year |>
+  dplyr::anti_join(pit_tag_previous_years, by = "tag_id")
+
+pit_tag_all_years <- dplyr::bind_rows(
+  pit_tag_previous_years |> dplyr::select(date, tag_id),
+  pit_tag_new
+) |>
   tibble::rowid_to_column()
 
-# and burn back and override last years file on onedrive
-pit_tag_all_years |> readr::write_csv(path_tag_previous_years, append = FALSE)
+if (nrow(pit_tag_new) > 0) {
+  # and burn back and override last years file on onedrive
+  pit_tag_all_years |> readr::write_csv(path_tag_previous_years, append = FALSE)
+  message("pit tags: added ", nrow(pit_tag_new), " new; all-years file updated")
+} else {
+  message("pit tags: no new tags for ", params$project_year, "; all-years file left as is")
+}
 
 
 
@@ -110,12 +137,16 @@ fish_data_complete <- readr::read_csv(file = path_onedrive_tags_joined) |>
   #filter for peace 2024
   dplyr::filter(project_name == params$job_name)
 
-# cross reference with step 1 of hab con sheet to get reference numbers
+# cross reference with step 1 to get reference numbers.
+# These are assigned in 0210_fiss_export_to_template.Rmd (`reference_number =
+# dplyr::row_number()`) and written to form_fiss_loc_tidy.csv, so that CSV is the
+# source - not a populated workbook, which 2025 no longer produces. Run 0210 first.
 ref_names <- dplyr::left_join(
   fish_data_complete,
-  fpr::fpr_import_hab_con(backup = F, row_empty_remove = T, col_filter_na = T) |>
-    purrr::pluck("step_1_ref_and_loc_info") |>
-    dplyr::select(reference_number, alias_local_name),
+  readr::read_csv("data/inputs_extracted/form_fiss_loc_tidy.csv",
+                  show_col_types = FALSE) |>
+    dplyr::select(reference_number, alias_local_name) |>
+    dplyr::mutate(reference_number = as.numeric(reference_number)),
   by = c('local_name' = 'alias_local_name')
 ) |>
   relocate(reference_number, .before = 'local_name')
@@ -236,8 +267,11 @@ fish_coll_data |>
 
 
 # Backup spreadsheet
-
-fpr::fpr_import_hab_con(row_empty_remove = T, col_filter_na = T)
+#
+# Dropped for 2025. This re-read the populated `habitat_confirmations.xls` with
+# `backup = TRUE` so each sheet landed in `data/backup/` as a git-visible record of
+# hand edits. 2025 produces no populated workbook - the report reads `form_fiss_site`
+# directly - so there is nothing here to back up. See #23.
 
 
 

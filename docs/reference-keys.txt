@@ -20,6 +20,7 @@ tab:tab-barrier-result
 tab:tab-cost-mult
 tab:tab-moti-params
 tab:tab-monitoring-metrics
+fig:map-interactive
 tab:cost-est-phase-1
 tab:tab-overview
 tab:phase-2-cv-assess-sum
@@ -29,6 +30,7 @@ tab:tab-wshd-sum-all
 fig:plot-model-all
 tab:tab-edna-summary
 tab:tab-mon-overview
+tab:stock-assess-dat-all
 tab:fiss-species-table
 fig:cd-map-aoi
 tab:cd-compare-table
@@ -56,6 +58,8 @@ fig:flood-map-wsg
 fig:flood-map-detail
 tab:tab-sites-sum-cap
 tab:tab-sites-cap
+tab:tab-uav-imagery-cap
+tab:tab-rfp-tracking
 tab:tab-edna-per-site
 tab:tab-edna-field-blanks
 tab:tab-edna-retests
@@ -66,7 +70,8 @@ tab:tab-culvert-126158
 tab:tab-edna-126158
 tab:tab-edna-results-126158
 tab:tab-habitat-summary-126158
-fig:photo-126158-d01
+fig:photo-126158-01
+fig:photo-126158-02
 fig:map-196085
 tab:tab-wshd-196085
 tab:tab-culvert-bcfp-196085
@@ -75,8 +80,10 @@ tab:tab-culvert-203582
 tab:tab-edna-196085
 tab:tab-edna-results-196085
 tab:tab-habitat-summary-196085
-fig:photo-196085-d01
-fig:photo-203582-d01
+fig:photo-196085-01
+fig:photo-196085-02
+fig:photo-196085-03
+fig:photo-203582-01
 fig:map-196332
 tab:tab-wshd-196332
 tab:tab-culvert-bcfp-196332
@@ -84,7 +91,8 @@ tab:tab-culvert-196332
 tab:tab-edna-196332
 tab:tab-edna-results-196332
 tab:tab-habitat-summary-196332
-fig:photo-196332-d01
+fig:photo-196332-01
+fig:photo-196332-02
 fig:map-203581
 tab:tab-wshd-203581
 tab:tab-culvert-bcfp-203581
@@ -93,8 +101,10 @@ tab:tab-culvert-196076
 tab:tab-edna-203581
 tab:tab-edna-results-203581
 tab:tab-habitat-summary-203581
-fig:photo-203581-d01
-fig:photo-196076-d01
+fig:photo-203581-01
+fig:photo-203581-02
+fig:photo-196076-01
+fig:photo-196076-02
 fig:photo-196200-before
 fig:photo-196200-after
 fig:lidar-196200
@@ -166,3 +176,4 @@ engineering-design-1
 monitoring-1
 collaborative-gis-environment-1
 recommendations
+methodology
