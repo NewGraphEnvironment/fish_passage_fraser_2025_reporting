@@ -1,3 +1,7 @@
+# fish_passage_fraser_2025_reporting 0.6.3 (2026-08-06)
+
+* Stop naming the model version in the assistance note. It read "Claude Opus 5" in the report body and "Claude Sonnet 4.6" on the executive summary cover — two different claims in one release, because the cover is a separate file built by a separate script and had not been rebuilt since May. The note now reads "Claude (Anthropic)", which stays accurate across model releases and across the many sessions a report is drafted over.
+
 # fish_passage_fraser_2025_reporting 0.6.2 (2026-08-06)
 
 * Add stream temperature and Growing-Season Degree Days to the methods and results chapters, and cite `water-temp-bc` ([Issue #32](https://github.com/NewGraphEnvironment/fish_passage_fraser_2025_reporting/issues/32)). The 2024 Bayesian Spatial Stream Network modelling with Poisson Consulting was carried out in this study area — the Nechako is a sub-basin of the Upper Fraser — but the report cited it only from a three-line attachment stub and said nothing about the 2025 work that extended the same methodology to a larger network and added Growing-Season Degree Days as the productivity-relevant thermal metric. Both studies are now linked in the water temperature attachment, and the observations behind them are credited to `water-temp-bc`, which had been referenced by link in other reports but never cited.
