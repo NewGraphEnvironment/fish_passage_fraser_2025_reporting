@@ -15,7 +15,7 @@ author: |
 
 date: |
  |
- | Version 0.6.1 DRAFT `r format(Sys.Date(), "%Y-%m-%d")`
+ | Version 0.6.2 DRAFT `r format(Sys.Date(), "%Y-%m-%d")`
  |
  | *Claude Opus 5 (Anthropic) assisted with literature synthesis, drafting, and technical writing. All scientific interpretation, data analysis, and conclusions are the responsibility of the authors.*
 toc-title: Table of Contents
@@ -133,8 +133,6 @@ knitr::write_bib(c(
 At New Graph Environment, we understand our well-being as inseparable from the health of the land and waters we work within. When we care for ecosystems, we care for ourselves and for the communities connected to them.
 
 Modern civilization has a long journey ahead to acknowledge and address the historic and ongoing impacts of colonialism that have resulted in harm to the cultures and livelihoods living interconnected with our ecosystems for many thousands of years.
-
-This work takes place within the territories of First Nations who have stewarded these lands and waters since time immemorial.
 
 
 ```{js, logo-header, echo = FALSE, eval= T}

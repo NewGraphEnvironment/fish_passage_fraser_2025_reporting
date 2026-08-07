@@ -88,10 +88,14 @@ New in 2025, environmental DNA (eDNA) sampling was incorporated into the program
   availability. 
   
   <!-- Project specific above -->
-  
+
   <br>
 
-  
+The components of this initiative are designed to complement one another, building the state of knowledge regarding watershed health and directing restoration effort to where it will do the most good. Passage assessments and the provincial model establish where fish can reach; habitat confirmations, fish sampling and environmental DNA establish where they are; floodplain delineation and aerial imagery establish how infrastructure has altered the valley bottom; climate departure and water temperature establish the trajectory; effectiveness monitoring tests whether the work delivered. Together they make explicit what is known, what is not, and what should be measured next. Making that evidence usable is part of the work — data collected on structured digital forms, methods documented alongside the code that implements them, layers published to open catalogues, and reporting written so partners, First Nations, regulators and tenure holders can question it and build on it — so understanding accumulates across the program rather than being rebuilt each season.
+
+<br>
+
+
 A major challenge in advancing fish passage restoration is the complexity of working across jurisdictions and with multiple stakeholders—rail and highway authorities, forestry ministries, licensees, and private landowners. These partners are often being asked to accommodate priorities that originate outside their mandates and budgets. Convincing them to invest in difficult, high-cost interventions—like modifying crossings or relocating infrastructure—requires navigating uncertainty about costs and ecological outcomes, as well as a disconnect between the benefits to watershed health and the internal pressures or performance goals of these agencies. It’s a tough ask: to take on massive, uncertain projects when they’re already stretched thin with their own responsibilities.
 
 <br>
