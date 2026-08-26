@@ -78,11 +78,11 @@ template's. Overwriting it would undo a fix.
 - [x] Replace the hardcoded `| Version 0.6.3 DRAFT` in `index.Rmd:18` with
       `` `r desc::desc_get_version()` ``, as template and Peace do, so it cannot drift again
 - [x] Rebuild gitbook, print PDF, executive summary PDF
-- [ ] PR, merge, tag, verify published links resolve live
+- [x] PR opened; merge, tag and live verification follow
 
 ## Phase 5: File the UAV regression separately
 
-- [ ] Issue: the malformed `http:/23cog...` URLs are frozen in
+- [x] Issue: the malformed `http:/23cog...` URLs are frozen in
       `data/snapshots/fp_sites_tracking.parquet` in both Fraser and the template, were
       fixed once in `b7ffeee` and regressed via the snapshot, and the upstream
       `url_uav_ortho` source is not in any of the four repos
