@@ -48,14 +48,14 @@ two Rmds reference.
 
 Files, with insert points confirmed by exploration:
 
-- [ ] `scripts/links_check.R` — copy from template (new file)
-- [ ] `scripts/02_reporting/0190-build-html-map-tables.R` — replace the 31-line pre-fix
+- [x] `scripts/links_check.R` — copy from template (new file)
+- [x] `scripts/02_reporting/0190-build-html-map-tables.R` — replace the 31-line pre-fix
       version with the template's 86-line one
-- [ ] `scripts/02_reporting/0130-tables.R:934-937` — replace the `case_when` `photo_link`
+- [x] `scripts/02_reporting/0130-tables.R:934-937` — replace the `case_when` `photo_link`
       with the template's `pscis_crossing_id` form
-- [ ] `index.Rmd` — add `update_html_map_tables: FALSE` after `update_bcfishpass` (line 51);
+- [x] `index.Rmd` — add `update_html_map_tables: FALSE` after `update_bcfishpass` (line 51);
       add `source('scripts/02_reporting/0190-build-html-map-tables.R')` after line 114
-- [ ] `scripts/run_gitbook.R` — insert the 12-line check hook between the `render_site` call
+- [x] `scripts/run_gitbook.R` — insert the 12-line check hook between the `render_site` call
       (line 62) and the auto-open block
 
 Do **not** touch `scripts/packages.R`. Fraser's has diverged deliberately — it carries
@@ -64,13 +64,13 @@ template's. Overwriting it would undo a fix.
 
 ## Phase 3: Generate, verify, prune
 
-- [ ] Flip `update_html_map_tables: TRUE`, build, confirm `docs/sum/` populates (32 pages
+- [x] Flip `update_html_map_tables: TRUE`, build, confirm `docs/sum/` populates (32 pages
       expected — 16 `cv`, 16 `bcfp`), flip back to FALSE
-- [ ] Commit `docs/sum/`
-- [ ] Delete **only** `docs/ai-disclosure.html` and `docs/changelog.html`. Leave
+- [x] Commit `docs/sum/`
+- [x] Delete **only** `docs/ai-disclosure.html` and `docs/changelog.html`. Leave
       `attach-bayes.html` alone — it is a live chapter here
-- [ ] Run the check: expect 49 → 3, the remainder being the UAV parquet URLs
-- [ ] Confirm the 12 dead photo links now resolve against the 17 real `data/photos/` folders
+- [x] Run the check: expect 49 → 3, the remainder being the UAV parquet URLs
+- [x] Confirm the 12 dead photo links now resolve against the 17 real `data/photos/` folders
 
 ## Phase 4: Release Fraser
 
