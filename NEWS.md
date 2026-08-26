@@ -1,3 +1,11 @@
+# fish_passage_fraser_2025_reporting 0.7.0 (2026-08-26)
+
+* Fix the broken links in the results interactive map — 49 of them, now 3. Photo links were built from `my_crossing_reference` where one existed, which is the modelled crossing id, but `0110_photos.R` renames photo folders to PSCIS ids; 12 of 18 photo links pointed at folders that do not exist. The Culvert Data and Model Data popup pages were never generated at all, leaving 32 more dead ([template #61](https://github.com/NewGraphEnvironment/fish_passage_template_reporting/issues/61), [#231](https://github.com/NewGraphEnvironment/fish_passage_template_reporting/issues/231), [#234](https://github.com/NewGraphEnvironment/fish_passage_template_reporting/issues/234)).
+* Check that rendered links resolve, as part of every gitbook build. The test is not whether a file exists on the machine that built it but whether it is in the repository, since that is what GitHub Pages serves — a page present only locally is a dead link for every reader ([template #232](https://github.com/NewGraphEnvironment/fish_passage_template_reporting/issues/232)).
+* Generate the Culvert Data and Model Data pages from the report pipeline, behind an `update_html_map_tables` switch following the `update_bcfishpass` pattern, and commit them.
+* Remove two orphaned pages left in `docs/` from an earlier book structure — `ai-disclosure.html` and `changelog.html`, dated 19 May, with no source file and linking only to each other. bookdown does not clean its output directory.
+* Read the report version from `DESCRIPTION` rather than repeating it in `index.Rmd`, so the title block cannot drift from the released version.
+
 # fish_passage_fraser_2025_reporting 0.6.3 (2026-08-06)
 
 * Stop naming the model version in the assistance note. It read "Claude Opus 5" in the report body and "Claude Sonnet 4.6" on the executive summary cover — two different claims in one release, because the cover is a separate file built by a separate script and had not been rebuilt since May. The note now reads "Claude (Anthropic)", which stays accurate across model releases and across the many sessions a report is drafted over.

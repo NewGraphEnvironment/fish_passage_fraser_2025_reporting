@@ -74,10 +74,10 @@ template's. Overwriting it would undo a fix.
 
 ## Phase 4: Release Fraser
 
-- [ ] Bump 0.6.3 → 0.7.0 with NEWS
-- [ ] Replace the hardcoded `| Version 0.6.3 DRAFT` in `index.Rmd:18` with
+- [x] Bump 0.6.3 → 0.7.0 with NEWS
+- [x] Replace the hardcoded `| Version 0.6.3 DRAFT` in `index.Rmd:18` with
       `` `r desc::desc_get_version()` ``, as template and Peace do, so it cannot drift again
-- [ ] Rebuild gitbook, print PDF, executive summary PDF
+- [x] Rebuild gitbook, print PDF, executive summary PDF
 - [ ] PR, merge, tag, verify published links resolve live
 
 ## Phase 5: File the UAV regression separately
@@ -96,8 +96,8 @@ cannot run standalone, and renaming an output that `0400-results.Rmd:596` and
 
 ## Verification
 
-- [ ] `Rscript scripts/links_check.R` reports 3 (the UAV parquet URLs), down from 49
+- [x] `Rscript scripts/links_check.R` reports 3 (the UAV parquet URLs), down from 49
 - [ ] Photo and `sum/` hrefs resolve from a fresh clone, checked live after release
-- [ ] `attach-bayes.html` still present and reachable
+- [x] `attach-bayes.html` still present and reachable
 - [ ] `/code-check` clean on each commit
 - [ ] `/planning-archive` on completion
