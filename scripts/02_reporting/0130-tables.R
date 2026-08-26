@@ -931,10 +931,13 @@ tab_map_phase_1 <- tab_map_phase_1_prep |>
                                      TRUE ~ priority_phase1),
                 priority_phase1 = stringr::str_to_title(priority_phase1)) |>
   dplyr::mutate(data_link = paste0('<a href =', 'sum/cv/', pscis_crossing_id, '.html ', 'target="_blank">Culvert Data</a>')) |>
-  dplyr::mutate(photo_link = dplyr::case_when(is.na(my_crossing_reference) ~ paste0('<a href =', 'https://raw.githubusercontent.com/NewGraphEnvironment/', params$repo_name, '/main/data/photos/', pscis_crossing_id, '/crossing_all.JPG ',
-                                                                                    'target="_blank">Culvert Photos</a>'),
-                                              TRUE ~ paste0('<a href =', 'https://raw.githubusercontent.com/NewGraphEnvironment/', params$repo_name, '/main/data/photos/', my_crossing_reference, '/crossing_all.JPG ',
-                                                            'target="_blank">Culvert Photos</a>'))) |>
+  # Photo folders are named by PSCIS id - `0110_photos.R` renames them, and
+  # `0160_add_pscis_ids.R:179` says so outright. This used to prefer
+  # `my_crossing_reference` where one existed, which pointed at the modelled
+  # crossing id and so at a folder that no longer exists: 12 of 18 links in the
+  # published Fraser report were dead. See template#61.
+  dplyr::mutate(photo_link = paste0('<a href =', 'https://raw.githubusercontent.com/NewGraphEnvironment/', params$repo_name, '/main/data/photos/', pscis_crossing_id, '/crossing_all.JPG ',
+                                    'target="_blank">Culvert Photos</a>')) |>
   dplyr::mutate(model_link = paste0('<a href =', 'sum/bcfp/', pscis_crossing_id, '.html ', 'target="_blank">Model Data</a>')) |>
   dplyr::distinct(site_id, .keep_all = TRUE) #just for now
 

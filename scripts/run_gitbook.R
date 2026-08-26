@@ -61,6 +61,18 @@ move_to_hold(appendix_stub)           # stub belongs in hold for gitbook
 # Build
 rmarkdown::render_site(output_format = 'bookdown::gitbook', encoding = 'UTF-8')
 
+# --- Check the links resolve --------------------------------------------
+# Runs here rather than as a separate thing to remember, because a check that
+# has to be remembered has the same failure mode as a script that has to be
+# remembered - which is how 49 dead links reached the published report.
+# Reports and does not stop the build: the book is already rendered, and the
+# author should see the whole list rather than have the run aborted.
+cat("\n=== Checking rendered links ===\n")
+link_status <- system2("Rscript", "scripts/links_check.R")
+if (!identical(link_status, 0L)) {
+  cat("\n  ^ broken links above. Fix before releasing.\n")
+}
+
 # Auto-open results chapter (or fall back to index.html)
 results_html <- list.files("docs", pattern = "^results", ignore.case = TRUE, full.names = TRUE)[1]
 if (is.na(results_html)) results_html <- "docs/index.html"

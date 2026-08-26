@@ -1,132 +1,61 @@
-# Findings — Submit the 2025 habitat confirmation data to the Province (FDS) (#26)
+# Findings — sync the results-map link fixes to Fraser (template#234)
 
-## The port source is Peace, not the template
+## Measured starting state
 
-Issue #26 says to port from `fish_passage_template_reporting` v0.15.0. That version is a
-generation behind. Template v0.15.0's `fds_prep_for_submission.R` writes four CSVs for
-manual paste-special and has **no** `has_fish`, **no** `dir_workbook`, **no** `hdr_*`
-header block, **no** workbook writer, and **no** watershed/TWC refresh — so three of the
-issue's own test-plan items cannot be met from it.
+`scripts/links_check.R` (run from the template, against Fraser's committed `docs/`) reports **49 broken links**:
 
-`fish_passage_peace_2025_reporting` `origin/main` has all of it. The template received the
-early paste-based port (`e1d800b`, `95daae2`); Peace then advanced past it in
+| Cause | Count |
+|---|---|
+| `sum/cv/<id>.html` — pages never generated | 16 |
+| `sum/bcfp/<id>.html` — pages never generated | 16 |
+| Photo links built from `my_crossing_reference` | 12 |
+| Malformed UAV viewer URLs (`http:/23cog...`) | 3 |
+| `attach-maps.html`, reachable only from orphan pages | 1 |
 
-```
-69108dc Add fds_prep_2025.R and the four sheets ready to paste
-4c72138 Consolidate to one submission script, unversioned in the filename
-29c6720 Build the submission workbook programmatically, drafting to hold/
-75fb638 Retract the gradient override; surface missing watershed codes
-27d8d7b Refresh watershed codes, assign TWCs, and make the script portable
-4ad5593 Fill the Step 1 header block from the report and permit
-3490efb Blank electrofisher settings on visual observation rows
-a6c8aa5 Promote the reviewed workbook to the submission directory
-```
+18 distinct photo URLs are emitted; `data/photos/` holds 17 real folders; only 6 links resolve. The 12 dead ones all point at modelled-crossing ids — `19703257`, `24403467`, `5400047` and so on.
 
-without porting back. Read `27d8d7b` first — it is what lets the script move between repos
-unchanged (template resolved by glob, sheet geometry derived from the workbook, fish
-sheets optional).
+## Four things that make this not a straight copy
 
-This is exactly the drift issue #26 step 7 warns about, running in the opposite direction
-from what the issue assumes.
+### `attach-bayes.html` is a live chapter here
 
-## Fraser has zero `_ef` sites, so the script aborts as written
+Peace's fix deleted four orphan pages, `attach-bayes.html` among them. **In Fraser it is real** — source `2500-Attachment_water_temp_modelling.Rmd`, anchor `{-#attach-bayes}`, rebuilt with every other page. Applying Peace's delete list unchanged would remove a published chapter.
 
-Fraser's 11 sites are `203581`, `196076`, `196085`, `203582`, `126158`, `196332` (us/ds).
-None matches `_ef[0-9]*$`. `fds_prep_for_submission.R` carries an unconditional
+Only two pages here are genuine orphans: `docs/ai-disclosure.html` and `docs/changelog.html`, both dated May 19 against a fresh build, neither with a source Rmd. They link to each other and to `attach-maps.html`, whose source sits parked in `hold/2200-Attachment_maps.Rmd` and is never rendered — which is why the link is dead while the page is simply absent.
 
-```r
-stopifnot(sum(is_ef(step_4$local_name)) > 0)
-```
+### The malformed UAV URLs are a snapshot regression, not Fraser's bug
 
-which stops the run.
+`http:/23cog.s3.amazonaws.com/...` — single slash after the scheme — appears in no `.R` or `.Rmd` in the repo. It is frozen inside `data/snapshots/fp_sites_tracking.parquet`, as pre-built anchor HTML in the `link_uav1` column, and surfaces through `0730-appendix-site-assessment-data.Rmd` which dumps the frame with `escape = FALSE`.
 
-### The trap that produced a wrong first read
+The parquet is copied verbatim from the template by `scripts/fp_inputs_snapshot.R`, and **the template's copy carries the identical string**. The generator (`scripts/db-load.Rmd:496`) uses `ngr::ngr_str_link_url()` correctly — it faithfully wrapped a bad `url_uav_ortho` value from `data/inputs_raw/uav_tracking.csv`, which exists in none of the four repos.
 
-`data/backup/2025/form_fiss_site_2025.csv` is the **pooled all-regions** backup — 26 rows,
-8 `_ef`, including Peace's `125179` / `198692` monitoring sites (named in
-`fish_passage_peace_2025_reporting#23`). Reading it suggests Fraser has ef sites. It does
-not.
+There is a template commit `b7ffeee update the uav urls to correct the single slash issue!`. **This was fixed once and regressed through the snapshot.** Out of scope here; filed separately in Phase 5.
 
-| File | Rows | `_ef` sites |
-|---|---|---|
-| `data/backup/2025/form_fiss_site_2025.csv` (pooled) | 26 | 8 |
-| `data/backup/2025/sern_fraser_2024/form_fiss_site_2025.csv` (Fraser) | 11 | 0 |
+### Promoting Skeena's eDNA script would regress Fraser
 
-The pipeline's real input is the Fraser Mergin gpkg at
-`~/Projects/gis/sern_fraser_2024/data_field/2025/form_fiss_site_2025.gpkg`.
+Skeena's `edna_map.R` is the region-generic version to promote (region from `params$gis_project_name`), and the diff against Fraser's `edna_map_fraser.R` is *only* genericization — seven substitutions, no logic differences.
 
-## The no-fish path
+But it reads `params$` at top level with no `exists()` guard, so `Rscript scripts/edna_map.R` fails on line 29. Fraser's current script has **zero** `params$` reads and runs standalone today. Promotion has to add the front-matter read that `0210` and `fds_prep_for_submission.R` already use.
 
-`has_fish` is a file-existence check, not a param:
+The output name also changes from `edna_unbc_results_2025_fraser_map.html` to `..._map.html`, and two files link the old name: `0400-results.Rmd:596` and `0837-appendix-edna.Rmd:153`. Left with the Skeena pass (#230).
 
-```r
-path_step_2 <- "data/inputs_raw/fish_data_coll.csv"
-path_step_3 <- "data/inputs_raw/fish_data_ind.csv"
-has_fish <- fs::file_exists(path_step_2) && fs::file_exists(path_step_3)
-```
+### `scripts/packages.R` must not be overwritten
 
-`0220` is not run for Fraser, so neither file exists and `has_fish` resolves FALSE on its
-own. Downstream: `step_2_submission` and `step_3_submission` are `NULL`, the two fish CSVs
-are not written, and `sheet_spec` self-prunes so the workbook writer never touches Steps 2
-and 3.
+Fraser's has diverged deliberately: it declares `leafpop`, `english` and `bcmaps` (from #30, which fixed headless builds) and reads `params$update_packages` more defensively than the template's `exists("params") && isTRUE(...)`. Copying the template's version would undo that fix.
 
-With zero `_ef` sites the step_4 drop is a no-op — all 11 sites submit habitat — and
-step_2's comment inheritance and electrofisher-settings blanking are skipped with it.
+## Confirmed insert points
 
-## Verified, needs no work: the DFO header field
+| File | Where |
+|---|---|
+| `index.Rmd:51` | `update_html_map_tables: FALSE` after `update_bcfishpass` |
+| `index.Rmd:114` | `source(...0190...)` after `0130-tables.R` |
+| `scripts/run_gitbook.R:62` | check hook between `render_site()` and the auto-open block |
+| `scripts/02_reporting/0130-tables.R:934-937` | the `case_when` `photo_link` to replace |
 
-Peace passed `hdr_permit_dfo <- NA_character_`, and `put_by_label()` returns early on `NA`,
-so the DFO label lookup has never actually run. Checked it against the template directly:
+`docs/sum/` does not exist and is not gitignored — nothing in `.gitignore` touches `docs/`.
 
-| Sheet | Row | Col | Label |
-|---|---|---|---|
-| Step 1 (Ref. and Loc. Info) | 25 | 2 | `DFO  PERMIT NUMBER:` (double space) |
+Fraser's `index.Rmd:18` hardcodes `Version 0.6.3 DRAFT`, where template and Peace read `desc::desc_get_version()`. Worth converting while releasing so it cannot drift again.
 
-`grepl("^DFO", ...)` matches it uniquely, so `put_by_label("^DFO", "XR 463 2025", 3)` lands
-correctly with no code change.
+## Reference — the proven commits
 
-## Do not re-run `0205_fiss_wrangle.R`
-
-Issue #26 step 3 says to run `0205 → 0210 → 0220`. That is wrong. `0205` writes back to the
-field-form gpkgs with `sf::st_write(delete_dsn = TRUE)`, and its `source` column pools all
-three regions — running it from this repo destructively rewrites three Mergin projects.
-Peace deliberately did not re-run it, which is why the watershed refresh was moved into
-`fds_prep_for_submission.R`.
-
-## Gotchas inherited from Peace's #23
-
-1. **`readxl` lies about row geometry** — it skips leading blank rows, reporting headers at
-   15/23/18/20. `tidyxl::xlsx_cells()` gives absolute addresses: headers 32/24/19/21, data
-   33/25/20/22. Corroborated by the template's own VLOOKUP range `$33:$625`.
-2. **The gradient "bug" is a false alarm — do not re-fix it.** `Average Gradient (%)`
-   carries Excel numFmt `0.0%`, and a percent-formatted cell multiplies by 100 for display,
-   so the template's `AVERAGE(...)/100` is correct: stored `0.028` renders `2.8%`. Peace
-   committed an override (`f5006c6`) then retracted it (`75fb638`).
-3. **`00000NA` residual defect.** The fix was applied to step_1 only; step_4's
-   `waterbody_id` comes straight through from `0210`, and Peace's submitted
-   `step_4_stream_site_data.csv` carries `00000NA` on all six rows. Fix here rather than
-   submit it twice.
-4. **`openxlsx::loadWorkbook()` fails on legacy `.xls`** (`subscript out of bounds`),
-   succeeds on `.xlsx`. Step 2's data-validation count moves 33 → 35 on re-serialize,
-   reproducible against the untouched template — openxlsx, not the script.
-5. **Template facts** — 8 sheets, 101 validations stored as inline literal lists,
-   `sheetProtection password="dbeb"` on 7 of 8, no macros. Province accepts `.xls` or
-   `.xlsx`. The QA tool is optional ("strongly recommended"), Windows + Excel ≤2010 only.
-
-## Repo state at start
-
-- Fraser `main` at `d22bf2d`, clean, v0.2.1. `planning/active/` empty.
-- `index.Rmd` has no `permit_id` (also missing `derive_params`, `species_of_interest`).
-- `index.Rmd` `date:` reads `Version 0.0.1` — stale against DESCRIPTION/NEWS.
-- `2400-Attachment_data.Rmd` links to `data/habitat_confirmations.xls`, which does not
-  exist in the repo — a live broken link in the published book.
-- No `data/templates/`, no `data/permit_submission/`.
-- The local Peace checkout was 41 commits behind `origin/main` (clean fast-forward).
-
-## Issue context
-
-<full body of fish_passage_fraser_2025_reporting#26 — see `gh issue view 26`>
-
-Relates to NewGraphEnvironment/fish_passage_template_reporting#128
-Relates to NewGraphEnvironment/fish_passage_template_reporting#132
-Relates to NewGraphEnvironment/fish_passage_fraser_2025_permit#3
+- Peace: `f15a8ca` (check) → `c5361a4` (fixes, 51 → 0) → `5103429` (wire in, release 0.16.0), merged `1484a71` PR #45
+- Template: `a88ff3c`, merged `79ee683` PR #233, closing #61 / #231 / #232
