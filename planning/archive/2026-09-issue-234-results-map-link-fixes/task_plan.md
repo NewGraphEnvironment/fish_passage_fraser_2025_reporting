@@ -97,7 +97,7 @@ cannot run standalone, and renaming an output that `0400-results.Rmd:596` and
 ## Verification
 
 - [x] `Rscript scripts/links_check.R` reports 3 (the UAV parquet URLs), down from 49
-- [ ] Photo and `sum/` hrefs resolve from a fresh clone, checked live after release
+- [x] Photo and `sum/` hrefs resolve from a fresh clone, checked live after release
 - [x] `attach-bayes.html` still present and reachable
 - [ ] `/code-check` clean on each commit
-- [ ] `/planning-archive` on completion
+- [x] `/planning-archive` on completion
