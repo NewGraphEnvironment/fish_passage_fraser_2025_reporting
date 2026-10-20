@@ -1,6 +1,6 @@
 # fish_passage_fraser_2025_reporting
 
-Fraser Region fish-passage restoration planning 2025. Bookdown report spawned from [fish_passage_template_reporting](https://github.com/NewGraphEnvironment/fish_passage_template_reporting); source lives in the numbered `*.Rmd` chapter files and `scripts/`.
+Fraser Region fish-passage restoration planning 2025. Bookdown report spawned from New Graph Environment's internal fish passage report template; source lives in the numbered `*.Rmd` chapter files and `scripts/`.
 
 ## Repository Context
 
